@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/effect-fade';
 import "swiper/css/navigation"
-// import required modules
+// import requiteal modules
 import { Autoplay, Controller, EffectCube,EffectFade, Navigation} from 'swiper/modules';
 
 
@@ -21,15 +21,15 @@ const Header = () => {
         <div className='min-h-screen bg-main'>
             <div className='absolute inset-0'>
                 <div className='absolute inset-0'>
-                    <div className='container m-auto pt-28 flex flex-col h-full'>
-                        <div className='text-white font-bold text-9xl flex flex-col items-center'>
+                    <div className='container m-auto pt-36 flex flex-col h-full'>
+                        <div className='text-white font-bold text-8xl flex flex-col items-center'>
                             <div className='relative'>
-                                <img src={ArrowHeader} className='absolute -right-24 top-14' alt="" />
+                                <img src={ArrowHeader} className='absolute -right-24 top-4 -rotate-12' alt="" />
                                 Your next <span className='text-teal-300'>travel </span>
                             </div>
                             <div className='flex items-end '>
                                 <span><span className='text-teal-300'>destination</span> is </span>
-                                <div className='pb-2.5 '>
+                                <div className=''>
                                     <Swiper
                                         slidesPerView={1}
                                         effect={'cube'}
@@ -42,37 +42,37 @@ const Header = () => {
                                         className='h-[88px] w-[330px]'
                                     >
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Ha Long Bay</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Phu Quoc</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Nha Trang</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Da Nang</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Ha Noi</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal rounded-xl ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
                                                 <span className="whitespace-nowrap">Ho Chi Minh</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
@@ -385,9 +385,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div className='relative py-4'>
-                <Navbar></Navbar>
-            </div>
+      
         </div>
     );
 }

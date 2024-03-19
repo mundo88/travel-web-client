@@ -10,7 +10,7 @@ const MainContent = () => {
             <div className='absolute inset-0'>
                 <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
             </div>
-            <div className='container m-auto pt-36 relative'>
+            <div className='container m-auto pt-16 relative'>
                
                 <div className='flex items-center gap-12'>
                     <span className='h-16 w-2 bg-teal-500'></span>
@@ -58,8 +58,8 @@ const MainContent = () => {
                 <div className='mt-36'>
                     <div className='flex items-center gap-12 justify-end'>
                         <div>
-                            <div className='uppercase text-teal-300 text-4xl font-bold'>
-                                Featured Packages
+                            <div className='uppercase text-teal-300 text-4xl font-bold text-right'>
+                                Featuteal Packages
                             </div>
                             <div className='text-gray-300 text-md text-right' >Take a look the best places in the VietNam</div>
                         </div>
@@ -67,61 +67,61 @@ const MainContent = () => {
                     </div>
                     <div className='mt-16 grid gap-12 grid-cols-3'>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Pho Co</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Pho Co</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://mir-s3-cdn-cf.behance.net/projects/404/fa78a4133824639.Y3JvcCwyNjE4LDIwNDgsNiww.png" alt="" className='w-full h-full object-cover'/>
                             </div>
                         </div>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Trang tien</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Trang tien</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://i.ytimg.com/vi/4yhJmPZjufQ/maxresdefault.jpg" alt="" className='w-full h-full object-cover' />
                             </div>
                         </div>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Ho Guom</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Ho Guom</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://evivatour.com/wp-content/uploads/2021/11/Best-time-to-visit-Vietnam-900x565.jpg" alt="" className='w-full h-full object-cover' />
                             </div>
                         </div>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Sapa</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Sapa</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://vietnamhearttravel.com/travel-uploads/travel/2018_12/sapa1-dep.jpg" alt="" className='w-full h-full object-cover'/>
                             </div>
                         </div>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Da lat</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Da lat</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://sakos.vn/wp-content/uploads/2023/04/hanh-trinh-kham-pha-da-lat-bang-trai-ngoai-troi-1.png" alt="" className='w-full h-full object-cover' />
                             </div>
                         </div>
                         <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold'>Vung tau</div>
+                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Vung tau</div>
                             <div className='w-full h-full relative'>
                                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 rounded-xl duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 rounded-xl duration-300 text-center active:scale-95'>Book now</button>
+                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
                                 </div>
                                 <img src="https://www.vietnamonline.com/media/uploads/froala_editor/images/VNO-Best%20Time%20To%20Visit%20Vung%20Tau1.jpg" alt="" className='w-full h-full object-cover' />
                             </div>
