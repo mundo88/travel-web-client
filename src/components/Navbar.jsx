@@ -2,7 +2,7 @@ import React from 'react';
 import logo from "../assets/images/logo.png"
 import line from "../assets/images/SVG/line.svg"
 import { Link } from 'react-router-dom';
-import { NavHashLink } from 'react-router-hash-link';
+import { NavHashLink,HashLink } from 'react-router-hash-link';
 
 
 const Navbar = () => {
@@ -13,8 +13,8 @@ const Navbar = () => {
                     <img src={logo} className='h-full w-auto' alt="" />
                 </div>
                 <div className='flex items-center justify-center gap-6' >
-                    <NavHashLink end to={"/"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
-                        {({isActive})=>(
+                    <NavHashLink smooth={true} activeClassName="haha" to={"/#top"} className='flex items-center justify-center py-2 px-2 relative font-semibold group'>
+                    {({isActive})=>(
                             isActive ? 
                             <>
                                 <span className='text-teal-300'>Home</span>
@@ -24,9 +24,8 @@ const Navbar = () => {
                             </>
                             : <span>Home</span>
                         )}
-                        
                     </NavHashLink>
-                    <NavHashLink to={"/#popular-place"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
+                    <NavHashLink to={"#popular-place"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
                         {({isActive})=>(
                             isActive ? 
                             <>
@@ -37,9 +36,8 @@ const Navbar = () => {
                             </>
                             : <span>Popular places</span>
                         )}
-                        
                     </NavHashLink>
-                    <NavHashLink to={"/#current-deals"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
+                    <NavHashLink to={"#current-deals"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
                         {({isActive})=>(
                             isActive ? 
                             <>
@@ -52,7 +50,7 @@ const Navbar = () => {
                         )}
                         
                     </NavHashLink>
-                    <NavHashLink to={"/#contact"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
+                    <NavHashLink to={"#contact"} className='flex items-center justify-center py-2 px-2 relative font-semibold'>
                         {({isActive})=>(
                             isActive ? 
                             <>

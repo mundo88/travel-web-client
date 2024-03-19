@@ -35,12 +35,8 @@ const Header = () => {
                                         effect={'cube'}
                                         grabCursor={true}
                                         direction={'vertical'}
-                                        modules={[EffectCube,Autoplay,Controller]}
+                                        modules={[EffectCube,Controller]}
                                         loop={true}
-                                        autoplay={{
-                                            delay: 5000,
-                                            pauseOnMouseEnter:true
-                                        }}
                                         onSwiper={setFirstSwiper}
                                         controller={{ control: secondSwiper }}
                                         className='h-[88px] w-[330px]'
@@ -93,9 +89,8 @@ const Header = () => {
                                 controller={{ control: firstSwiper }}
                                 loop={true}
                                 effect={'fade'}
-                                grabCursor={true}
                                 autoplay={{
-                                    delay: 5000,
+                                    delay: 4000,
                                     pauseOnMouseEnter:true
                                 }}
                                 navigation={{
@@ -105,13 +100,11 @@ const Header = () => {
                                 }}
                             >
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://w.forfun.com/fetch/73/73b1687219d6bcd4a37889774a41287b.jpeg'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'>
-                                           
-                                            </div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -145,7 +138,7 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -153,11 +146,11 @@ const Header = () => {
                                 </SwiperSlide>
                                 
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/09/DJI_0087-1-scaled-1.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'></div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -191,7 +184,7 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -199,11 +192,11 @@ const Header = () => {
                                 </SwiperSlide>
                                 
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://static.vinwonders.com/production/nha-trang-o-dau-1.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'></div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -237,7 +230,7 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -245,11 +238,11 @@ const Header = () => {
                                 </SwiperSlide>
                                 
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://images2.thanhnien.vn/528068263637045248/2023/6/4/screenshot-2023-06-04-at-224756-16858937361421786911492.png'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'></div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -283,7 +276,7 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -291,11 +284,11 @@ const Header = () => {
                                 </SwiperSlide>
                                 
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://statics.vinpearl.com/ho-hoan-kiem-1_1688884405.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'></div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -329,7 +322,7 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -337,11 +330,11 @@ const Header = () => {
                                 </SwiperSlide>
                     
                                 <SwiperSlide>
-                                    <div className='relative h-full'>
+                                    <div className='h-full'>
+                                        <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' src='https://vcdn-vnexpress.vnecdn.net/2023/05/26/Untitled-Panorama1-5826-1685055517.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className='bg-gradient-to-t w-full h-full from-black/80 via-transparent to-transparent z-10  transition-none opacity-0 group-hover:opacity-100 duration-300 transition-opacity'></div>
-                                            <div className='opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-20'>
+                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -375,17 +368,17 @@ const Header = () => {
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
                                                 <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
-                                                    <span>Book</span>
+                                                    <span>Book now</span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
-                            <button  className='absolute top-1/2 -translate-y-1/2 left-4 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 prev opacity-0 group-hover:opacity-100'>
+                            <button  className='absolute top-1/2 -translate-y-1/2 left-4 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 prev opacity-0 group-hover:opacity-100 z-20'>
                                 <TbChevronLeft size={26}></TbChevronLeft>
                             </button>
-                            <button  className='absolute top-1/2 -translate-y-1/2 right-4 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover:opacity-100'>
+                            <button  className='absolute top-1/2 -translate-y-1/2 right-4 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover:opacity-100 z-20'>
                                 <TbChevronRight size={26}></TbChevronRight>
                             </button>
                         </div>
