@@ -1,132 +1,390 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import WordMapImage from "../assets/images/world-map.png"
-import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
-
+import { TbArrowNarrowRight, TbChevronLeft, TbChevronRight, TbPlayerPlayFilled } from 'react-icons/tb';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Controller, EffectFade } from 'swiper/modules';
+import 'swiper/css/effect-fade';
+import AssetImg2 from "../assets/images/asset2.svg"
+import AssetImg3 from "../assets/images/asset3.svg"
+import AssetImg4 from "../assets/images/asset4.svg"
+import AssetImg5 from "../assets/images/asset5.svg"
+import AssetImg7 from "../assets/images/asset7.svg"
+import LineImg from "../assets/images/line.svg"
 
 const MainContent = () => {
+    const [firstSwiper, setFirstSwiper] = useState(null);
+    const [secondSwiper, setSecondSwiper] = useState(null);
     return (
         <div className='bg-main relative h-full pb-32'>
-            <div className='absolute inset-0'>
-                <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
-            </div>
-            <div className='container m-auto pt-16 relative'>
-               
-                <div className='flex items-center gap-12'>
-                    <span className='h-16 w-2 bg-teal-500'></span>
-                    <div>
-                        <div className='uppercase text-teal-300 text-4xl font-bold'>
-                            Choose your destination
-                        </div>
-                        <div className='text-gray-300 text-md' >Take a look the best places in the VietNam</div>
-                    </div>
+            <div className="relative">
+                <div className='absolute inset-0'>
+                    <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
                 </div>
-                <div className="relative">
-                    <button  className='absolute top-1/2 -translate-y-1/2 -left-20 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
-                        <TbChevronLeft size={26}></TbChevronLeft>
-                    </button>
-                    <button  className='absolute top-1/2 -translate-y-1/2 -right-20 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
-                        <TbChevronRight size={26}></TbChevronRight>
-                    </button>
-                    <div className='flex mt-16 -space-x-4'>
-                        <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
-                            <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                                <img src="https://vietnam.travel/sites/default/files/styles/large/public/2022-05/shutterstock_1303493764_1.jpg?itok=AhlENvUY" alt="" className='w-full h-full object-cover' />
-                            </div>
-                            <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Hoi An</p>
-                        </div>
-                        <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
-                            <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                                <img src="https://statics.vinpearl.com/Vietnam-travel-20_1689353358.jpg" alt="" className='w-full h-full object-cover' />
-                            </div>
-                            <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Fansipan</p>
-                        </div>
-                        <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
-                            <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                                <img src="https://static.toiimg.com/photo/101545435.cms" alt="" className='w-full h-full object-cover' />
-                            </div>
-                            <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Ha Long Bay</p>
-                        </div>
-                        <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
-                            <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                                <img src="https://www.travelandleisure.com/thmb/0yHeWZeBbUMSBeOrUq5kSV00o4w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-fisherman-in-vietnam-WHENVIETNAM0124-53bac1777bc5497390ccc317e9c71295.jpg" alt="" className='w-full h-full object-cover' />
-                            </div>
-                            <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Trang An</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='mt-36'>
-                    <div className='flex items-center gap-12 justify-end'>
-                        <div>
-                            <div className='uppercase text-teal-300 text-4xl font-bold text-right'>
-                                Featuteal Packages
-                            </div>
-                            <div className='text-gray-300 text-md text-right' >Take a look the best places in the VietNam</div>
-                        </div>
+                <div className='container m-auto pt-16 relative'>
+                    <div className='flex items-center gap-12'>
                         <span className='h-16 w-2 bg-teal-500'></span>
+                        <div>
+                            <div className='uppercase text-teal-300 text-4xl font-bold'>
+                                Choose your destination
+                            </div>
+                            <div className='text-gray-300 text-md' >Take a look the best places in the VietNam</div>
+                        </div>
                     </div>
-                    <div className='mt-16 grid gap-12 grid-cols-3'>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Pho Co</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
+                    <div className="relative">
+                
+                        <button  className='absolute top-1/2 -translate-y-1/2 -left-20 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                            <TbChevronLeft size={26}></TbChevronLeft>
+                        </button>
+                        <button  className='absolute top-1/2 -translate-y-1/2 -right-20 z-10 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                            <TbChevronRight size={26}></TbChevronRight>
+                        </button>
+                        <div className='flex mt-16 -space-x-4'>
+                            <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
+                                <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
+                                    <img src="https://vietnam.travel/sites/default/files/styles/large/public/2022-05/shutterstock_1303493764_1.jpg?itok=AhlENvUY" alt="" className='w-full h-full object-cover' />
                                 </div>
-                                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/fa78a4133824639.Y3JvcCwyNjE4LDIwNDgsNiww.png" alt="" className='w-full h-full object-cover'/>
+                                <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Hoi An</p>
                             </div>
-                        </div>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Trang tien</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
+                            <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
+                                <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
+                                    <img src="https://statics.vinpearl.com/Vietnam-travel-20_1689353358.jpg" alt="" className='w-full h-full object-cover' />
                                 </div>
-                                <img src="https://i.ytimg.com/vi/4yhJmPZjufQ/maxresdefault.jpg" alt="" className='w-full h-full object-cover' />
+                                <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Fansipan</p>
                             </div>
-                        </div>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Ho Guom</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
+                            <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
+                                <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
+                                    <img src="https://static.toiimg.com/photo/101545435.cms" alt="" className='w-full h-full object-cover' />
                                 </div>
-                                <img src="https://evivatour.com/wp-content/uploads/2021/11/Best-time-to-visit-Vietnam-900x565.jpg" alt="" className='w-full h-full object-cover' />
+                                <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Ha Long Bay</p>
                             </div>
-                        </div>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Sapa</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
+                            <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-16 group'>
+                                <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
+                                    <img src="https://www.travelandleisure.com/thmb/0yHeWZeBbUMSBeOrUq5kSV00o4w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-fisherman-in-vietnam-WHENVIETNAM0124-53bac1777bc5497390ccc317e9c71295.jpg" alt="" className='w-full h-full object-cover' />
                                 </div>
-                                <img src="https://vietnamhearttravel.com/travel-uploads/travel/2018_12/sapa1-dep.jpg" alt="" className='w-full h-full object-cover'/>
-                            </div>
-                        </div>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Da lat</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
-                                </div>
-                                <img src="https://sakos.vn/wp-content/uploads/2023/04/hanh-trinh-kham-pha-da-lat-bang-trai-ngoai-troi-1.png" alt="" className='w-full h-full object-cover' />
-                            </div>
-                        </div>
-                        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-                            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Vung tau</div>
-                            <div className='w-full h-full relative'>
-                                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95'>Book now</button>
-                                </div>
-                                <img src="https://www.vietnamonline.com/media/uploads/froala_editor/images/VNO-Best%20Time%20To%20Visit%20Vung%20Tau1.jpg" alt="" className='w-full h-full object-cover' />
+                                <p className='uppercase text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Trang An</p>
                             </div>
                         </div>
                     </div>
+                    <div className='mt-36'>
+                        <div className='flex items-center gap-12 justify-end'>
+                            <div>
+                                <div className='uppercase text-teal-300 text-4xl font-bold text-right'>
+                                    Featuteal Packages
+                                </div>
+                                <div className='text-gray-300 text-md text-right' >Take a look the best places in the VietNam</div>
+                            </div>
+                            <span className='h-16 w-2 bg-teal-500'></span>
+                        </div>
+                        <div className='mt-16 grid gap-12 grid-cols-3 pb-36'>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Pho Co</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/fa78a4133824639.Y3JvcCwyNjE4LDIwNDgsNiww.png" alt="" className='w-full h-full object-cover'/>
+                                </div>
+                            </div>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Trang tien</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://i.ytimg.com/vi/4yhJmPZjufQ/maxresdefault.jpg" alt="" className='w-full h-full object-cover' />
+                                </div>
+                            </div>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Ho Guom</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://evivatour.com/wp-content/uploads/2021/11/Best-time-to-visit-Vietnam-900x565.jpg" alt="" className='w-full h-full object-cover' />
+                                </div>
+                            </div>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Sapa</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://vietnamhearttravel.com/travel-uploads/travel/2018_12/sapa1-dep.jpg" alt="" className='w-full h-full object-cover'/>
+                                </div>
+                            </div>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Da lat</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://sakos.vn/wp-content/uploads/2023/04/hanh-trinh-kham-pha-da-lat-bang-trai-ngoai-troi-1.png" alt="" className='w-full h-full object-cover' />
+                                </div>
+                            </div>
+                            <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+                                <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>Ho Tram</div>
+                                <div className='w-full h-full relative'>
+                                    <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                                    </div>
+                                    <img src="https://booking.pystravel.vn/uploads/posts/albums/6315/b927abb7ac0194ba111214afc5919185.jpg" alt="" className='w-full h-full object-cover' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='relative'>
+                <div class="flex items-center gap-12 container m-auto mb-16">
+                    <span class="h-16 w-2 bg-teal-500"></span>
+                    <div>
+                        <div class="uppercase text-teal-300 text-4xl font-bold">Where is the best place to explore?</div>
+                        <div class="text-gray-300 text-md">Take a look the best places in the VietNam</div>
+                    </div>
+                </div>
+                <div className='h-screen'>
+                    <Swiper 
+                        className='h-full' 
+                        effect='fade'  
+                        modules={[EffectFade,Controller]} 
+                        loop={true} 
+                        onSwiper={setFirstSwiper} 
+                        slidesPerGroup={1}
+                        mousewheel={false}
+                    >
+                        <SwiperSlide >
+                            <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'>
+                            </div>
+                            <img className='h-full w-full object-cover' src="https://vietnamtravel.com/images/2023/06/vietnam-travel-featured-image.jpg" alt="" />
+                            <div className='absolute h-full top-0 left-0 flex justify-center pl-44 ml-1 z-10 flex-col'>
+                                <div className='relative z-10 text-8xl font-black text-white after:absolute after:top-2 after:-left-2 after:text-[#051214] after:content-[attr(data-title)] after:-z-10 after:opacity-50' >VIETNAM</div>
+                                <p className='max-w-1/3 w-1/3 text-gray-200 text-sm mt-2 mb-12'>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                                <div className='flex items-center gap-4'>
+                                    <button class="w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95">Detail</button>
+                                    <button class="flex items-center gap-2 w-fit text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
+                                        Explore
+                                        <TbArrowNarrowRight size={28}></TbArrowNarrowRight> 
+                                    </button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide >
+                            <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'>
+                            </div>
+                            <img className='h-full w-full object-cover' src="https://a.cdn-hotels.com/gdcs/production29/d372/b70fa24d-b7b9-491a-a67a-8da0857b80a2.jpg" alt="" />
+                            <div className='absolute h-full top-0 left-0 flex justify-center pl-44 ml-1 z-10 flex-col'>
+                                <div className='relative z-10 text-8xl font-black text-white '>INDONESIA</div>
+                                <p className='max-w-1/3 w-1/3 text-gray-200 text-sm mt-2 mb-12'>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                                <div className='flex items-center gap-4'>
+                                    <button class="w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95">Detail</button>
+                                    <button class="flex items-center gap-2 w-fit text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
+                                        Explore
+                                        <TbArrowNarrowRight size={28}></TbArrowNarrowRight> 
+                                    </button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide >
+                            <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'>
+                            </div>
+                            <img className='h-full w-full object-cover' src="https://www.kkday.com/vi/blog/wp-content/uploads/Chiang-Mai-Travel-Guide.jpg" alt="" />
+                            <div className='absolute h-full top-0 left-0 flex justify-center pl-44 ml-1 z-10 flex-col'>
+                                <div className='relative z-10 text-8xl font-black text-white after:absolute after:top-2 after:-left-2 after:text-[#051214] after:content-[attr(data-title)] after:-z-10 after:opacity-50' >THAILAND</div>
+                                <p className='max-w-1/3 w-1/3 text-gray-200 text-sm mt-2 mb-12'>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                                <div className='flex items-center gap-4'>
+                                    <button class="w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95">Detail</button>
+                                    <button class="flex items-center gap-2 w-fit text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
+                                        Explore
+                                        <TbArrowNarrowRight size={28}></TbArrowNarrowRight> 
+                                    </button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide >
+                            <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'>
+                            </div>
+                            <img className='h-full w-full object-cover' src="https://thriftynomads.com/wp-content/uploads/2018/01/Japan-Mt-Fuji.jpg" alt="" />
+                            <div className='absolute h-full top-0 left-0 flex justify-center pl-44 ml-1 z-10 flex-col'>
+                                <div className='relative z-10 text-8xl font-black text-white after:absolute after:top-2 after:-left-2 after:text-[#051214] after:content-[attr(data-title)] after:-z-10 after:opacity-50' >JAPAN</div>
+                                <p className='max-w-1/3 w-1/3 text-gray-200 text-sm mt-2 mb-12'>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                </p>
+                                <div className='flex items-center gap-4'>
+                                    <button class="w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95">Detail</button>
+                                    <button class="flex items-center gap-2 w-fit text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
+                                        Explore
+                                        <TbArrowNarrowRight size={28}></TbArrowNarrowRight> 
+                                    </button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    </Swiper>
+                    <div className='absolute top-0 right-0 h-full flex items-center justify-end z-40 w-1/2 pl-24'>
+                        <div className='absolute bottom-36 left-0 flex gap-4 ml-24'>
+                            <button className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                                <TbChevronLeft size={26}></TbChevronLeft>
+                            </button>
+                            <button className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                                <TbPlayerPlayFilled size={26}></TbPlayerPlayFilled>
+                            </button>
+                            <button  className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                                <TbChevronRight size={26}></TbChevronRight>
+                            </button>
+                        </div>
+                        <Swiper 
+                            className='overflow-hidden w-full h-1/2' 
+                            slidesPerView={2.5} 
+                            loop={true} 
+                            spaceBetween={24} 
+                            modules={[Controller]} 
+                            onSwiper={setSecondSwiper} 
+                            controller={{ control: firstSwiper }}
+                            slidesPerGroup={1}
+                            >
+                            <SwiperSlide className='group '>
+                                <div className='pb-20 pt-12 group-[&.swiper-slide-active]:py-0 duration-300 h-full'>
+                                    <div className='flex items-center gap-4 mb-4'>
+                                        <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>VIETNAM</div>
+                                    </div>
+                                    <div className='h-full overflow-hidden'>
+                                        <img className='w-full h-full object-cover rounded-lg' src="https://hoponworld.com/wp-content/uploads/2021/07/halong-bay-vietnam.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide className='group '>
+                                <div className='pb-20 pt-12 group-[&.swiper-slide-active]:py-0 duration-300 h-full'>
+                                    <div className='flex items-center gap-4 mb-4'>
+                                        <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>INDONESIA</div>
+                                    </div>
+                                    <div className='h-full overflow-hidden'>
+                                        <img className='w-full h-full object-cover rounded-lg' src="https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revisi-2020/destinations-thumbnail/Bali-Thumbnail.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide className='group '>
+                                <div className='pb-20 pt-12 group-[&.swiper-slide-active]:py-0 duration-300 h-full'>
+                                    <div className='flex items-center gap-4 mb-4'>
+                                        <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>THAILAND</div>
+                                    </div>
+                                    <div className='h-full overflow-hidden'>
+                                        <img className='w-full h-full object-cover rounded-lg' src="https://vietnamtouristvn.com/thumbs/670x500x1/upload/product/muang-boran-4-8565.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                            <SwiperSlide className='group '>
+                                <div className='pb-20 pt-12 group-[&.swiper-slide-active]:py-0 duration-300 h-full'>
+                                    <div className='flex items-center gap-4 mb-4'>
+                                        <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>JAPAN</div>
+                               
+                                    </div>
+                                    <div className='h-full overflow-hidden'>
+                                        <img className='w-full h-full object-cover rounded-lg' src="https://thriftynomads.com/wp-content/uploads/2018/01/Japan-Mt-Fuji.jpg" alt="" />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>
+                </div>
+            </div>
+            <div className="container mt-36 mx-auto">
+                <div class="flex items-center gap-12 justify-end pb-16">
+                    <div>
+                        <div class="uppercase text-teal-300 text-4xl font-bold text-right">Featuteal Packages</div>
+                        <div class="text-gray-300 text-md text-right">Take a look the best places in the VietNam</div>
+                    </div>
+                    <span class="h-16 w-2 bg-teal-500"></span>
+                </div>
+                <div className="grid grid-cols-2 gap-8">
+                    <div className='flex'>
+                        <div className='w-full max-h-[450px]'>
+                            <img src="https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                        </div>
+                        <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
+                            <div className='h-full relative'>
+                                <img src={AssetImg2} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
+                            </div>
+                            <div className='text-left w-full h-full flex flex-col justify-end'>
+                                <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
+                                <div className="mt-1 mb-4 text-sm text-gray-300">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                                <button className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <div className='w-full max-h-[450px]'>
+                            <img src="https://images.pexels.com/photos/2265876/pexels-photo-2265876.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                        </div>
+                        <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
+                            <div className='text-left w-full h-full flex flex-col justify-start'>
+                                <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
+                                <div className="mt-1 mb-4 text-sm text-gray-800">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                                <button className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                            </div>
+                            <div className='h-full relative'>
+                                <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-span-2'>
+                        <img src={LineImg} alt="" />
+                    </div>
+                    <div className='flex'>
+                        <div className='w-full max-h-[450px]'>
+                            <img src="https://images.pexels.com/photos/2162891/pexels-photo-2162891.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                        </div>
+                        <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
+                            <div className='text-left w-full h-full flex flex-col justify-start'>
+                                <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
+                                <div className="mt-1 mb-4 text-sm text-gray-800">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                                <button className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                            </div>
+                            <div className='h-full relative'>
+                                <img src={AssetImg7} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <div className='w-full max-h-[450px]'>
+                            <img src="https://images.pexels.com/photos/2108845/pexels-photo-2108845.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                        </div>
+                        <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
+                            <div className='h-full relative'>
+                                <img src={AssetImg5} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
+                            </div>
+                            <div className='text-left w-full h-full flex flex-col justify-end'>
+                                <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
+                                <div className="mt-1 mb-4 text-sm text-gray-300">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                                <button className='w-full text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div className='m-auto mt-8 flex justify-center'>
+                     <button className='w-fit text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>
+                        /View all
+                     </button>
                 </div>
             </div>
         </div>

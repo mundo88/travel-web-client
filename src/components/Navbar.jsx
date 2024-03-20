@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from "../assets/images/logo.png"
 import line from "../assets/images/SVG/line.svg"
-import { Link } from 'react-router-dom';
-import { NavHashLink,HashLink } from 'react-router-hash-link';
+import { NavHashLink } from 'react-router-hash-link';
 
 
 const Navbar = () => {
@@ -13,7 +12,7 @@ const Navbar = () => {
                     <img src={logo} className='h-full w-auto' alt="" />
                 </div>
                 <div className='flex items-center justify-center gap-6' >
-                    <NavHashLink smooth={true} activeClassName="haha" to={"/#top"} className='flex items-center justify-center py-2 px-2 relative font-semibold group'>
+                    <NavHashLink smooth={true} to={"/#top"} className='flex items-center justify-center py-2 px-2 relative font-semibold group'>
                     {({isActive})=>(
                             isActive ? 
                             <>

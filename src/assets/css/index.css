@@ -14,4 +14,10 @@
     body,html {
         font-family: inter;
     }
+    .text-stroke-3 {
+        -webkit-text-stroke: 3 black;
+    }
+    .text-stroke-black {
+        -webkit-text-stroke-color: black;
+    }
   }

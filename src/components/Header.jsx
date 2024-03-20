@@ -1,6 +1,5 @@
 
-import React, { useRef, useState } from 'react';
-import Navbar  from './Navbar';
+import React, {  useState } from 'react';
 import { TbCalendarEvent, TbChevronDown, TbChevronLeft, TbChevronRight, TbMapPin, TbSend } from "react-icons/tb";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import ArrowHeader from "../assets/images/arrow-header.svg"
@@ -21,7 +20,7 @@ const Header = () => {
         <div className='min-h-screen bg-main'>
             <div className='absolute inset-0'>
                 <div className='absolute inset-0'>
-                    <div className='container m-auto pt-36 flex flex-col h-full'>
+                    <div className='container m-auto pt-44 flex flex-col h-full'>
                         <div className='text-white font-bold text-8xl flex flex-col items-center'>
                             <div className='relative'>
                                 <img src={ArrowHeader} className='absolute -right-24 top-4 -rotate-12' alt="" />
@@ -102,7 +101,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://w.forfun.com/fetch/73/73b1687219d6bcd4a37889774a41287b.jpeg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://w.forfun.com/fetch/73/73b1687219d6bcd4a37889774a41287b.jpeg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
@@ -148,7 +147,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/09/DJI_0087-1-scaled-1.jpg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/09/DJI_0087-1-scaled-1.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
@@ -194,7 +193,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://static.vinwonders.com/production/nha-trang-o-dau-1.jpg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://static.vinwonders.com/production/nha-trang-o-dau-1.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
@@ -240,7 +239,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://images2.thanhnien.vn/528068263637045248/2023/6/4/screenshot-2023-06-04-at-224756-16858937361421786911492.png'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://images2.thanhnien.vn/528068263637045248/2023/6/4/screenshot-2023-06-04-at-224756-16858937361421786911492.png'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
@@ -286,7 +285,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://statics.vinpearl.com/ho-hoan-kiem-1_1688884405.jpg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://statics.vinpearl.com/ho-hoan-kiem-1_1688884405.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
@@ -332,7 +331,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' src='https://vcdn-vnexpress.vnecdn.net/2023/05/26/Untitled-Panorama1-5826-1685055517.jpg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://vcdn-vnexpress.vnecdn.net/2023/05/26/Untitled-Panorama1-5826-1685055517.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
