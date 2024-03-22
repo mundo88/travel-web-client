@@ -80,7 +80,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='overflow-hidden h-full mt-12 rounded-t-[36px] relative flex items-center justify-center group'>
+                        <div className='overflow-hidden h-full mt-12 relative flex items-center justify-center group'>
                             <Swiper 
                                 className='h-full w-full'
                                 modules={[Controller,EffectFade,Autoplay,Navigation]}
@@ -104,7 +104,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://w.forfun.com/fetch/73/73b1687219d6bcd4a37889774a41287b.jpeg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -112,7 +112,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -120,7 +120,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -128,7 +128,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -136,7 +136,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
@@ -150,7 +150,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/09/DJI_0087-1-scaled-1.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -158,7 +158,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -166,7 +166,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -174,7 +174,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -182,7 +182,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
@@ -196,7 +196,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://static.vinwonders.com/production/nha-trang-o-dau-1.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -204,7 +204,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -212,7 +212,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -220,7 +220,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -228,7 +228,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
@@ -242,7 +242,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://images2.thanhnien.vn/528068263637045248/2023/6/4/screenshot-2023-06-04-at-224756-16858937361421786911492.png'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -250,7 +250,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -258,7 +258,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -266,7 +266,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -274,7 +274,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
@@ -288,7 +288,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://statics.vinpearl.com/ho-hoan-kiem-1_1688884405.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -296,7 +296,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -304,7 +304,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -312,7 +312,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -320,7 +320,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
@@ -334,7 +334,7 @@ const Header = () => {
                                         <img className='h-full w-full object-cover' alt='' src='https://vcdn-vnexpress.vnecdn.net/2023/05/26/Untitled-Panorama1-5826-1685055517.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Destination</span>
@@ -342,7 +342,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbSend size={'36'}></TbSend> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Type</span>
@@ -350,7 +350,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Price</span>
@@ -358,7 +358,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 rounded-xl duration-300 w-full'>
+                                                <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                                                     <div className='flex flex-col'>
                                                         <span className='text-sm'>Date</span>
@@ -366,7 +366,7 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                                 <div className='h-8 w-0.5 bg-gray-400'></div>
-                                                <button className='text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 rounded-xl duration-300 w-full text-center active:scale-95'>
+                                                <button className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
                                                     <span>Book now</span>
                                                 </button>
                                             </div>
