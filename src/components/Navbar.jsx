@@ -30,7 +30,7 @@ const Navbar = () => {
                     <NavHashLink to={"#current-deals"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <span>Current deals</span>
                     </NavHashLink>
-                    <NavHashLink to={"#contact"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
+                    <NavHashLink to={"#contact"} smooth className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <span>Contact</span>
                     </NavHashLink>
                 </div>

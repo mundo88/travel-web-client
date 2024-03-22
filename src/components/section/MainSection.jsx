@@ -4,6 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Controller, EffectFade,EffectCoverflow } from 'swiper/modules';
 import "swiper/css/effect-coverflow";
 import 'swiper/css/effect-fade';
+import AssetImg2 from "../../assets/images/asset2.svg"
+import AssetImg3 from "../../assets/images/asset3.svg"
+import AssetImg5 from "../../assets/images/asset5.svg"
+import AssetImg7 from "../../assets/images/asset7.svg"
+import LineImg from "../../assets/images/line.svg"
+import {ContactContent ,ContactForm} from '../Contact';
 
 const MainSection = ({children}) => {
     return (
@@ -12,6 +18,8 @@ const MainSection = ({children}) => {
         </div>
     );
 }
+
+
 
 const MainSectionCity =({children,props})=>{
     return (
@@ -272,8 +280,154 @@ const MainSectionCountry =()=>{
     )
 }
 
+const MainSectionArticle =()=>{
+    return (
+        <>
+            <div className="grid grid-cols-2 gap-8">
+                <div className='flex'>
+                    <div className='w-full max-h-[450px]'>
+                        <img src="https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                    </div>
+                    <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
+                        <div className='h-full relative'>
+                            <img src={AssetImg2} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
+                        </div>
+                        <div className='text-left w-full h-full flex flex-col justify-end'>
+                            <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
+                            <div className="mt-1 mb-4 text-sm text-gray-300">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                            <button className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex'>
+                    <div className='w-full max-h-[450px]'>
+                        <img src="https://images.pexels.com/photos/2265876/pexels-photo-2265876.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                    </div>
+                    <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
+                        <div className='text-left w-full h-full flex flex-col justify-start'>
+                            <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
+                            <div className="mt-1 mb-4 text-sm text-gray-800">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                            <button className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                        </div>
+                        <div className='h-full relative'>
+                            <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
+                        </div>
+                    </div>
+                </div>
+                <div className='col-span-2'>
+                    <img src={LineImg} alt="" />
+                </div>
+                <div className='flex'>
+                    <div className='w-full max-h-[450px]'>
+                        <img src="https://images.pexels.com/photos/2162891/pexels-photo-2162891.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                    </div>
+                    <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
+                        <div className='text-left w-full h-full flex flex-col justify-start'>
+                            <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
+                            <div className="mt-1 mb-4 text-sm text-gray-800">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                            <button className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                        </div>
+                        <div className='h-full relative'>
+                            <img src={AssetImg7} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
+                        </div>
+                    </div>
+                </div>
+                <div className='flex'>
+                    <div className='w-full max-h-[450px]'>
+                        <img src="https://images.pexels.com/photos/2108845/pexels-photo-2108845.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
+                    </div>
+                    <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
+                        <div className='h-full relative'>
+                            <img src={AssetImg5} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
+                        </div>
+                        <div className='text-left w-full h-full flex flex-col justify-end'>
+                            <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
+                            <div className="mt-1 mb-4 text-sm text-gray-300">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </div>
+                            <button className='w-full text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='m-auto mt-8 flex justify-center'>
+                    <button className='w-fit text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>
+                    /View all
+                    </button>
+            </div>
+        </>
+    )
+}
+const MainSectionSeason = ()=>{
+    return (
+        <div className='grid grid-cols-4 h-full'>
+            <div className="h-full overflow-hidden relative group">
+                <div className="absolute inset-0 bg-black/40 opacity-100 duration-300"></div>
+                <div className='absolute inset-0 flex items-center justify-center'>
+                    <div className="rotate-180 uppercase text-gray-500 text-8xl font-bold group-hover:text-white duration-300" style={{writingMode: "vertical-rl"}}>
+                        Spring
+                    </div>
+                </div>
+                <img className='w-full h-full object-cover' src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAxL3Jhd3BpeGVsX29mZmljZV8yNV93b3Jtc19leWVfdmlld19waG90b19vZl9zdW1tZXJfZmxvd2VyX2ZpZWxkX18wNTkwYzk2Ny0xNDNlLTQyODQtYTMxMS05ODhlZWU5YmI2ZjhfMS5qcGc.jpg" alt="" />
+            </div>
+            <div className="h-full overflow-hidden relative group">
+                <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 opacity-100 duration-300"></div>
+                <div className='absolute inset-0 flex items-center justify-center'>
+                    <div className="rotate-180 uppercase text-gray-500 text-8xl font-bold group-hover:text-white duration-300" style={{writingMode: "vertical-rl"}}>
+                        Summer
+                    </div>
+                </div>
+                <img className='w-full h-full object-cover' src="https://e1.pxfuel.com/desktop-wallpaper/643/754/desktop-wallpaper-summer-aesthetic-iphone-summer-aesthetic-mobile.jpg" alt="" />
+            </div>
+            <div className="h-full overflow-hidden relative group">
+                <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 opacity-100 duration-300"></div>
+                <div className='absolute inset-0 flex items-center justify-center'>
+                    <div className="rotate-180 uppercase text-gray-500 text-8xl font-bold group-hover:text-white duration-300" style={{writingMode: "vertical-rl"}}>
+                        Autumn
+                    </div>
+                </div>
+                <img className='w-full h-full object-cover' src="https://64.media.tumblr.com/a264729b60d856261d35a2d0cbb58cb4/afea46ee5e650c99-88/s2048x3072/88d6c65197c97d363e229fd268398c5256cbbc6e.jpg" alt="" />
+            </div>
+            <div className="h-full overflow-hidden relative group">
+                <div className="absolute inset-0 bg-black/40 group-hover:opacity-0 opacity-100 duration-300"></div>
+                <div className='absolute inset-0 flex items-center justify-center'>
+                    <div className="rotate-180 uppercase text-gray-500 text-8xl font-bold group-hover:text-white duration-300" style={{writingMode: "vertical-rl"}}>
+                        Winter
+                    </div>
+                </div>
+                <img className='w-full h-full object-cover' src="https://wallpapercave.com/wp/wp8282322.jpg" alt="" />
+            </div>
+        </div>    
+    )
+}
+
+
+const MainSectionContact = ({children})=>{
+    return (
+        <>
+            <div className="grid grid-cols-2 gap-24">
+                <div className="flex items-center relative">
+                    <ContactContent/>
+                </div>
+                <div className='flex flex-col justify-between pt-12'>
+                    <ContactForm/>
+                </div>
+            </div>
+        </>
+    )
+}
+
 MainSection.City = MainSectionCity
 MainSection.Site = MainSectionSite
 MainSection.Country = MainSectionCountry
+MainSection.Article = MainSectionArticle
+MainSection.Season = MainSectionSeason
+MainSection.Contact = MainSectionContact
 
 export default MainSection;
