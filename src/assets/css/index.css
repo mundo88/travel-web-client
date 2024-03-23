@@ -14,10 +14,8 @@
     body,html {
         font-family: inter;
     }
-    .text-stroke-3 {
-        -webkit-text-stroke: 3 black;
+    .bg-instagram {
+        background: #f09433;
+        background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf)
     }
-    .text-stroke-black {
-        -webkit-text-stroke-color: black;
-    }
-  }
+}
