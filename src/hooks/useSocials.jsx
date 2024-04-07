@@ -1,5 +1,5 @@
 import React from 'react';
-import { TbBrandFacebookFilled, TbBrandInstagram, TbBrandLinkedin, TbBrandTwitterFilled, TbBrandYoutubeFilled,TbBrandWhatsapp } from 'react-icons/tb';
+import { TbBrandFacebookFilled, TbBrandInstagram, TbBrandTwitterFilled, TbBrandYoutubeFilled,TbBrandWhatsapp } from 'react-icons/tb';
 
 const useSocials = () => {
     const socials = {

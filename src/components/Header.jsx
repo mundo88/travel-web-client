@@ -101,7 +101,7 @@ const Header = () => {
                                 <SwiperSlide>
                                     <div className='h-full'>
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
-                                        <img className='h-full w-full object-cover' alt='' src='https://w.forfun.com/fetch/73/73b1687219d6bcd4a37889774a41287b.jpeg'/>
+                                        <img className='h-full w-full object-cover' alt='' src='https://static.vinwonders.com/production/du-lich-ha-long-topbanner.jpg'/>
                                         <div className=" absolute inset-0">
                                             <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
@@ -374,10 +374,10 @@ const Header = () => {
                                     </div>
                                 </SwiperSlide>
                             </Swiper>
-                            <button  className='absolute top-1/2 -translate-y-1/2 left-4 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 prev opacity-0 group-hover:opacity-100 z-20'>
+                            <button  className='absolute top-1/2 -translate-y-1/2 left-4 w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 prev opacity-0 group-hover:opacity-100 z-20'>
                                 <TbChevronLeft size={26}></TbChevronLeft>
                             </button>
-                            <button  className='absolute top-1/2 -translate-y-1/2 right-4 w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover:opacity-100 z-20'>
+                            <button  className='absolute top-1/2 -translate-y-1/2 right-4 w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover:opacity-100 z-20'>
                                 <TbChevronRight size={26}></TbChevronRight>
                             </button>
                         </div>

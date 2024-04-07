@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 const Home = () => {
     return (
         <div className='bg-main'>
-            <div className='relative z-50'>
+            <div className='relative z-50 py-8'>
                 <Navbar></Navbar>
             </div>
             <Header></Header>  

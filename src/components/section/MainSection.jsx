@@ -9,8 +9,11 @@ import AssetImg3 from "../../assets/images/asset3.svg"
 import AssetImg5 from "../../assets/images/asset5.svg"
 import AssetImg7 from "../../assets/images/asset7.svg"
 import LineImg from "../../assets/images/line.svg"
-import {ContactContent ,ContactForm} from '../Contact';
-
+import {ContactContent } from '../Contact';
+import { useEffect } from 'react';
+import {axiosInstance}  from "../../service/Axiosinstance"
+import { Link } from 'react-router-dom';
+import ContactForm from '../form/ContactForm';
 const MainSection = ({children}) => {
     return (
         <div>
@@ -61,52 +64,34 @@ const MainSectionCity =({children,props})=>{
 }
 
 
-const SiteCard = ({thumb,siteName})=>{
+const TourCard = ({tour})=>{
     return(
-        <div className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>{siteName}</div>
+        <Link to={"/tour/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>{tour.destination.city.name}</div>
             <div className='w-full h-full relative'>
                 <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
                     <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
                     <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
                 </div>
-                <img src={thumb} alt="" className='w-full h-full object-cover'/>
+                <img src={tour.thumbnail} alt="" className='w-full h-full object-cover'/>
             </div>
-        </div>
+        </Link>
     )
 }
-const MainSectionSite = ({children,props})=>{
-    const sites = [
-        {
-            siteName:"NINH BINH",
-            thumb:"https://mir-s3-cdn-cf.behance.net/projects/404/fa78a4133824639.Y3JvcCwyNjE4LDIwNDgsNiww.png"
-        },
-        {
-            siteName:"TRANG TIEN",
-            thumb:"https://i.ytimg.com/vi/4yhJmPZjufQ/maxresdefault.jpg"
-        },
-        {
-            siteName:"HA NOI",
-            thumb:"https://evivatour.com/wp-content/uploads/2021/11/Best-time-to-visit-Vietnam-900x565.jpg"
-        },
-        {
-            siteName:"LAO CAI",
-            thumb:"https://vietnamhearttravel.com/travel-uploads/travel/2018_12/sapa1-dep.jpg"
-        },
-        {
-            siteName:"DALAT",
-            thumb:"https://sakos.vn/wp-content/uploads/2023/04/hanh-trinh-kham-pha-da-lat-bang-trai-ngoai-troi-1.png"
-        },
-        {
-            siteName:"MOC CHAU",
-            thumb:"https://booking.pystravel.vn/uploads/posts/albums/6315/b927abb7ac0194ba111214afc5919185.jpg"
-        },
-    ]
+const MainSectionTour = ({children,props})=>{
+    const [tours,setTours]= useState([])
+    useEffect(() => {
+        axiosInstance.get('tours/').then(res=>{
+            console.log(res.data.results[0].thumbnail)
+            setTours(res.data.results)
+        })
+    }, []);
+
     return (
-        <div className="grid gap-12 grid-cols-3 ">
-            {sites.map((site,key)=>(
+        <div className="grid gap-12 grid-cols-3">
+            {tours&& tours.map((tour,key)=>(
                 <div key={key}>
-                    <SiteCard thumb={site.thumb} siteName={site.siteName}/>
+                    <TourCard tour={tour}/>
                 </div>
             ))}
    
@@ -118,7 +103,7 @@ const MainSectionCountry =()=>{
     const [firstSwiper, setFirstSwiper] = useState(null);
     const [secondSwiper, setSecondSwiper] = useState(null);
     return (
-        <>
+        <d>
             <Swiper 
                 className='h-full' 
                 effect='fade'  
@@ -205,19 +190,19 @@ const MainSectionCountry =()=>{
             </Swiper>
             <div className='absolute top-0 right-0 h-full flex items-center justify-end z-40 w-1/2 pl-24'>
                 <div className='absolute bottom-36 left-1/2 -translate-x-1/2 flex gap-4 ml-24'>
-                    <button className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <button className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbChevronLeft size={26}></TbChevronLeft>
                     </button>
-                    <button className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <button className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbPlayerPlayFilled size={26}></TbPlayerPlayFilled>
                     </button>
-                    <button  className='w-12 h-12 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <button  className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbChevronRight size={26}></TbChevronRight>
                     </button>
                 </div> 
                 <Swiper 
                     className='overflow-hidden h-1/2' 
-                    slidesPerView={3} 
+                    slidesPerView={1} 
                     loop={true} 
                     spaceBetween={24} 
                     modules={[Controller,EffectCoverflow]} 
@@ -235,9 +220,9 @@ const MainSectionCountry =()=>{
                     >
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            <div className='flex items-center gap-4 mb-4'>
+                            {/* <div className='flex items-center gap-4 mb-4'>
                                 <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>VIETNAM</div>
-                            </div>
+                            </div> */}
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://hoponworld.com/wp-content/uploads/2021/07/halong-bay-vietnam.jpg" alt="" />
                             </div>
@@ -245,9 +230,9 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            <div className='flex items-center gap-4 mb-4'>
+                            {/* <div className='flex items-center gap-4 mb-4'>
                                 <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>INDONESIA</div>
-                            </div>
+                            </div> */}
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revisi-2020/destinations-thumbnail/Bali-Thumbnail.jpg" alt="" />
                             </div>
@@ -255,9 +240,9 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            <div className='flex items-center gap-4 mb-4'>
+                            {/* <div className='flex items-center gap-4 mb-4'>
                                 <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>THAILAND</div>
-                            </div>
+                            </div> */}
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://vietnamtouristvn.com/thumbs/670x500x1/upload/product/muang-boran-4-8565.jpg" alt="" />
                             </div>
@@ -265,10 +250,10 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            <div className='flex items-center gap-4 mb-4'>
+                            {/* <div className='flex items-center gap-4 mb-4'>
                                 <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>JAPAN</div>
                         
-                            </div>
+                            </div> */}
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://thriftynomads.com/wp-content/uploads/2018/01/Japan-Mt-Fuji.jpg" alt="" />
                             </div>
@@ -276,7 +261,7 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                 </Swiper>
             </div>        
-        </>
+        </d>
     )
 }
 
@@ -411,7 +396,7 @@ const MainSectionSeason = ()=>{
 const MainSectionContact = ({children})=>{
     return (
         <>
-            <div className="grid grid-cols-2 gap-24">
+            <div className="grid grid-cols-2 gap-24 items-center">
                 <div className="flex items-center relative">
                     <ContactContent/>
                 </div>
@@ -424,10 +409,13 @@ const MainSectionContact = ({children})=>{
 }
 
 MainSection.City = MainSectionCity
-MainSection.Site = MainSectionSite
+MainSection.Tour = MainSectionTour
 MainSection.Country = MainSectionCountry
 MainSection.Article = MainSectionArticle
 MainSection.Season = MainSectionSeason
 MainSection.Contact = MainSectionContact
 
 export default MainSection;
+export {
+    TourCard
+}
