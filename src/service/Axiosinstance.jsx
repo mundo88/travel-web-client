@@ -5,6 +5,6 @@ const API_URL = process.env.REACT_APP_API_ENDPOINT
 export const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     }
 })
