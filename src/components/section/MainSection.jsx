@@ -82,7 +82,7 @@ const MainSectionTour = ({children,props})=>{
     const [tours,setTours]= useState([])
     useEffect(() => {
         axiosInstance.get('tours/').then(res=>{
-            console.log(res.data.results[0].thumbnail)
+            console.log(res.data)
             setTours(res.data.results)
         })
     }, []);
