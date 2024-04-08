@@ -8,8 +8,8 @@
     .bg-main {
         @apply bg-[#051214]
     }
-    .swiper-disable {
-        @apply opacity-0
+    .swiper-button:disabled {
+        @apply opacity-0 pointer-events-none
     }
     body,html {
         font-family: inter;

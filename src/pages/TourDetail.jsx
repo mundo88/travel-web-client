@@ -3,7 +3,7 @@ import { axiosInstance } from '../service/Axiosinstance';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
-import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbMapPin, TbMessage, TbPhotoSensor3, TbSearch, TbSend, TbShare, TbStarFilled, TbUserHeart } from 'react-icons/tb';
+import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart } from 'react-icons/tb';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { HiOutlineCheck } from "react-icons/hi";
 import { PiBowlFoodLight, PiCarProfileLight, PiMoney } from "react-icons/pi";
@@ -12,6 +12,9 @@ import HeaderTitle from '../components/section/HeaderTitle';
 import Modal from "../components/Modal"
 import  ContactForm  from '../components/form/ContactForm';
 import { IoClose } from "react-icons/io5";
+import GalleryImage from '../components/GalleryImage';
+
+
 const TourDetail = () => {
     const [tour,setTour]=useState(null)
     const { id } = useParams()
@@ -20,12 +23,21 @@ const TourDetail = () => {
     const [tours,setTours]= useState([])
     const [tab,setTab]=useState('about')
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [comment,setComment] =useState(null)
     function openModal() {
       setIsOpen(true);
     }
     function closeModal() {
       setIsOpen(false);
     }
+    const [galleryView, setgalleryView] = useState(false);
+    function openGalleryView() {
+        setgalleryView(true);
+    }
+    function closeGalleryView() {
+        setgalleryView(false);
+    }
+
     useEffect(() => {
         axiosInstance.get('tours/').then(res=>{
             console.log(res.data.results[0].thumbnail)
@@ -80,12 +92,12 @@ const TourDetail = () => {
                         </div>
                     </div>
                     <div className="grid grid-cols-5 grid-rows-2 gap-4">
-                        <div className="col-span-3 row-span-2 group overflow-hidden">
+                        <div className="col-span-3 row-span-2 group overflow-hidden" onClick={openGalleryView}>
                             <img src={tour.thumbnail} alt="" className='w-full h-full object-cover group-hover:scale-110 duration-300'/>
                         </div>
                         <div className="grid col-span-2 row-span-2 grid-cols-2 gap-4">
                             {tour.attachments.slice(0,4).map((attachment,key)=>(
-                                <div className="w-full h-full relative overflow-hidden group">
+                                <div className="w-full h-full relative overflow-hidden group" onClick={openGalleryView}>
                                     {key ===3 &&
                                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-20">
                                             <button className='flex items-center gap-2 w-fit font-semibold hover:border-teal-300 hover:bg-black/60 px-6 py-3 border-gray-300 duration-300 text-center active:scale-95 border-2 text-white'>
@@ -114,7 +126,7 @@ const TourDetail = () => {
                             </div>
                             <div className='mt-8 text-gray-300 whitespace-pre-line'>
                                 {isReadMore ? tour.about.slice(0, 550): tour.about }
-                                {tour.about.length > 150 && 
+                                {tour.about.length > 550 && 
                                     <>
                                         {isReadMore ? 
                                             <button className='inline-block ml-2 text-teal-300' onClick={toggleReadMore}>..Xem thêm</button> 
@@ -220,11 +232,16 @@ const TourDetail = () => {
                                             <TbChevronDown></TbChevronDown>
                                         </div>
                                     </div>
-                                    <div className="my-10 w-full relative">
-                                        <input type="text" className='peer w-full h-12 flex pl-16 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder='Tìm kiếm bình luận' />
-                                        <span className='absolute top-1/2 -translate-y-1/2 left-0 pl-6 text-gray-300 peer-focus:text-teal-300'>
-                                            <TbSearch  size={24}></TbSearch>
-                                        </span>
+                                    <div className="flex items-center">
+                                        <div className="my-10 w-full relative">
+                                            <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder='Viết bình luận' />
+                                            <span className='absolute top-1/2 -translate-y-1/2 left-0 pl-4 text-gray-300 peer-focus:text-teal-300'>
+                                                <TbMoodSmile size={24}></TbMoodSmile>
+                                            </span>
+                                        </div>
+                                        <button class={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700' }`}>
+                                            <span>Đăng</span>
+                                        </button>
                                     </div>
                                     <div className='flex flex-col gap-10'>
                                         {Array.from(Array(5),(e,i)=>(
@@ -348,6 +365,12 @@ const TourDetail = () => {
                     </button>
                     <ContactForm></ContactForm>
                 </div>
+            </Modal>}     
+            {galleryView && <Modal show={galleryView} onClose={closeGalleryView}>
+                    <button className='absolute top-0 right-0 p-4 z-50'>
+                        <IoClose size={36} className="text-gray-200 duration-150" onClick={closeGalleryView}></IoClose>
+                    </button>
+                <GalleryImage attachments={tour.attachments}></GalleryImage>
             </Modal>}     
         </div>
     );

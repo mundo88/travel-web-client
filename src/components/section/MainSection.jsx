@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TbArrowNarrowRight, TbChevronLeft, TbChevronRight, TbPlayerPlayFilled } from 'react-icons/tb';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Controller, EffectFade,EffectCoverflow } from 'swiper/modules';
+import {  EffectFade,EffectCoverflow, FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import "swiper/css/effect-coverflow";
 import 'swiper/css/effect-fade';
 import AssetImg2 from "../../assets/images/asset2.svg"
@@ -69,9 +69,14 @@ const TourCard = ({tour})=>{
         <Link to={"/tour/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
             <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-3xl font-bold group-hover:text-white duration-300'>{tour.destination.city.name}</div>
             <div className='w-full h-full relative'>
-                <div className='absolute bg-black/60 flex items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                    <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
-                    <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                <div className='absolute bg-black/70 p-8 flex flex-col items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
+                    <div className="text-white text-xl font-semibold truncate max-w-full">
+                        {tour.name}
+                    </div>
+                    <div className='flex items-center justify-center gap-4'>
+                        <button className='w-fit text-xl font-semibold px-8 py-3 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                        <button className='w-fit text-xl font-semibold hover:bg-teal-400 px-8 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
+                    </div>
                 </div>
                 <img src={tour.thumbnail} alt="" className='w-full h-full object-cover'/>
             </div>
@@ -100,19 +105,16 @@ const MainSectionTour = ({children,props})=>{
 }
 
 const MainSectionCountry =()=>{
-    const [firstSwiper, setFirstSwiper] = useState(null);
-    const [secondSwiper, setSecondSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
         <d>
             <Swiper 
                 className='h-full' 
                 effect='fade'  
-                modules={[EffectFade,Controller]} 
+                modules={[EffectFade,Thumbs,FreeMode]} 
                 loop={true} 
-                onSwiper={setFirstSwiper} 
+                thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
                 mousewheel={false}
-                controller={{ control: secondSwiper }}
-
             >
                 <SwiperSlide >
                     <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent'>
@@ -189,7 +191,7 @@ const MainSectionCountry =()=>{
                 
             </Swiper>
             <div className='absolute top-0 right-0 h-full flex items-center justify-end z-40 w-1/2 pl-24'>
-                <div className='absolute bottom-36 left-1/2 -translate-x-1/2 flex gap-4 ml-24'>
+                <div className='absolute bottom-64 left-1/2 -translate-x-1/2 flex gap-4 ml-24'>
                     <button className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbChevronLeft size={26}></TbChevronLeft>
                     </button>
@@ -201,22 +203,15 @@ const MainSectionCountry =()=>{
                     </button>
                 </div> 
                 <Swiper 
-                    className='overflow-hidden h-1/2' 
-                    slidesPerView={1} 
+                    className='overflow-hidden h-1/3' 
+                    onSwiper={setThumbsSwiper}
+                    slidesPerView={3}
+                    freeMode={true}
+                    watchSlidesProgress={true}
+                    modules={[FreeMode,EffectCoverflow, Navigation, Thumbs]}
                     loop={true} 
                     spaceBetween={24} 
-                    modules={[Controller,EffectCoverflow]} 
-                    onSwiper={setSecondSwiper} 
-                    controller={{ control: firstSwiper }}
-                    slidesPerGroup={1}
-                    effect="coverflow"
-                    coverflowEffect={{
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 500,
-                        modifier: 1,
-                        slideShadows: false
-                    }}
+           
                     >
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
