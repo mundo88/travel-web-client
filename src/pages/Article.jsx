@@ -1,11 +1,50 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { TbBrandFacebookFilled, TbBrandInstagram, TbBrandTiktokFilled, TbBrandTwitterFilled, TbBrandWechat, TbDots, TbDotsVertical, TbTimeline } from 'react-icons/tb';
+import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbDots, TbHeartFilled, TbMessage, TbMessageCircle2Filled, TbTimeline } from 'react-icons/tb';
+import { FaShare } from "react-icons/fa";
+import { axiosInstance } from '../service/Axiosinstance';
+import line from "../assets/images/SVG/line.svg"
+import { TourCard } from '../components/section/MainSection';
+
+const ArticleCard = () => {
+    return (
+        <Link className='flex flex-col gap-3 group/article'>
+            <div className="w-full aspect-video relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/60 group-hover/article:opacity-100 opacity-0 duration-300 z-20"></div>
+                <img className='w-full h-full object-cover group-hover/article:scale-110 duration-300' src="https://pos.nvncdn.com/86c7ad-50310/art/artCT/20230420_0moA6KAt.png" alt="" />
+            </div>
+            <div className='flex gap-3 items-center'>
+                <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800 text-sm uppercase'>
+                    TIN TỨC
+                </span>
+                <span className='font-normal text-sm text-grey-800'>17/08/2023</span>
+            </div>
+            <div className='text-gray-800 text-2xl font-bold group-hover/article:underline duration-300'>
+                TOP 10 ĐỊA ĐIỂM DU LỊCH TRONG NƯỚC CHỤP ẢNH ĐẸP NHẤT
+            </div>
+        </Link>
+    )
+}
 
 const Article = () => {
     const { id } = useParams()
-    
+    const [news,setNews] = useState([])
+    const [tours,setTours]=useState([])
+    useEffect(() => {
+        axiosInstance.get('tours/').then(res=>{
+            console.log(res.data.results[0].thumbnail)
+            setTours(res.data.results)
+        })
+    }, []);
+    useEffect(() => {
+        axiosInstance.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=0a468c3d73c141409da78b5cc2049132").then(res=>{
+            setNews(res.data.articles)
+        })
+        return () => {
+            
+        };
+    }, [id]);
     return (
         <div className='min-h-screen bg-main'>
             <div className='sticky top-0 py-4 bg-main z-50'>
@@ -13,19 +52,19 @@ const Article = () => {
             </div>
             <div className='h-full bg-grey-50'>
                 <div className='container mx-auto py-24'>
-                    <div className="w-full flex">
+                    <div className="w-full flex gap-24">
                         <div className='flex items-start gap-10'>
                             <div className="flex flex-col gap-2 mt-12 sticky top-28">
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-gray-400 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandFacebookFilled className='relative z-10' size={24}></TbBrandFacebookFilled>
                                 </button>
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-gray-400 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandTiktokFilled  className='relative z-10' size={24}></TbBrandTiktokFilled>
                                 </button>
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-gray-400 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandTwitterFilled  className='relative z-10' size={24}></TbBrandTwitterFilled>
                                 </button>
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-gray-400 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbDots  className='relative z-10' size={28}></TbDots>
                                 </button>
                             </div>
@@ -42,9 +81,21 @@ const Article = () => {
                                     </span>
                                 </div>
                                 <h1 className='text-gray-800 text-4xl font-bold mt-4'>Kinh Nghiệm du lịch Phú Quốc 3 ngày 2 đêm giá siêu rẻ</h1>
-                                <div className="mt-6 flex items-center gap-2">
+                                <div className="mt-6 flex items-center gap-1">
                                     <TbTimeline size={24} className='text-teal-700'></TbTimeline>
                                     <span className='font-bold text-lg text-grey-800'>17/08/2023</span>
+                                    <div className="flex items-center gap-1 ml-4">
+                                        <TbHeartFilled className='text-grey-800' size={24}></TbHeartFilled>
+                                        <span className='font-bold text-lg text-grey-800'>198</span>
+                                    </div>
+                                    <div className="flex items-center gap-1 ml-4">
+                                        <TbMessageCircle2Filled className='text-grey-800' size={24}></TbMessageCircle2Filled>
+                                        <span className='font-bold text-lg text-grey-800'>36</span>
+                                    </div>
+                                    <div className="flex items-center gap-1 ml-4">
+                                        <FaShare className='text-grey-800' size={24}></FaShare>
+                                        <span className='font-bold text-lg text-grey-800'>14</span>
+                                    </div>
                                 </div>
                                 <div className="mt-12">
                                     <img src="https://flytime.vn/upload/img/products/08ae65742cda01e85a345a92e2744a2b.gif" alt="" />
@@ -142,7 +193,47 @@ const Article = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="min-w-96"></div>
+                        <div className="min-w-96">
+                            <div className='text-gray-800 text-4xl font-bold relative'>
+                                Latest News
+                                <div className="absolute w-full -bottom-4 left-0">
+                                    <img src={line} className='w-1/2' alt="" />
+                                </div>
+                            </div>
+                            <div className='mt-10 flex flex-col gap-8'>
+                                { Array.from(Array(5),(e,i)=>(
+                                    <ArticleCard></ArticleCard>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div className='mt-24'>
+                        <div>
+                            <div className='text-gray-800 text-4xl font-bold relative w-fit'>
+                                Related articles
+                                <div className="absolute w-full -bottom-4 left-0">
+                                    <img src={line} className='w-1/2' alt="" />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-3 gap-8 mt-12">
+                                <ArticleCard></ArticleCard>
+                                <ArticleCard></ArticleCard>
+                                <ArticleCard></ArticleCard>
+                            </div>
+                        </div>
+                        <div className='mt-12'>
+                            <div className='text-gray-800 text-4xl font-bold relative w-fit'>
+                                Related tours
+                                <div className="absolute w-full -bottom-4 left-0">
+                                    <img src={line} className='w-1/2' alt="" />
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-3 gap-8 mt-12">
+                                {tours && tours.slice(0,3).map((tour,key)=>(
+                                    <TourCard tour={tour}></TourCard>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>  
