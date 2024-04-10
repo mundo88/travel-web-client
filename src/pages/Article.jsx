@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbDots, TbHeartFilled, TbMessage, TbMessageCircle2Filled, TbTimeline } from 'react-icons/tb';
+import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbFile, TbHeart, TbHeartFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
 import { FaShare } from "react-icons/fa";
 import { axiosInstance } from '../service/Axiosinstance';
 import line from "../assets/images/SVG/line.svg"
 import { TourCard } from '../components/section/MainSection';
 import Footer from '../components/Footer';
+import { HashLink } from 'react-router-hash-link';
 
 const ArticleCard = () => {
     return (
@@ -30,22 +31,15 @@ const ArticleCard = () => {
 
 const Article = () => {
     const { id } = useParams()
-    const [news,setNews] = useState([])
     const [tours,setTours]=useState([])
+    const [comment,setComment] =useState(null)
+
     useEffect(() => {
         axiosInstance.get('tours/').then(res=>{
             console.log(res.data.results[0].thumbnail)
             setTours(res.data.results)
         })
     }, []);
-    useEffect(() => {
-        axiosInstance.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=0a468c3d73c141409da78b5cc2049132").then(res=>{
-            setNews(res.data.articles)
-        })
-        return () => {
-            
-        };
-    }, [id]);
     return (
         <>
             <div className='min-h-screen bg-main'>
@@ -86,15 +80,15 @@ const Article = () => {
                                     <div className="mt-6 flex items-center gap-1">
                                         <TbTimeline size={24} className='text-teal-700'></TbTimeline>
                                         <span className='font-bold text-lg text-grey-800'>17/08/2023</span>
-                                        <div className="flex items-center gap-1 ml-4">
+                                        <div className="flex items-center gap-1 ml-4 hover:underline">
                                             <TbHeartFilled className='text-grey-800' size={24}></TbHeartFilled>
                                             <span className='font-bold text-lg text-grey-800'>198</span>
                                         </div>
-                                        <div className="flex items-center gap-1 ml-4">
+                                        <HashLink to={"#comment"} smooth className="flex items-center gap-1 ml-4 hover:underline">
                                             <TbMessageCircle2Filled className='text-grey-800' size={24}></TbMessageCircle2Filled>
                                             <span className='font-bold text-lg text-grey-800'>36</span>
-                                        </div>
-                                        <div className="flex items-center gap-1 ml-4">
+                                        </HashLink>
+                                        <div className="flex items-center gap-1 ml-4 hover:underline">
                                             <FaShare className='text-grey-800' size={24}></FaShare>
                                             <span className='font-bold text-lg text-grey-800'>14</span>
                                         </div>
@@ -193,6 +187,81 @@ const Article = () => {
                                             Nếu đi xe máy xuyên rừng, bạn nên tìm một chiếc bản đồ Phú Quốc phòng trường hợp lạc đường.
                                         </span>
                                     </div>
+                                    <div className="flex-1 mt-24" id='comment'>
+                                        <div className="flex items-center justify-between w-full">
+                                            <div className="text-2xl text-grey-800">
+                                                328 lượt đánh giá
+                                            </div>
+                                            <button className="py-2 px-2 flex items-center justify-center gap-4 text-grey-800 border border-gray-500 hover:border-teal-700 duration-150 active:scale-95">
+                                                <span>Gần đây nhất</span>
+                                                <TbChevronDown></TbChevronDown>
+                                            </button>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <div className="my-10 w-full relative">
+                                                <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pr-20 pl-4 border border-grey-500 focus:border-grey-800 duration-150 outline-none hover:border-grey-800 bg-transparent text-grey-800' placeholder='Viết bình luận' />
+                                                <span className='absolute top-1/2 -translate-y-1/2 right-0 pr-3 text-grey-500 flex items-center justify-center gap-2.5'>
+                                                    <button className='hover:text-grey-800'>
+                                                        <TbMoodSmile size={24}></TbMoodSmile>
+                                                    </button>
+                                                    <button className='hover:text-grey-800'>
+                                                        <TbPhoto size={24}></TbPhoto>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <button class={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
+                                                <span>Đăng</span>
+                                            </button>
+                                        </div>
+                                        <div className='flex flex-col gap-10'>
+                                            {Array.from(Array(3),(e,i)=>(
+                                                <div className='flex flex-col gap-3'>
+                                                    <div className='flex items-center'>
+                                                        <div className='w-12 h-12 rounded-full overflow-hidden'>
+                                                            <img src='https://www.vietgemstones.com/blog/wp-content/uploads/2023/12/Firefly-The-letter-OM-in-the-mysterious-space-of-the-earth-82739-1-copy-1024x1024.jpg' className='w-full h-full object-cover' alt="" />
+                                                        </div>
+                                                        <div className='ml-4'>
+                                                            <p className='font-medium text-grey-800'>
+                                                                Quynh Thi Nguyen
+                                                            </p>
+                                                            <p className='text-gray-500 text-sm'>
+                                                                3 Week ago
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className='flex items-center gap-2'>
+                                                        {Array.from(Array(5), (e, i) => (
+                                                        <div className='text-orange-500' key={i}>
+                                                            <TbStarFilled></TbStarFilled>
+                                                        </div>
+                                                        ))}
+                                                    </div>
+                                                    <div className='space-y-2'>
+                                                        <div className='text-grey-800'>
+                                                            Tuy nhiên, theo nhiều nhà nghiên cứu dân tộc học Việt Nam cho rằng, cái tên Đà Lạt xuất phát từ phiên âm bản địa với từ gốc là Đạ Lạch. Theo ngôn ngữ K'ho, Đăk, Đạ hay Đa có nghĩa là nước, là suối, sông. Còn Lạch (Lạt) là tên bộ tộc của dân tộc K'ho. Đà Lạch là con suối của người Lạch. Đến nay, tên gọi Đà Lạt được nhiều người hiểu với ý nghĩa là con suối của người Lạch, người Lạch chính là thành viên trong đại gia đình các dân tộc Việt Nam.
+                                                        </div>
+                                                        <div className='flex items-center gap-6'>
+                                                            <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
+                                                                <TbHeart></TbHeart>
+                                                                Yêu thích
+                                                            </Link>
+                                                            <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
+                                                                <TbMessage></TbMessage>
+                                                                Trả lời
+                                                            </Link>
+                                                            <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
+                                                                <TbShare></TbShare>
+                                                                Chia sẻ
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            <button className='w-fit py-2 px-6 flex items-center justify-center gap-4 text-grey-800 border border-grey-500 hover:border-teal-700 duration-150 active:scale-95'>
+                                                Hiểu thị toàn bộ đánh giá
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="min-w-96">
@@ -208,6 +277,7 @@ const Article = () => {
                                     ))}
                                 </div>
                             </div>
+                     
                         </div>
                         <div className='mt-24'>
                             <div className='flex flex-col'>
@@ -218,7 +288,7 @@ const Article = () => {
                                             <img src={line} className='w-1/2' alt="" />
                                         </div>
                                     </div>
-                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border-2 border-grey-700 hover:border-teal-700">/View all</button>
+                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
                                  </div>
                                 <div className="grid grid-cols-3 gap-8 mt-12">
                                     <ArticleCard></ArticleCard>
@@ -234,7 +304,7 @@ const Article = () => {
                                             <img src={line} className='w-1/2' alt="" />
                                         </div>
                                     </div>
-                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border-2 border-grey-700 hover:border-teal-700">/View all</button>
+                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
                                  </div>
                                 <div className="grid grid-cols-3 gap-8 mt-12">
                                     {tours && tours.slice(0,3).map((tour,key)=>(

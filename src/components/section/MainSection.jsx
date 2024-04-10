@@ -215,9 +215,9 @@ const MainSectionCountry =()=>{
                     >
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            {/* <div className='flex items-center gap-4 mb-4'>
-                                <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>VIETNAM</div>
-                            </div> */}
+                            <div className='flex items-center gap-4 mb-4'>
+                                <div className='font-bold text-gray-100 text-2xl'>VIETNAM</div>
+                            </div>
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://hoponworld.com/wp-content/uploads/2021/07/halong-bay-vietnam.jpg" alt="" />
                             </div>
@@ -225,9 +225,9 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            {/* <div className='flex items-center gap-4 mb-4'>
-                                <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>INDONESIA</div>
-                            </div> */}
+                            <div className='flex items-center gap-4 mb-4'>
+                                <div className='font-bold text-gray-100 text-2xl'>INDONESIA</div>
+                            </div>
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://www.indonesia.travel/content/dam/indtravelrevamp/en/destinations/revisi-2020/destinations-thumbnail/Bali-Thumbnail.jpg" alt="" />
                             </div>
@@ -235,9 +235,9 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            {/* <div className='flex items-center gap-4 mb-4'>
-                                <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>THAILAND</div>
-                            </div> */}
+                            <div className='flex items-center gap-4 mb-4'>
+                                <div className='font-bold text-gray-100 text-2xl'>THAILAND</div>
+                            </div>
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://vietnamtouristvn.com/thumbs/670x500x1/upload/product/muang-boran-4-8565.jpg" alt="" />
                             </div>
@@ -245,10 +245,9 @@ const MainSectionCountry =()=>{
                     </SwiperSlide>
                     <SwiperSlide className='group'>
                         <div className=' duration-300 h-full flex flex-col justify-center'>
-                            {/* <div className='flex items-center gap-4 mb-4'>
-                                <div className='font-bold group-[&.swiper-slide-active]:text-white text-gray-300 text-2xl'>JAPAN</div>
-                        
-                            </div> */}
+                            <div className='flex items-center gap-4 mb-4'>
+                                <div className='font-bold text-gray-100 text-2xl'>JAPAN</div>
+                            </div>
                             <div className='h-full w-full overflow-hidden'>
                                 <img className='w-full h-full object-cover ' src="https://thriftynomads.com/wp-content/uploads/2018/01/Japan-Mt-Fuji.jpg" alt="" />
                             </div>

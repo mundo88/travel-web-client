@@ -316,7 +316,7 @@ const TourDetail = () => {
                         <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                             <TbMapPin size={'36'}></TbMapPin> 
                             <div className='flex flex-col'>
-                                <span className='text-sm'>Điểm đến</span>
+                                <span className='text-sm'>Destination</span>
                                 <span className='text-lg'>{tour.destination.city.name}</span>
                             </div>
                         </div>
@@ -324,7 +324,7 @@ const TourDetail = () => {
                         <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                             <TbSend size={'36'}></TbSend> 
                             <div className='flex flex-col'>
-                                <span className='text-sm'>Vận chuyển</span>
+                                <span className='text-sm'>Transpot</span>
                                 <span className='text-lg'>{tour.transpot}</span>
                             </div>
                         </div>
@@ -332,16 +332,16 @@ const TourDetail = () => {
                         <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                             <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
                             <div className='flex flex-col'>
-                                <span className='text-sm'>Giá tiền</span>
-                                <span className='text-lg'>{tour.price.toLocaleString("vi-VN",{style:"currency",currency:'VND'})}</span>
+                                <span className='text-sm'>Price</span>
+                                <span className='text-lg'>{tour.price.toLocaleString("en-US",{style:"currency",currency:'USD'})}</span>
                             </div>
                         </div>
                         <div className='h-8 w-0.5 bg-gray-400'></div>
                         <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                             <TbCalendarEvent size={'36'}></TbCalendarEvent> 
                             <div className='flex flex-col'>
-                                <span className='text-sm'>Thời gian</span>
-                                <span className='text-lg'>{tour.schedule}</span>
+                                <span className='text-sm'>Time</span>
+                                <span className='text-lg'>{tour.time}</span>
                             </div>
                         </div>
                         <div className='h-8 w-0.5 bg-gray-400'></div>

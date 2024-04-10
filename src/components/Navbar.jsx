@@ -37,7 +37,7 @@ const Navbar = () => {
                     <NavHashLink smooth={true} to={"/#article"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <span>Article</span>
                     </NavHashLink>
-                    <NavHashLink smooth={true} to={"/#contact"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
+                    <NavHashLink smooth={true} to={"/contact"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <span>Contact</span>
                     </NavHashLink>
                 </div>
