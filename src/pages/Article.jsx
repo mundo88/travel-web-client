@@ -35,11 +35,12 @@ const Article = () => {
     const [comment,setComment] =useState(null)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         axiosInstance.get('tours/').then(res=>{
             console.log(res.data.results[0].thumbnail)
             setTours(res.data.results)
         })
-    }, []);
+    }, [id]);
     return (
         <>
             <div className='min-h-screen bg-main article'>
