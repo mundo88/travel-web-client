@@ -18,4 +18,10 @@
         background: #f09433;
         background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf)
     }
+    blockquote {
+        @apply p-4 my-4 border-s-4 border-gray-500 bg-gray-800
+    }
+    .tour ul {
+        @apply space-y-0.5 list-disc list-inside py-2
+    }
 }

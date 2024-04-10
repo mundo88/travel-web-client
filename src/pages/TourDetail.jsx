@@ -13,6 +13,7 @@ import Modal from "../components/Modal"
 import  ContactForm  from '../components/form/ContactForm';
 import { IoClose } from "react-icons/io5";
 import GalleryImage from '../components/GalleryImage';
+import parse from 'html-react-parser';
 
 
 const TourDetail = () => {
@@ -53,7 +54,7 @@ const TourDetail = () => {
     }, [id]);
     
     return (
-        <div className='min-h-screen bg-main '>
+        <div className='min-h-screen bg-main tour'>
             <div className='py-8'>
                 <Navbar></Navbar>
             </div>
@@ -125,13 +126,17 @@ const TourDetail = () => {
                                 </button>
                             </div>
                             <div className='mt-8 text-gray-300 whitespace-pre-line'>
-                                {isReadMore ? tour.about.slice(0, 550): tour.about }
-                                {tour.about.length > 550 && 
+                                {tab==='about' &&  
                                     <>
-                                        {isReadMore ? 
-                                            <button className='inline-block ml-2 text-teal-300' onClick={toggleReadMore}>..Xem thêm</button> 
-                                            :  
-                                            <button className='text-teal-300 mt-1 block' onClick={toggleReadMore}>Thu gọn</button>
+                                        {isReadMore ? parse(tour.about.slice(0, 550)): parse(tour.about) }
+                                        {tour.about.length > 550 && 
+                                            <>
+                                                {isReadMore ? 
+                                                    <button className='inline-block ml-2 text-teal-300' onClick={toggleReadMore}>..Xem thêm</button> 
+                                                    :  
+                                                    <button className='text-teal-300 mt-1 block' onClick={toggleReadMore}>Thu gọn</button>
+                                                }
+                                            </>
                                         }
                                     </>
                                 }

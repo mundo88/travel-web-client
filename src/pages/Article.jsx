@@ -42,7 +42,7 @@ const Article = () => {
     }, []);
     return (
         <>
-            <div className='min-h-screen bg-main'>
+            <div className='min-h-screen bg-main article'>
                 <div className='sticky top-0 py-4 bg-main z-50'>
                     <Navbar></Navbar>
                 </div>
