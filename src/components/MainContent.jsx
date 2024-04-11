@@ -34,7 +34,7 @@ const MainContent = () => {
                     </div>
                 </div>
                 <div className='relative'>
-                    <div className="m-auto mb-16 container">
+                    <div className="m-auto md:mb-16 mb-8 container">
                         <HeaderTitle title={'Best place to explore'} desciption={'Take a look the best places'}/>
                     </div>
                     <div className='h-screen' id="explore">
@@ -42,7 +42,7 @@ const MainContent = () => {
                     </div>
                 </div>
                 <div className="container md:mt-36 mt-16 mx-auto">
-                    <div className="mb-16" >
+                    <div className="md:nb-16 mb-8" >
                         <HeaderTitle postion={'right'} title={'Experience in trips'} desciption={'Take a look the best places'}/>
                     </div>
                     <div id="article">
@@ -50,7 +50,7 @@ const MainContent = () => {
                     </div>
                 </div>
                 <div className='md:mt-36 mt-16 relative'>
-                    <div className="container m-auto mb-16">
+                    <div className="container m-auto md:mb-16 mb-8">
                         <HeaderTitle  title={'Destination to the season'} desciption={'Take a look the best places'}/>
                     </div>
                     <div className="h-screen">

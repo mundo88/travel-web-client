@@ -9,23 +9,17 @@ import { TbMenu2 } from 'react-icons/tb';
 const Navbar = () => {
     return (
         <div className='w-full bg-main text-white'>
-            <div className='flex justify-between items-center px-6 container m-auto'>
-                <Link to={"/"} className='md:h-14 h-8'>
+            <div className='flex justify-between items-center px-6  container m-auto'>
+                <Link to={"/"} className='md:h-12 h-8'>
                     <img src={logo} className='h-full w-auto' alt="" />
                 </Link>
                 <div className="hidden md:block">
                     <div className='flex items-center justify-center gap-6'>
                         <NavHashLink smooth={true} to={"/#top"} className='flex items-center justify-center py-2 px-2 relative font-semibold group'>
-                        {({isActive})=>(
-                                isActive ? 
-                                <>
-                                    <span className='text-teal-300'>Home</span>
-                                    <span className='absolute bottom-0.5'>
-                                        <img src={line} alt=""/>
-                                    </span> 
-                                </>
-                                : <span>Home</span>
-                            )}
+                            <span className='text-teal-300'>Home</span>
+                            <span className='absolute bottom-0.5'>
+                                <img src={line} alt=""/>
+                            </span> 
                         </NavHashLink>
                         <NavHashLink smooth={true} to={"/#destination"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                             <span>Destination</span>
