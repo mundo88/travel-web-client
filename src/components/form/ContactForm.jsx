@@ -21,7 +21,7 @@ const ContactForm = () => {
                 <input type="text" name="share" id="share" className='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 placeholder:text-2xl' placeholder="Hi, i' love o ask you..."/>
             </div>    
             <div className='pt-4 flex justify-end items-center'>
-                <button className="flex flex-col items-center gap-2 w-fit text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
+                <button className="flex flex-row justify-center md:flex-col items-center gap-2 md:w-fit w-full text-xl font-semibold hover:bg-teal-400 px-6 py-3 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400">
                     SEND
                     <TbArrowNarrowRight size={28}></TbArrowNarrowRight> 
                 </button>

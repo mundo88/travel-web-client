@@ -14,7 +14,7 @@ const Contact = () => {
                 <div className="flex items-center relative">
                     <ContactContent/>
                 </div>
-                <div className='flex flex-col justify-between pt-12'>
+                <div className='flex flex-col justify-between'>
                     <ContactForm/>
                 </div>
             </div>

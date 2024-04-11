@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 
 const Home = () => {
     return (
-        <div className='bg-main'>
+        <div className='bg-main overflow-x-hidden'>
             <div className='relative z-50 py-8'>
                 <Navbar></Navbar>
             </div>

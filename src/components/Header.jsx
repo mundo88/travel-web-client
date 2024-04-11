@@ -20,15 +20,15 @@ const Header = () => {
         <div className='min-h-screen bg-main'>
             <div className='absolute inset-0'>
                 <div className='absolute inset-0'>
-                    <div className='container m-auto pt-44 flex flex-col h-full'>
-                        <div className='text-white font-bold text-8xl flex flex-col items-center'>
+                    <div className='container m-auto pt-28 md:pt-44 flex flex-col h-full'>
+                        <div className='text-white font-bold text-3xl md:text-8xl flex flex-col items-center'>
                             <div className='relative'>
-                                <img src={ArrowHeader} className='absolute -right-24 top-4 -rotate-12' alt="" />
+                                <img src={ArrowHeader} className='absolute md:-right-24 top-4 -rotate-12 md:w-auto -right-10 w-12 h-auto' alt="" />
                                 Your next <span className='text-teal-300'>travel </span>
                             </div>
-                            <div className='flex items-end '>
+                            <div className='md:flex md:items-end md:flex-row gap-4 md:gap-6 flex flex-col items-center justify-center'>
                                 <span><span className='text-teal-300'>destination</span> is </span>
-                                <div className=''>
+                                <div className='md:max-h-[88px] md:h-[88px] md:w-[330px] w-[240px] overflow-hidden max-h-12'>
                                     <Swiper
                                         slidesPerView={1}
                                         effect={'cube'}
@@ -38,40 +38,40 @@ const Header = () => {
                                         loop={true}
                                         onSwiper={setFirstSwiper}
                                         controller={{ control: secondSwiper }}
-                                        className='h-[88px] w-[330px]'
+                                        className='h-full w-full'
                                     >
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Ha Long Bay</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Phu Quoc</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Nha Trang</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Da Nang</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Ha Noi</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 px-4 py-6 text-3xl font-normal  ml-8'>
+                                            <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                 <span className="whitespace-nowrap">Ho Chi Minh</span>
                                                 <TbChevronDown size={36}></TbChevronDown>
                                             </div>
@@ -80,7 +80,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='overflow-hidden h-full mt-12 relative flex items-center justify-center group'>
+                        <div className='overflow-hidden h-full md:mt-12 mt-8 relative flex items-center justify-center group'>
                             <Swiper 
                                 className='h-full w-full'
                                 modules={[Controller,EffectFade,Autoplay,Navigation]}
@@ -103,7 +103,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://static.vinwonders.com/production/du-lich-ha-long-topbanner.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -149,7 +149,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://khaihoanphuquoc.com.vn/wp-content/uploads/2023/09/DJI_0087-1-scaled-1.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -195,7 +195,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://static.vinwonders.com/production/nha-trang-o-dau-1.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -241,7 +241,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://images2.thanhnien.vn/528068263637045248/2023/6/4/screenshot-2023-06-04-at-224756-16858937361421786911492.png'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -287,7 +287,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://statics.vinpearl.com/ho-hoan-kiem-1_1688884405.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>
@@ -333,7 +333,7 @@ const Header = () => {
                                         <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20'></div>
                                         <img className='h-full w-full object-cover' alt='' src='https://vcdn-vnexpress.vnecdn.net/2023/05/26/Untitled-Panorama1-5826-1685055517.jpg'/>
                                         <div className=" absolute inset-0">
-                                            <div className=' opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                            <div className='hidden opacity-0 group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl md:flex justify-between items-center gap-4 z-40'>
                                                 <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                     <TbMapPin size={'36'}></TbMapPin> 
                                                     <div className='flex flex-col'>

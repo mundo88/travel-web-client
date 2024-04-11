@@ -10,7 +10,7 @@ const Navbar = () => {
     return (
         <div className='w-full bg-main text-white'>
             <div className='flex justify-between items-center px-6 container m-auto'>
-                <Link to={"/"} className='h-14'>
+                <Link to={"/"} className='md:h-14 h-8'>
                     <img src={logo} className='h-full w-auto' alt="" />
                 </Link>
                 <div className="hidden md:block">
@@ -46,7 +46,7 @@ const Navbar = () => {
                 </div>
                 <div className="block md:hidden">
                     <button className='flex items-center justify-center'>
-                        <TbMenu2 size={36}></TbMenu2>
+                        <TbMenu2 size={28}></TbMenu2>
                     </button>
                 </div>
             </div>

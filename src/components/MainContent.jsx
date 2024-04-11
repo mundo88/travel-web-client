@@ -15,18 +15,17 @@ const MainContent = () => {
                     <div className='absolute inset-0'>
                         <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
                     </div>
-                    <div className='container m-auto pt-16 relative'>
-
+                    <div className='container m-auto md:mt-16 -mt-8 relative'>
                         <div id="featuteal">
                             <HeaderTitle postion={'left'} title={'Featuteal Packages'} desciption={'Take a look the best places'}/>
-                            <div className='mt-16' >
+                            <div className='md:mt-16 mt-8' >
                                 <MainSection.Tour/>
                             </div>
                         </div>
-                        <div className='my-36' id="destination">
+                        <div className='md:my-36 my-16' id="destination">
                             <HeaderTitle postion={'right'} title={'Choose your destination'} desciption={'Take a look the best places'}/>
                             <div className="relative">
-                                <div className="mt-16">
+                                <div className="md:mt-16 mt-8">
                                     <MainSection.City></MainSection.City>
                                 </div>
                             </div>
@@ -42,7 +41,7 @@ const MainContent = () => {
                         <MainSection.Country/>
                     </div>
                 </div>
-                <div className="container mt-36 mx-auto">
+                <div className="container md:mt-36 mt-16 mx-auto">
                     <div className="mb-16" >
                         <HeaderTitle postion={'right'} title={'Experience in trips'} desciption={'Take a look the best places'}/>
                     </div>
@@ -50,7 +49,7 @@ const MainContent = () => {
                         <MainSection.Article/>
                     </div>
                 </div>
-                <div className='mt-36 relative'>
+                <div className='md:mt-36 mt-16 relative'>
                     <div className="container m-auto mb-16">
                         <HeaderTitle  title={'Destination to the season'} desciption={'Take a look the best places'}/>
                     </div>
@@ -58,8 +57,8 @@ const MainContent = () => {
                         <MainSection.Season/>
                     </div>
                 </div>
-                <div className="container mt-36 mx-auto" id='contact'>
-                    <div className="container m-auto mb-16">
+                <div className="container md:mt-36 mt-16 mx-auto" id='contact'>
+                    <div className="container m-auto mb-8">
                         <HeaderTitle postion={'right'} title={'Contact us'} desciption={'Take a look the best places'}/>
                     </div>
                     <MainSection.Contact></MainSection.Contact>
