@@ -6,14 +6,13 @@ import "swiper/css/effect-coverflow";
 import 'swiper/css/effect-fade';
 import AssetImg2 from "../../assets/images/asset2.svg"
 import AssetImg3 from "../../assets/images/asset3.svg"
-import AssetImg5 from "../../assets/images/asset5.svg"
-import AssetImg7 from "../../assets/images/asset7.svg"
 import LineImg from "../../assets/images/line.svg"
 import {ContactContent } from '../Contact';
 import { useEffect } from 'react';
 import {axiosInstance}  from "../../service/Axiosinstance"
 import { Link } from 'react-router-dom';
 import ContactForm from '../form/ContactForm';
+
 const MainSection = ({children}) => {
     return (
         <div>
@@ -87,9 +86,11 @@ const MainSectionTour = ({children,props})=>{
     const [tours,setTours]= useState([])
     useEffect(() => {
         axiosInstance.get('tours/').then(res=>{
-            console.log(res.data)
             setTours(res.data.results)
         })
+        return ()=>{
+
+        }
     }, []);
 
     return (
@@ -262,80 +263,61 @@ const MainSectionCountry =()=>{
 }
 
 const MainSectionArticle =()=>{
+    const [articles,setArticles]= useState([])
+    useEffect(() => {
+        axiosInstance.get('articles/').then(res=>{
+            console.log(res.data.results)
+            setArticles(res.data.results)
+        })
+        return ()=>{
+
+        }
+    }, []);
     return (
         <>
             <div className="grid md:grid-cols-2 gap-8 grid-cols-1 px-4">
-                <div className='flex'>
-                    <div className='w-full max-h-[450px]'>
-                        <img src="https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
-                    </div>
-                    <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
-                        <div className='h-full relative'>
-                            <img src={AssetImg2} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
+                {articles&& articles.slice(0,4).map((article,key)=>(
+                    key % 2 ===0 ?
+                    <div className='flex'>
+                        <div className='w-full h-[450px] max-h-[450px]'>
+                            <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                         </div>
-                        <div className='text-left w-full h-full flex flex-col justify-end'>
-                            <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
-                            <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-none md:text-sm text-gray-300">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
+                            <div className='h-full relative'>
+                                <img src={AssetImg2} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
                             </div>
-                            <Link to={"/article/1"} className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
-                        </div>
-                    </div>
-                </div>
-                <div className='flex'>
-                    <div className='w-full max-h-[450px]'>
-                        <img src="https://images.pexels.com/photos/2265876/pexels-photo-2265876.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
-                    </div>
-                    <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
-                        <div className='text-left w-full h-full flex flex-col justify-start'>
-                            <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
-                            <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-none md:text-sm text-gray-800 ">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <div className='text-left w-full h-full flex flex-col justify-end'>
+                                <div className='text-md font-bold text-white'>{article.title}</div>
+                                <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-4 md:text-sm text-gray-300">
+                                    {article.description}
+                                </div>
+                                <Link to={"/article/"+article.id} className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                             </div>
-                            <Link to={"/article/1"} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                         </div>
-                        <div className='h-full relative'>
-                            <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
-                        </div>
-                    </div>
-                </div>
-                <div className='md:col-span-2 hidden md:block'>
-                    <img src={LineImg} alt="" />
-                </div>
-                <div className='flex'>
-                    <div className='w-full max-h-[450px]'>
-                        <img src="https://images.pexels.com/photos/2162891/pexels-photo-2162891.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
-                    </div>
-                    <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
-                        <div className='text-left w-full h-full flex flex-col justify-start'>
-                            <div className='text-md font-bold text-black'>Evening Bangkok cruise</div>
-                            <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-none md:text-sm text-gray-800 ">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>:
+                    <>
+                        <div className='flex'>
+                            <div className='w-full h-[450px] max-h-[450px]'>
+                                <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                             </div>
-                            <Link to={"/article/1"} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
-                        </div>
-                        <div className='h-full relative'>
-                            <img src={AssetImg7} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
-                        </div>
-                    </div>
-                </div>
-                <div className='flex'>
-                    <div className='w-full max-h-[450px]'>
-                        <img src="https://images.pexels.com/photos/2108845/pexels-photo-2108845.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" className='w-full h-full object-cover'/>
-                    </div>
-                    <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
-                        <div className='h-full relative'>
-                            <img src={AssetImg5} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
-                        </div>
-                        <div className='text-left w-full h-full flex flex-col justify-end'>
-                            <div className='text-md font-bold text-white'>Evening Bangkok cruise</div>
-                            <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-none md:text-sm text-gray-300">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
+                                <div className='text-left w-full h-full flex flex-col justify-start'>
+                                    <div className='text-md font-bold text-black'>{article.title}</div>
+                                    <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-4 md:text-sm text-gray-800 ">
+                                        {article.description}
+                                    </div>
+                                    <Link to={"/article/"+article.id} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
+                                </div>
+                                <div className='h-full relative'>
+                                    <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
+                                </div>
                             </div>
-                            <Link to={"/article/1"} className='w-full text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                         </div>
-                    </div>
-                </div>
+                        <div className='md:col-span-2 hidden md:block'>
+                            <img src={LineImg} alt="" />
+                        </div>
+                    </>
+                ))}
             </div>
             <div className='m-auto mt-8 flex justify-center'>
                 <button className='w-fit text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>

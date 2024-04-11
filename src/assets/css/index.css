@@ -24,4 +24,10 @@
     .tour ul {
         @apply space-y-0.5 list-disc list-inside py-2
     }
+    .article figure.attachment{
+        @apply my-6
+    }
+    .article h4 {
+        @apply font-semibold my-1
+    }
 }
