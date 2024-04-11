@@ -15,18 +15,22 @@ const MainContent = () => {
                     <div className='absolute inset-0'>
                         <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
                     </div>
-                    <div className='container m-auto pt-16 relative' id='destination'>
-                        <HeaderTitle title={'Choose your destination'} desciption={'Take a look the best places'}/>
-                        <div className="relative">
-                            <div className="mt-16">
-                                <MainSection.City></MainSection.City>
-                            </div>
-                        </div>
-                        <div className='mt-36' id="featuteal">
-                            <HeaderTitle postion={'right'} title={'Featuteal Packages'} desciption={'Take a look the best places'}/>
-                            <div className='mt-16 pb-36' >
+                    <div className='container m-auto pt-16 relative'>
+
+                        <div id="featuteal">
+                            <HeaderTitle postion={'left'} title={'Featuteal Packages'} desciption={'Take a look the best places'}/>
+                            <div className='mt-16' >
                                 <MainSection.Tour/>
                             </div>
+                        </div>
+                        <div className='my-36' id="destination">
+                            <HeaderTitle postion={'right'} title={'Choose your destination'} desciption={'Take a look the best places'}/>
+                            <div className="relative">
+                                <div className="mt-16">
+                                    <MainSection.City></MainSection.City>
+                                </div>
+                            </div>
+                       
                         </div>
                     </div>
                 </div>
@@ -38,11 +42,13 @@ const MainContent = () => {
                         <MainSection.Country/>
                     </div>
                 </div>
-                <div className="container mt-36 mx-auto" id="article">
-                    <div className="mb-16">
+                <div className="container mt-36 mx-auto">
+                    <div className="mb-16" >
                         <HeaderTitle postion={'right'} title={'Experience in trips'} desciption={'Take a look the best places'}/>
                     </div>
-                    <MainSection.Article/>
+                    <div id="article">
+                        <MainSection.Article/>
+                    </div>
                 </div>
                 <div className='mt-36 relative'>
                     <div className="container m-auto mb-16">
