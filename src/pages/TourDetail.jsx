@@ -252,7 +252,7 @@ const TourDetail = () => {
                                         {Array.from(Array(5),(e,i)=>(
                                             <div className='flex flex-col gap-3'>
                                                 <div className='flex items-center'>
-                                                    <div className='w-12 h-12 rounded-full overflow-hidden'>
+                                                    <div className='w-12 h-12 rounded-full overflow-hidden border-teal-300 border'>
                                                         <img src={tour.thumbnail} className='w-full h-full object-cover' alt="" />
                                                     </div>
                                                     <div className='ml-4'>

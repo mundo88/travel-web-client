@@ -163,10 +163,10 @@ const Article = () => {
                                                 </button>
                                             </div>
                                             <div className='flex flex-col gap-10'>
-                                                {article.comments.map((comment,key)=>(
-                                                    <div className='flex flex-col gap-3' key={key}>
+                                                {article.comments && article.comments.map((comment,key)=>(
+                                                    <div className='flex flex-col gap-2' key={key}>
                                                         <div className='flex items-center'>
-                                                            <div className='w-12 h-12 rounded-full overflow-hidden'>
+                                                            <div className='w-12 h-12 rounded-full overflow-hidden border-grey-200 border'>
                                                                 <img src={comment.user.avatar} className='w-full h-full object-cover' alt="" />
                                                             </div>
                                                             <div className='ml-4'>
@@ -188,6 +188,13 @@ const Article = () => {
                                                         <div className='space-y-2'>
                                                             <div className='text-grey-800'>
                                                                 {comment.comment}
+                                                            </div>
+                                                            <div className="my-6 flex gap-2">
+                                                                {comment.attachments && comment.attachments.map((attachment,key) => (
+                                                                    <div className="max-w-28 max-h-44 overflow-hidden" key={key}>
+                                                                        <img src={attachment.file} alt="" className='w-full h-full object-cover' />
+                                                                    </div>
+                                                                ))}
                                                             </div>
                                                             <div className='flex items-center gap-6'>
                                                                 <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
