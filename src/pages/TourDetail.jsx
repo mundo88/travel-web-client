@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance } from '../service/axiosInstance';
+import { axiosInstance } from '../service/AxiosInstance';
 import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';

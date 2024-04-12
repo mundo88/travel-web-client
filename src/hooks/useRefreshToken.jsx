@@ -1,4 +1,4 @@
-import { axiosInstance } from "../service/axiosInstance";
+import {axiosInstance} from "../service/AxiosInstance";
 import useAuth from "./useAuth";
 
 export default function useRefreshToken() {
