@@ -34,7 +34,7 @@ const ContactContent = ()=>{
                         <Link to={"mailto:booking.maytour@gmail.com"}  className='text-gray-300 text-sm line-clamp-1'>booking.maytour@gmail.com</Link>
                     </div>
                 </div>
-                <div className="md:px-2 md:pb-8 md:mt-8 mt-4 flex items-center gap-6 pb-4 md:pb-0 md:justify-start justify-between">
+                <div className="md:px-2 md:pb-8 md:mt-8 mt-4 flex items-center gap-6 pb-4 md:justify-start justify-between">
                     {Object.keys(socials).map((key,i)=>(
                         <Link to={socials[key].to} key={i} className={`w-12 h-12 border-gray-500 ring-2 ring-gray-500 hover:ring-offset-[3px] hover:ring-offset-[#051214] flex items-center justify-center text-gray-300 relative ${socials[key].hoverClass} active:-translate-y-1 duration-300`}>
                             <span className='relative z-10'>

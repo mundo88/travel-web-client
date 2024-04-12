@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbFile, TbHeart, TbHeartFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
+import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbFile, TbHeart, TbHeartFilled, TbLink, TbMail, TbMailFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
 import { FaShare } from "react-icons/fa";
-import { axiosInstance } from '../service/Axiosinstance';
+import { axiosInstance } from '../service/axiosInstance';
 import line from "../assets/images/SVG/line.svg"
 import { TourCard } from '../components/section/MainSection';
 import Footer from '../components/Footer';
 import { HashLink } from 'react-router-hash-link';
 import parse from 'html-react-parser';
+import TimeAgo from 'react-timeago'
 
-const ArticleCard = () => {
+const ArticleCard = ({article}) => {
     return (
-        <Link className='flex flex-col gap-3 group/article'>
+        <Link to={'/article/'+article.id} className='flex flex-col gap-3 group/article' key={article.id}>
             <div className="w-full aspect-video relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/60 group-hover/article:opacity-100 opacity-0 duration-300 z-20"></div>
-                <img className='w-full h-full object-cover group-hover/article:scale-110 duration-300' src="https://pos.nvncdn.com/86c7ad-50310/art/artCT/20230420_0moA6KAt.png" alt="" />
+                <img className='w-full h-full object-cover group-hover/article:scale-110 duration-300' src={article.thumbnail} alt="" />
             </div>
             <div className='flex gap-3 items-center'>
                 <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800 text-sm uppercase'>
                     TIN TỨC
                 </span>
-                <span className='font-normal text-sm text-grey-800'>17/08/2023</span>
+                <span className='font-normal text-sm text-grey-800'>{new Date(article.updated_at).toLocaleDateString('vi-VN')}</span>
             </div>
             <div className='text-gray-800 text-2xl font-bold group-hover/article:underline duration-300'>
-                TOP 10 ĐỊA ĐIỂM DU LỊCH TRONG NƯỚC CHỤP ẢNH ĐẸP NHẤT
+                {article.title}
             </div>
         </Link>
     )
@@ -35,13 +36,32 @@ const Article = () => {
     const [tours,setTours]=useState([])
     const [comment,setComment] =useState(null)
     const [article,setArticle] =useState(null)
-    useEffect(() => {
+    const [latestArticles,setLatestArticles] =useState([])
+    const [relatedArticles,setRelatedArticles] =useState([])
+    const [fullShare,setFullShare] = useState(false)
+    function setTagsSearchQuery(tags){
+        let params = new URLSearchParams();
+        tags.map(tag=>{
+            params.append("tags", tag.id);
+        })
+        return params.toString()
+    }
+    useEffect(() => { 
         window.scrollTo(0, 0)
-        axiosInstance.get('tours/').then(res=>{
+        axiosInstance.get('tours').then(res=>{
             setTours(res.data.results)
         })
+  
         axiosInstance.get('articles/'+id).then(res=>{
             setArticle(res.data)
+            const related_api ="articles/?"+ setTagsSearchQuery(res.data.tags)
+            axiosInstance.get(related_api).then(res=>{
+                setRelatedArticles(res.data.results)
+            })
+
+        })
+        axiosInstance.get('articles/?ordering=-id').then(res=>{
+            setLatestArticles(res.data.results)
         })
     }, [id]);
     return (
@@ -64,11 +84,21 @@ const Article = () => {
                                     <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                         <TbBrandTwitterFilled  className='relative z-10' size={24}></TbBrandTwitterFilled>
                                     </button>
-                                    <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
-                                        <TbDots  className='relative z-10' size={28}></TbDots>
-                                    </button>
+                                    <div className="flex flex-col items-center justify-center gap-2 font-semibold text-grey-800">
+                                      
+                                        {fullShare &&
+                                        <><button className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2  hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                            <TbMailFilled  className='relative z-10' size={28}></TbMailFilled>
+                                        </button>
+                                        <button className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                            <TbLink onClick={() => {navigator.clipboard.writeText(window.location.href)}} className='relative z-10' size={28}></TbLink>
+                                        </button></>}
+                                        <button onClick={()=>setFullShare(!fullShare)} className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                            <TbDots className='relative z-10' size={28}></TbDots>
+                                        </button>
+                                    </div>
                                 </div>
-                                {article&&
+                                {article &&
                                     <div>
                                         <div className="flex items-center gap-2">
                                             <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
@@ -109,7 +139,7 @@ const Article = () => {
                                         <div className="flex-1 mt-24" id='comment'>
                                             <div className="flex items-center justify-between w-full">
                                                 <div className="text-2xl text-grey-800">
-                                                    328 lượt đánh giá
+                                                    {article.comments.length} comments
                                                 </div>
                                                 <button className="py-2 px-2 flex items-center justify-center gap-4 text-grey-800 border border-gray-500 hover:border-teal-700 duration-150 active:scale-95">
                                                     <span>Gần đây nhất</span>
@@ -128,28 +158,28 @@ const Article = () => {
                                                         </button>
                                                     </span>
                                                 </div>
-                                                <button class={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
+                                                <button className={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
                                                     <span>Đăng</span>
                                                 </button>
                                             </div>
                                             <div className='flex flex-col gap-10'>
-                                                {Array.from(Array(3),(e,i)=>(
-                                                    <div className='flex flex-col gap-3'>
+                                                {article.comments.map((comment,key)=>(
+                                                    <div className='flex flex-col gap-3' key={key}>
                                                         <div className='flex items-center'>
                                                             <div className='w-12 h-12 rounded-full overflow-hidden'>
-                                                                <img src='https://www.vietgemstones.com/blog/wp-content/uploads/2023/12/Firefly-The-letter-OM-in-the-mysterious-space-of-the-earth-82739-1-copy-1024x1024.jpg' className='w-full h-full object-cover' alt="" />
+                                                                <img src={comment.user.avatar} className='w-full h-full object-cover' alt="" />
                                                             </div>
                                                             <div className='ml-4'>
                                                                 <p className='font-medium text-grey-800'>
-                                                                    Quynh Thi Nguyen
+                                                                    {comment.user.username}
                                                                 </p>
                                                                 <p className='text-gray-500 text-sm'>
-                                                                    3 Week ago
+                                                                    <TimeAgo date={comment.created_at}></TimeAgo>
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div className='flex items-center gap-2'>
-                                                            {Array.from(Array(5), (e, i) => (
+                                                            {Array.from(Array(comment.star), (e, i) => (
                                                             <div className='text-orange-500' key={i}>
                                                                 <TbStarFilled></TbStarFilled>
                                                             </div>
@@ -157,27 +187,27 @@ const Article = () => {
                                                         </div>
                                                         <div className='space-y-2'>
                                                             <div className='text-grey-800'>
-                                                                Tuy nhiên, theo nhiều nhà nghiên cứu dân tộc học Việt Nam cho rằng, cái tên Đà Lạt xuất phát từ phiên âm bản địa với từ gốc là Đạ Lạch. Theo ngôn ngữ K'ho, Đăk, Đạ hay Đa có nghĩa là nước, là suối, sông. Còn Lạch (Lạt) là tên bộ tộc của dân tộc K'ho. Đà Lạch là con suối của người Lạch. Đến nay, tên gọi Đà Lạt được nhiều người hiểu với ý nghĩa là con suối của người Lạch, người Lạch chính là thành viên trong đại gia đình các dân tộc Việt Nam.
+                                                                {comment.comment}
                                                             </div>
                                                             <div className='flex items-center gap-6'>
                                                                 <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
                                                                     <TbHeart></TbHeart>
-                                                                    Yêu thích
+                                                                    Like
                                                                 </Link>
                                                                 <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
                                                                     <TbMessage></TbMessage>
-                                                                    Trả lời
+                                                                    Reply
                                                                 </Link>
                                                                 <Link className='text-grey-800 flex items-center text-sm justify-center hover:text-teal-700 duration-150 gap-2 hover:underline'>
                                                                     <TbShare></TbShare>
-                                                                    Chia sẻ
+                                                                    Share
                                                                 </Link>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 ))}
                                                 <button className='w-fit py-2 px-6 flex items-center justify-center gap-4 text-grey-800 border border-grey-500 hover:border-teal-700 duration-150 active:scale-95'>
-                                                    Hiểu thị toàn bộ đánh giá
+                                                    Show all
                                                 </button>
                                             </div>
                                         </div>
@@ -192,8 +222,10 @@ const Article = () => {
                                     </div>
                                 </div>
                                 <div className='mt-10 flex flex-col gap-8'>
-                                    { Array.from(Array(5),(e,i)=>(
-                                        <ArticleCard></ArticleCard>
+                                    {latestArticles && latestArticles.map((latestArticle,key)=>(
+                                        <div key={key}>
+                                            <ArticleCard article={latestArticle} />
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -208,12 +240,14 @@ const Article = () => {
                                             <img src={line} className='w-1/2' alt="" />
                                         </div>
                                     </div>
-                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
+                                    <button className="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
                                  </div>
                                 <div className="grid grid-cols-3 gap-8 mt-12">
-                                    <ArticleCard></ArticleCard>
-                                    <ArticleCard></ArticleCard>
-                                    <ArticleCard></ArticleCard>
+                                    {relatedArticles && relatedArticles.slice(0,3).map((latestArticle,key)=>(
+                                        <div key={key}>
+                                            <ArticleCard article={latestArticle} />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className='mt-12'>
@@ -224,11 +258,13 @@ const Article = () => {
                                             <img src={line} className='w-1/2' alt="" />
                                         </div>
                                     </div>
-                                    <button class="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
+                                    <button className="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
                                  </div>
                                 <div className="grid grid-cols-3 gap-8 mt-12">
                                     {tours && tours.slice(0,3).map((tour,key)=>(
-                                        <TourCard tour={tour}></TourCard>
+                                       <div key={key}>
+                                            <TourCard tour={tour}></TourCard>
+                                       </div>
                                     ))}
                                 </div>
                             </div>
