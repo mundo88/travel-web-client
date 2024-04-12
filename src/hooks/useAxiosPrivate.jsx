@@ -1,4 +1,4 @@
-import { axiosPrivateInstance } from '../service/AxiosInstance'; 
+import { axiosPrivateInstance } from '../service/axiosInstance'; 
 import { useEffect } from 'react'
 import useAuth from "./useAuth";
 import useRefreshToken from "./useRefreshToken";

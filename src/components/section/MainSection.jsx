@@ -9,7 +9,7 @@ import AssetImg3 from "../../assets/images/asset3.svg"
 import LineImg from "../../assets/images/line.svg"
 import {ContactContent } from '../Contact';
 import { useEffect } from 'react';
-import {axiosInstance}  from "../../service/AxiosInstance"
+import { axiosInstance }  from "../../service/axiosInstance"
 import { Link } from 'react-router-dom';
 import ContactForm from '../form/ContactForm';
 
