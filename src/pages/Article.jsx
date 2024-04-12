@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbFile, TbHeart, TbHeartFilled, TbLink, TbMail, TbMailFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
+import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbHeart, TbHeartFilled, TbLink, TbMailFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
 import { FaShare } from "react-icons/fa";
 import {axiosInstance} from '../service/AxiosInstance';
 import line from "../assets/images/SVG/line.svg"
