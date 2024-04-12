@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TbArrowNarrowRight, TbChevronLeft, TbChevronRight, TbPlayerPlayFilled } from 'react-icons/tb';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {  EffectFade,EffectCoverflow, FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { Autoplay,EffectFade,EffectCoverflow, FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import "swiper/css/effect-coverflow";
 import 'swiper/css/effect-fade';
 import AssetImg2 from "../../assets/images/asset2.svg"
@@ -24,39 +24,55 @@ const MainSection = ({children}) => {
 
 
 const MainSectionCity =({children,props})=>{
+    const [cities,setCities] = useState([])
+    useEffect(() => {
+        axiosInstance.get("cities/?featured=true").then(res=>{
+            setCities(res.data.results)
+        })
+        return () => {
+        };
+    }, []);
     return (
         <div className="relative">
-            <button  className='absolute top-1/2 -translate-y-1/2 -left-20 z-10 w-12 h-12 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+            <button className='prev-city absolute top-1/2 -translate-y-1/2 md:-left-20 left-8 z-10 w-12 h-12 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                 <TbChevronLeft size={26}></TbChevronLeft>
             </button>
-            <button  className='absolute top-1/2 -translate-y-1/2 -right-20 z-10 w-12 h-12 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+            <button  className='next-city absolute top-1/2 -translate-y-1/2 md:-right-20 right-8 z-10 w-12 h-12 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                 <TbChevronRight size={26}></TbChevronRight>
             </button>
-            <div className='grid grid-cols-2 md:grid-cols-4 px-4'>
-                <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-12 md:even:mt-16 group'>
-                    <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                        <img src="https://vietnam.travel/sites/default/files/styles/large/public/2022-05/shutterstock_1303493764_1.jpg?itok=AhlENvUY" alt="" className='w-full h-full object-cover' />
-                    </div>
-                    <p className='text-lg md:uppercase md:text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Hoi An</p>
-                </div>
-                <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-12 md:even:mt-16 group'>
-                    <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                        <img src="https://statics.vinpearl.com/Vietnam-travel-20_1689353358.jpg" alt="" className='w-full h-full object-cover' />
-                    </div>
-                    <p className='text-lg md:uppercase md:text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Fansipan</p>
-                </div>
-                <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-12 md:even:mt-16 group'>
-                    <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                        <img src="https://static.toiimg.com/photo/101545435.cms" alt="" className='w-full h-full object-cover' />
-                    </div>
-                    <p className='text-lg md:uppercase md:text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Ha Long Bay</p>
-                </div>
-                <div className='flex flex-col gap-6 w-full overflow-hidden even:mt-12 md:even:mt-16 group'>
-                    <div className='w-full aspect-square overflow-hidden shadow-md shadow-black'>
-                        <img src="https://www.travelandleisure.com/thmb/0yHeWZeBbUMSBeOrUq5kSV00o4w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-fisherman-in-vietnam-WHENVIETNAM0124-53bac1777bc5497390ccc317e9c71295.jpg" alt="" className='w-full h-full object-cover' />
-                    </div>
-                    <p className='text-lg md:uppercase md:text-3xl text-gray-500 group-hover:text-white text-center duration-300 font-bold'>Trang An</p>
-                </div>
+            <div className='md:px-0 px-4'>
+                <Swiper className='w-full ' 
+                        breakpoints={
+                            {
+                                640: {
+                                    slidesPerView: 1  
+                                },
+                                768: {
+                                    slidesPerView: 2  
+                                },
+                                1024: {
+                                    slidesPerView: 4  
+                                }
+                            }
+                        }
+                        modules={[Navigation]}
+                        navigation={{
+                            nextEl: ".next-city",
+                            prevEl: ".prev-city",
+                            disabledClass: "swiper-disabled"
+                        }}
+                        cont>
+                    {cities && cities.map((city,key)=>(
+                        <SwiperSlide className=' md:even:mt-16'>
+                            <div className='flex flex-col gap-6 w-full overflow-hidden group'>
+                                <div className='w-full h-auto aspect-square overflow-hidden shadow-md shadow-black'>
+                                    <img src={city.thumbnail} alt="" className='w-full h-full object-cover' />
+                                </div>
+                                <p className='text-3xl uppercase text-gray-500 group-hover:text-white text-center duration-300 font-bold'>{city.name}</p>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             </div>
         </div>
     )
@@ -85,7 +101,7 @@ const TourCard = ({tour})=>{
 const MainSectionTour = ({children,props})=>{
     const [tours,setTours]= useState([])
     useEffect(() => {
-        axiosInstance.get('tours/').then(res=>{
+        axiosInstance.get('tours/?featured=true').then(res=>{
             setTours(res.data.results)
         })
         return ()=>{
@@ -112,10 +128,19 @@ const MainSectionCountry =()=>{
             <Swiper 
                 className='h-full' 
                 effect='fade'  
-                modules={[EffectFade,Thumbs,FreeMode]} 
+                modules={[EffectFade,Thumbs,FreeMode,Navigation,Autoplay]} 
                 loop={true} 
                 thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
                 mousewheel={false}
+                navigation={{
+                    nextEl: ".next-country",
+                    prevEl: ".prev-country",
+                    disabledClass: "swiper-disabled"
+                }}
+                autoplay={{
+                    delay: 4000,
+                    pauseOnMouseEnter:true
+                }}
             >
                 <SwiperSlide >
                     <div className='absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30 md:to-transparent'>
@@ -189,17 +214,16 @@ const MainSectionCountry =()=>{
                         </div>
                     </div>
                 </SwiperSlide>
-                
             </Swiper>
             <div className='absolute top-0 right-0 h-full flex items-center justify-end z-40 md:w-1/2 w-full md:pl-24 pl-0'>
                 <div className='absolute md:bottom-64 bottom-24 left-1/2 -translate-x-1/2 flex gap-4 md:ml-24 ml-0'>
-                    <button className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <button className='prev-country w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbChevronLeft size={26}></TbChevronLeft>
                     </button>
                     <button className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbPlayerPlayFilled size={26}></TbPlayerPlayFilled>
                     </button>
-                    <button  className='w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <button className='next-country w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                         <TbChevronRight size={26}></TbChevronRight>
                     </button>
                 </div> 
@@ -208,6 +232,7 @@ const MainSectionCountry =()=>{
                         className='overflow-hidden h-1/3 ' 
                         onSwiper={setThumbsSwiper}
                         slidesPerView={3}
+            
                         freeMode={true}
                         watchSlidesProgress={true}
                         modules={[FreeMode,EffectCoverflow, Navigation, Thumbs]}
@@ -266,7 +291,6 @@ const MainSectionArticle =()=>{
     const [articles,setArticles]= useState([])
     useEffect(() => {
         axiosInstance.get('articles/').then(res=>{
-            console.log(res.data.results)
             setArticles(res.data.results)
         })
         return ()=>{
@@ -278,12 +302,12 @@ const MainSectionArticle =()=>{
             <div className="grid md:grid-cols-2 gap-8 grid-cols-1 px-4">
                 {articles&& articles.slice(0,4).map((article,key)=>(
                     key % 2 ===0 ?
-                    <div className='flex'>
-                        <div className='w-full h-[450px] max-h-[450px]'>
+                    <div className='flex md:flex-row flex-col'>
+                        <div className='w-full h-auto md:h-[450px] md:max-h-[450px] aspect-square md:aspect-auto '>
                             <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                         </div>
                         <div className="w-full p-4 flex flex-col justify-end bg-teal-950 overflow-hidden">
-                            <div className='h-full relative'>
+                            <div className='h-full relative md:block hidden'>
                                 <img src={AssetImg2} alt="" className='w-2/3 h-auto object-cover absolute -top-12 -right-12' />
                             </div>
                             <div className='text-left w-full h-full flex flex-col justify-end'>
@@ -296,8 +320,8 @@ const MainSectionArticle =()=>{
                         </div>
                     </div>:
                     <>
-                        <div className='flex'>
-                            <div className='w-full h-[450px] max-h-[450px]'>
+                        <div className='flex md:flex-row flex-col'>
+                            <div className='w-full h-auto md:h-[450px] md:max-h-[450px] aspect-square md:aspect-auto'>
                                 <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                             </div>
                             <div className="w-full p-4 flex flex-col justify-start bg-teal-100 overflow-hidden">
@@ -308,7 +332,7 @@ const MainSectionArticle =()=>{
                                     </div>
                                     <Link to={"/article/"+article.id} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                                 </div>
-                                <div className='h-full relative'>
+                                <div className='h-full relative md:block hidden'>
                                     <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
                                 </div>
                             </div>
