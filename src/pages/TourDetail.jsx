@@ -15,7 +15,7 @@ import GalleryImage from '../components/GalleryImage';
 import parse from 'html-react-parser';
 import useAuth from '../hooks/useAuth';
 import { VscEmptyWindow } from "react-icons/vsc";
-
+import TimeAgo from 'react-timeago'
 
 const TourDetail = () => {
     const [tour,setTour]=useState(null)
@@ -238,10 +238,10 @@ const TourDetail = () => {
                                         {currentUser ?  
                                             <div className="flex items-center gap-4">
                                                 <div className='min-w-12 h-12 aspect-square overflow-hidden'>
-                                                    <img src={"http://127.0.0.1:8000" + currentUser.avatar} className='w-full h-full object-cover border border-gray-300' alt="" />
+                                                    <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className='w-full h-full object-cover border border-gray-300' alt="" />
                                                 </div>
                                                 <div className="relative w-full">
-                                                    <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`${currentUser.username} ơi, bạn đang nghĩ gì?`} />
+                                                    <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`Hey ${currentUser.username}, what are you thinking?`} />
                                                     <span className='absolute top-1/2 -translate-y-1/2 left-0 pl-4 text-gray-300 peer-focus:text-teal-300'>
                                                         <TbMoodSmile size={24}></TbMoodSmile>
                                                     </span>
@@ -251,34 +251,34 @@ const TourDetail = () => {
                                                 </button>
                                             </div>
                                             :
-                                            <div className='text-md text-gray-300'>Bạn cần đăng nhập để có thể bình luận.<Link className='ml-1 text-teal-300 hover:underline' to={'/login'}>Đăng nhập ngay</Link></div>
+                                            <div className='text-md text-gray-300'>Bạn cần đăng nhập để có thể bình luận.<Link className='ml-1 text-teal-300 hover:underline' to={'/login'}>Log in now!</Link></div>
                                         }
                                     </div>
                                     <div className='flex flex-col gap-10'>
                                         {tour.reviews.length ===0 ? 
                                         <div className='w-full h-full flex flex-col items-center justify-center text-gray-300 pt-24'>
                                             <VscEmptyWindow size={88}></VscEmptyWindow>
-                                            <span className='mt-6'>Tour hiện chưa có đánh giá <Link className='text-teal-300 hover:underline ml-1'>Đánh giá ngay</Link></span>
+                                            <span className='mt-6'>Tour currently has no reviews,<Link className='text-teal-300 hover:underline ml-1'>review now!</Link></span>
                                         </div>
                                         :
                                         <>
-                                        {Array.from(Array(5),(e,i)=>(
-                                                <div className='flex flex-col gap-3'>
+                                            {tour.reviews.map((review,key)=>(
+                                                <div className='flex flex-col gap-3' key={key}>
                                                     <div className='flex items-center'>
                                                         <div className='w-12 h-12 rounded-full overflow-hidden border-teal-300 border'>
-                                                            <img src={tour.thumbnail} className='w-full h-full object-cover' alt="" />
+                                                            <img src={review.user.avatar} className='w-full h-full object-cover' alt="" />
                                                         </div>
                                                         <div className='ml-4'>
                                                             <p className='font-medium text-gray-300'>
-                                                                Quynh Thi Nguyen
+                                                                {review.user.username}
                                                             </p>
                                                             <p className='text-gray-500 text-sm'>
-                                                                3 Week ago
+                                                                <TimeAgo date={review.created_at}></TimeAgo>
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div className='flex items-center gap-2'>
-                                                        {Array.from(Array(5), (e, i) => (
+                                                        {Array.from(Array(review.star), (e, i) => (
                                                         <div className='text-yellow-300' key={i}>
                                                             <TbStarFilled></TbStarFilled>
                                                         </div>
@@ -286,29 +286,30 @@ const TourDetail = () => {
                                                     </div>
                                                     <div className='space-y-2'>
                                                         <div className='text-gray-200'>
-                                                            Tuy nhiên, theo nhiều nhà nghiên cứu dân tộc học Việt Nam cho rằng, cái tên Đà Lạt xuất phát từ phiên âm bản địa với từ gốc là Đạ Lạch. Theo ngôn ngữ K'ho, Đăk, Đạ hay Đa có nghĩa là nước, là suối, sông. Còn Lạch (Lạt) là tên bộ tộc của dân tộc K'ho. Đà Lạch là con suối của người Lạch. Đến nay, tên gọi Đà Lạt được nhiều người hiểu với ý nghĩa là con suối của người Lạch, người Lạch chính là thành viên trong đại gia đình các dân tộc Việt Nam.
+                                                            {parse(review.content)}
                                                         </div>
                                                         <div className='flex items-center gap-6'>
                                                             <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
                                                                 <TbHeart></TbHeart>
-                                                                Yêu thích
+                                                                Like
                                                             </Link>
                                                             <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
                                                                 <TbMessage></TbMessage>
-                                                                Trả lời
+                                                                Reply
                                                             </Link>
                                                             <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
                                                                 <TbShare></TbShare>
-                                                                Chia sẻ
+                                                                Share
                                                             </Link>
                                                         </div>
                                                     </div>
                                                 </div>
                                             ))} 
                                             <button className='w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150'>
-                                                Hiểu thị toàn bộ đánh giá
+                                                Show all review
                                             </button>
-                                        </>}
+                                        </>
+                                        }
                                     </div>
                                 </div>
                             </div>

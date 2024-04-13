@@ -62,7 +62,7 @@ const Navbar = ({currentUser}) => {
                         <Dropdown.Button>
                             {currentUser ?
                                 <button className=' rounded-full flex items-center justify-center border-2 border-gray-300 min-h-8 min-w-8 w-8 h-8 overflow-hidden relative font-semibold hover:text-teal-300 duration-300'>
-                                    <img src={'http://127.0.0.1:8000' + currentUser.avatar} alt={`${currentUser.username} avatar`} className='w-full h-full object-cover' />
+                                    <img src={ process.env.REACT_APP_SERVER_URL + currentUser.avatar} alt={`${currentUser.username} avatar`} className='w-full h-full object-cover' />
                                 </button>:
                                 <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                                     <TbUser size={24}></TbUser>
@@ -79,7 +79,7 @@ const Navbar = ({currentUser}) => {
                                 </Dropdown.ItemText>
                             </Dropdown.Item>
                             <Dropdown.Separator/>
-                            {currentUser ?
+                            {currentUser.username ?
                                 <Dropdown.Item onClick={onLogout}>
                                     <Dropdown.ItemIcon>
                                         <IoLogOut size={20} />

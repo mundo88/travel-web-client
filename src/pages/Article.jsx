@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbHeart, TbHeartFilled, TbLink, TbMailFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
 import { FaShare } from "react-icons/fa";
 import { axiosInstance } from '../service/axiosInstance';
 import line from "../assets/images/SVG/line.svg"
 import { TourCard } from '../components/section/MainSection';
-import Footer from '../components/Footer';
 import { HashLink } from 'react-router-hash-link';
 import parse from 'html-react-parser';
 import TimeAgo from 'react-timeago'
