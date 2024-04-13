@@ -15,7 +15,7 @@ export const AuthContext = createContext({
 });
 
 
-export function AuthContextProvider({children,props}) {
+export function AuthContextProvider({children}) {
     const [currentUser, setCurrentUser] = useState({})
     const [accessToken, setAccessToken] = useState()
     const [refreshToken, setRefreshToken] = useState()

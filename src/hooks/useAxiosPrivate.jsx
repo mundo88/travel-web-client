@@ -5,7 +5,6 @@ import useRefreshToken from "./useRefreshToken";
 
 export default function useAxiosPrivate() {
     const { accessToken, setAccessToken, csrftoken, currentUser } = useAuth()
-    console.log(accessToken);
     const refresh = useRefreshToken()
     useEffect(() => {
         const requestIntercept = axiosPrivateInstance.interceptors.request.use(
@@ -28,7 +27,6 @@ export default function useAxiosPrivate() {
                     setAccessToken(newAccessToken)
                     prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
                     prevRequest.headers['X-CSRFToken'] = newCSRFToken
-                    console.log(newAccessToken)
                     return axiosPrivateInstance(prevRequest)
                 }
                 return Promise.reject(error);

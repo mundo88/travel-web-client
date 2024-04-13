@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../service/axiosInstance';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart } from 'react-icons/tb';
 import { MdOutlineAttachMoney } from "react-icons/md";
@@ -14,6 +13,8 @@ import  ContactForm  from '../components/form/ContactForm';
 import { IoClose } from "react-icons/io5";
 import GalleryImage from '../components/GalleryImage';
 import parse from 'html-react-parser';
+import useAuth from '../hooks/useAuth';
+import { VscEmptyWindow } from "react-icons/vsc";
 
 
 const TourDetail = () => {
@@ -25,6 +26,7 @@ const TourDetail = () => {
     const [tab,setTab]=useState('about')
     const [modalIsOpen, setIsOpen] = useState(false);
     const [comment,setComment] =useState(null)
+    const {currentUser} = useAuth()
     function openModal() {
       setIsOpen(true);
     }
@@ -41,23 +43,18 @@ const TourDetail = () => {
 
     useEffect(() => {
         axiosInstance.get('tours/').then(res=>{
-            console.log(res.data.results[0].thumbnail)
             setTours(res.data.results)
         })
     }, []);
     useEffect(() => {
-        axiosInstance.get("/tours/"+id).then(res=>{
-            console.log(res.data);
+        axiosInstance.get("tours/"+id+"/").then(res=>{
             setTour(res.data)
         })
         window.scrollTo(0, 100)
     }, [id]);
     
     return (
-        <div className='min-h-screen bg-main tour'>
-            <div className='py-8'>
-                <Navbar></Navbar>
-            </div>
+        <>
             {tour &&
             <div>
                 <div className='container m-auto relative pt-12'>
@@ -230,71 +227,88 @@ const TourDetail = () => {
                                 <div className="flex-1 pl-24">
                                     <div className="flex items-center justify-between w-full">
                                         <div className="text-2xl text-gray-300">
-                                            328 lượt đánh giá
+                                            {tour.reviews.length} reviews
                                         </div>
                                         <div className="py-2 px-2 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150">
                                             <span>Gần đây nhất</span>
                                             <TbChevronDown></TbChevronDown>
                                         </div>
                                     </div>
-                                    <div className="flex items-center">
-                                        <div className="my-10 w-full relative">
-                                            <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder='Viết bình luận' />
-                                            <span className='absolute top-1/2 -translate-y-1/2 left-0 pl-4 text-gray-300 peer-focus:text-teal-300'>
-                                                <TbMoodSmile size={24}></TbMoodSmile>
-                                            </span>
-                                        </div>
-                                        <button class={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700' }`}>
-                                            <span>Đăng</span>
-                                        </button>
+                                    <div className='my-10 w-full '>
+                                        {currentUser ?  
+                                            <div className="flex items-center gap-4">
+                                                <div className='min-w-12 h-12 aspect-square overflow-hidden'>
+                                                    <img src={"http://127.0.0.1:8000" + currentUser.avatar} className='w-full h-full object-cover border border-gray-300' alt="" />
+                                                </div>
+                                                <div className="relative w-full">
+                                                    <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`${currentUser.username} ơi, bạn đang nghĩ gì?`} />
+                                                    <span className='absolute top-1/2 -translate-y-1/2 left-0 pl-4 text-gray-300 peer-focus:text-teal-300'>
+                                                        <TbMoodSmile size={24}></TbMoodSmile>
+                                                    </span>
+                                                </div>
+                                                <button class={`text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700' }`}>
+                                                    <span>Post</span>
+                                                </button>
+                                            </div>
+                                            :
+                                            <div className='text-md text-gray-300'>Bạn cần đăng nhập để có thể bình luận.<Link className='ml-1 text-teal-300 hover:underline' to={'/login'}>Đăng nhập ngay</Link></div>
+                                        }
                                     </div>
                                     <div className='flex flex-col gap-10'>
+                                        {tour.reviews.length ===0 ? 
+                                        <div className='w-full h-full flex flex-col items-center justify-center text-gray-300 pt-24'>
+                                            <VscEmptyWindow size={88}></VscEmptyWindow>
+                                            <span className='mt-6'>Tour hiện chưa có đánh giá <Link className='text-teal-300 hover:underline ml-1'>Đánh giá ngay</Link></span>
+                                        </div>
+                                        :
+                                        <>
                                         {Array.from(Array(5),(e,i)=>(
-                                            <div className='flex flex-col gap-3'>
-                                                <div className='flex items-center'>
-                                                    <div className='w-12 h-12 rounded-full overflow-hidden border-teal-300 border'>
-                                                        <img src={tour.thumbnail} className='w-full h-full object-cover' alt="" />
+                                                <div className='flex flex-col gap-3'>
+                                                    <div className='flex items-center'>
+                                                        <div className='w-12 h-12 rounded-full overflow-hidden border-teal-300 border'>
+                                                            <img src={tour.thumbnail} className='w-full h-full object-cover' alt="" />
+                                                        </div>
+                                                        <div className='ml-4'>
+                                                            <p className='font-medium text-gray-300'>
+                                                                Quynh Thi Nguyen
+                                                            </p>
+                                                            <p className='text-gray-500 text-sm'>
+                                                                3 Week ago
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div className='ml-4'>
-                                                        <p className='font-medium text-gray-300'>
-                                                            Quynh Thi Nguyen
-                                                        </p>
-                                                        <p className='text-gray-500 text-sm'>
-                                                            3 Week ago
-                                                        </p>
+                                                    <div className='flex items-center gap-2'>
+                                                        {Array.from(Array(5), (e, i) => (
+                                                        <div className='text-yellow-300' key={i}>
+                                                            <TbStarFilled></TbStarFilled>
+                                                        </div>
+                                                        ))}
+                                                    </div>
+                                                    <div className='space-y-2'>
+                                                        <div className='text-gray-200'>
+                                                            Tuy nhiên, theo nhiều nhà nghiên cứu dân tộc học Việt Nam cho rằng, cái tên Đà Lạt xuất phát từ phiên âm bản địa với từ gốc là Đạ Lạch. Theo ngôn ngữ K'ho, Đăk, Đạ hay Đa có nghĩa là nước, là suối, sông. Còn Lạch (Lạt) là tên bộ tộc của dân tộc K'ho. Đà Lạch là con suối của người Lạch. Đến nay, tên gọi Đà Lạt được nhiều người hiểu với ý nghĩa là con suối của người Lạch, người Lạch chính là thành viên trong đại gia đình các dân tộc Việt Nam.
+                                                        </div>
+                                                        <div className='flex items-center gap-6'>
+                                                            <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
+                                                                <TbHeart></TbHeart>
+                                                                Yêu thích
+                                                            </Link>
+                                                            <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
+                                                                <TbMessage></TbMessage>
+                                                                Trả lời
+                                                            </Link>
+                                                            <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
+                                                                <TbShare></TbShare>
+                                                                Chia sẻ
+                                                            </Link>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className='flex items-center gap-2'>
-                                                    {Array.from(Array(5), (e, i) => (
-                                                    <div className='text-yellow-300' key={i}>
-                                                        <TbStarFilled></TbStarFilled>
-                                                    </div>
-                                                    ))}
-                                                </div>
-                                                <div className='space-y-2'>
-                                                    <div className='text-gray-200'>
-                                                        Tuy nhiên, theo nhiều nhà nghiên cứu dân tộc học Việt Nam cho rằng, cái tên Đà Lạt xuất phát từ phiên âm bản địa với từ gốc là Đạ Lạch. Theo ngôn ngữ K'ho, Đăk, Đạ hay Đa có nghĩa là nước, là suối, sông. Còn Lạch (Lạt) là tên bộ tộc của dân tộc K'ho. Đà Lạch là con suối của người Lạch. Đến nay, tên gọi Đà Lạt được nhiều người hiểu với ý nghĩa là con suối của người Lạch, người Lạch chính là thành viên trong đại gia đình các dân tộc Việt Nam.
-                                                    </div>
-                                                    <div className='flex items-center gap-6'>
-                                                        <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
-                                                            <TbHeart></TbHeart>
-                                                            Yêu thích
-                                                        </Link>
-                                                        <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
-                                                            <TbMessage></TbMessage>
-                                                            Trả lời
-                                                        </Link>
-                                                        <Link className='text-gray-300 flex items-center text-sm justify-center hover:text-teal-300 duration-150 gap-2'>
-                                                            <TbShare></TbShare>
-                                                            Chia sẻ
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                        <button className='w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150'>
-                                            Hiểu thị toàn bộ đánh giá
-                                        </button>
+                                            ))} 
+                                            <button className='w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150'>
+                                                Hiểu thị toàn bộ đánh giá
+                                            </button>
+                                        </>}
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +391,7 @@ const TourDetail = () => {
                     </button>
                 <GalleryImage attachments={tour.attachments}></GalleryImage>
             </Modal>}     
-        </div>
+        </>
     );
 }
 

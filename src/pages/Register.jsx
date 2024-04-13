@@ -14,10 +14,10 @@ const Register = () => {
             alert('Xác nhận mật khẩu không thành công')
             return
         }
-    //     axiosInstance.post('/register',{email,password}).then(res=>{
-    //       navigate("/login", { replace: true })
-    //   })
-        console.log(username,password,rePassword)
+        axiosInstance.post('/register',{username,password}).then(res=>{
+        console.log(res.data)
+        navigate("/login", { replace: true })
+      })
     }
     return (
         <>
