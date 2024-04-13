@@ -11,6 +11,7 @@ export default function AuthMiddleware() {
 function AnonymousMiddleware() {
     const { accessToken } = useAuth()
     const location = useLocation()
+    console.log(accessToken)
     return (
         accessToken ? <Navigate to="/" state={{ from: location }} replace /> : <Outlet />
     )

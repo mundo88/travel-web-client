@@ -5,6 +5,7 @@ import useRefreshToken from "./useRefreshToken";
 
 export default function useAxiosPrivate() {
     const { accessToken, setAccessToken, csrftoken, currentUser } = useAuth()
+    console.log(accessToken);
     const refresh = useRefreshToken()
     useEffect(() => {
         const requestIntercept = axiosPrivateInstance.interceptors.request.use(

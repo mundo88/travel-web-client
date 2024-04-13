@@ -5,13 +5,27 @@ import Home from "./pages/Home";
 import TourDetail from "./pages/TourDetail";
 import Article from "./pages/Article";
 import Contact from "./pages/Contact";
+import AuthLayout from "./components/AuthLayout";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import  { AnonymousMiddleware } from './middleware/Auth';
+import PersistLogin from './middleware/PersistLogin';
+
 function App() {
   return (
       <Routes>
-        <Route path="/" element={<Home/> }></Route>
-        <Route path="/contact" element={<Contact/> }></Route>
-        <Route path="/tour/:id" element={<TourDetail/>}></Route>
-        <Route path="/article/:id" element={<Article/>}></Route>
+        <Route element={<PersistLogin/>}>
+          <Route path="/" element={<Home/> }></Route>
+          <Route path="/contact" element={<Contact/> }></Route>
+          <Route path="/tour/:id" element={<TourDetail/>}></Route>
+          <Route path="/article/:id" element={<Article/>}></Route>
+          <Route element={<AnonymousMiddleware/>}>
+            <Route element={<AuthLayout/>}>
+              <Route path="/login" element={<Login/>}></Route>
+              <Route path="/register" element={<Register/>}></Route>
+            </Route>
+          </Route>
+        </Route>
       </Routes>
     );
 }

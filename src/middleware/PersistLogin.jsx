@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth' 
-import useAxiosPrivate from '../hooks/useAxiosPrivate' 
 import useRefreshToken from '../hooks/useRefreshToken' 
 
 export default function PersistLogin() {

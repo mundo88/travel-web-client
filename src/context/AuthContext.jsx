@@ -29,7 +29,7 @@ export function AuthContextProvider({children,props}) {
 
     const getCurrentUser = async () => {
         try {
-            const { data } = await axiosPrivateInstance.get('/users/me')
+            const { data } = await axiosPrivateInstance.get('users/me')
             setCurrentUser(data);
         } catch (error) {
             setCurrentUser(null);
