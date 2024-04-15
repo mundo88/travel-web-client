@@ -44,9 +44,9 @@ const TourCard = ({tour,children}) =>{
             </div>
             <div className='mt-2 space-y-1'>
                 <div className='flex justify-between w-full items-start gap-4'>
-                    <div className="text-gray-100 font-semibold line-clamp-2">
+                    <Link to={"/tours/"+tour.id} className="text-gray-100 font-semibold line-clamp-2 hover:underline">
                         {tour.name}
-                    </div>
+                    </Link>
                     <div className="text-gray-100  flex items-center gap-1">
                         <TbStarFilled size={18}></TbStarFilled>
                         {tour.aggregate_rating ? round(tour.aggregate_rating) : 5}
@@ -153,6 +153,11 @@ const TourList = () => {
                         <TourCard tour={tour}/>
                     </div>
                 ))}
+            </div>
+            <div className='mx-auto w-full flex items-center justify-center'>
+                <Link class="hover:bg-black/60 active:scale-95 focus:border-teal-300 mt-12 w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150" to="/tours">
+                    View more tour
+                </Link>
             </div>
         </div>
     );
