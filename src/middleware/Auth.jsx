@@ -1,5 +1,5 @@
 import useAuth from "../hooks/useAuth"
-import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { Navigate, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom"
 
 export default function AuthMiddleware() {
     const { accessToken } = useAuth()
@@ -11,9 +11,11 @@ export default function AuthMiddleware() {
 function AnonymousMiddleware() {
     const { accessToken } = useAuth()
     const location = useLocation()
-    console.log(accessToken)
+    const navigate = useNavigate()
+    const [nextParams] = useSearchParams();
+    const nextLocation = nextParams.get('next')||'/' 
     return (
-        accessToken ? <Navigate to="/" state={{ from: location }} replace /> : <Outlet />
+        accessToken ? <Navigate to={nextLocation} state={{ from: location }} replace /> : <Outlet />
     )
 } 
 export {

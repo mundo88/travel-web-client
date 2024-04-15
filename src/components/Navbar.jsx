@@ -12,11 +12,9 @@ import useLogout from '../hooks/useLogout';
 const Navbar = ({currentUser}) => {
     const [loading, setLoading] = useState(false)
     const logout = useLogout()
-    const navigate = useNavigate()
     const onLogout = async() =>{
         setLoading(true)
         await logout()
-        navigate('/')
     }
     return (
         <div className='w-full bg-main text-white'>
@@ -52,15 +50,15 @@ const Navbar = ({currentUser}) => {
                     </div>
                 </div>
                 <div className="md:flex items-center hidden gap-6 w-28 justify-end">
-                    <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
+                    <Link to={"/tours"} className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <TbSearch size={24}></TbSearch>
-                    </button>
+                    </Link>
                     <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <TbHeart size={24}></TbHeart>
                     </button>
                     <Dropdown>
                         <Dropdown.Button>
-                            {currentUser ?
+                            {currentUser.id ?
                                 <button className=' rounded-full flex items-center justify-center border-2 border-gray-300 min-h-8 min-w-8 w-8 h-8 overflow-hidden relative font-semibold hover:text-teal-300 duration-300'>
                                     <img src={ process.env.REACT_APP_SERVER_URL + currentUser.avatar} alt={`${currentUser.username} avatar`} className='w-full h-full object-cover' />
                                 </button>:
@@ -79,7 +77,7 @@ const Navbar = ({currentUser}) => {
                                 </Dropdown.ItemText>
                             </Dropdown.Item>
                             <Dropdown.Separator/>
-                            {currentUser.username ?
+                            {currentUser.id ?
                                 <Dropdown.Item onClick={onLogout}>
                                     <Dropdown.ItemIcon>
                                         <IoLogOut size={20} />
@@ -88,7 +86,7 @@ const Navbar = ({currentUser}) => {
                                         Log out
                                     </Dropdown.ItemText>
                                 </Dropdown.Item>:
-                                <Dropdown.Item onClick={onLogout}>
+                                <Dropdown.Item to={'/login'}>
                                     <Dropdown.ItemIcon>
                                         <IoLogIn size={20} />
                                     </Dropdown.ItemIcon>

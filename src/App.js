@@ -1,8 +1,9 @@
-import { Route,Routes } from "react-router-dom";
+import { Route,Routes, ScrollRestoration } from "react-router-dom";
 import React from "react";
 import "./assets/css/index.css"
 import Home from "./pages/Home";
 import TourDetail from "./pages/TourDetail";
+import TouchList from "./pages/TourList"
 import Article from "./pages/Article";
 import Contact from "./pages/Contact";
 import AuthLayout from "./components/AuthLayout";
@@ -11,7 +12,7 @@ import Register from "./pages/Register";
 import  { AnonymousMiddleware } from './middleware/Auth';
 import PersistLogin from './middleware/PersistLogin';
 import Layout from "./components/Layout";
-
+ 
 function App() {
   return (
       <Routes>
@@ -19,7 +20,8 @@ function App() {
           <Route path="/" element={<Home/> }></Route>
           <Route element={<Layout/>}>
             <Route path="/contact" element={<Contact/> }></Route>
-            <Route path="/tour/:id" element={<TourDetail/>}></Route>
+            <Route path="/tours/:id" element={<TourDetail/>}></Route>
+            <Route path="/tours" element={<TouchList/>}></Route>
             <Route path="/article/:id" element={<Article/>}></Route>
           </Route>
           <Route element={<AnonymousMiddleware/>}>

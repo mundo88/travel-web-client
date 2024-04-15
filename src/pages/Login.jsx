@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TbArrowNarrowRight } from 'react-icons/tb';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { axiosInstance } from '../service/axiosInstance';
 import useAuth from '../hooks/useAuth';
 
@@ -9,9 +9,6 @@ const Login = () => {
     const [password,setPassword] = useState(null)
     const [loading, setLoading] = useState(false)
     const { setAccessToken, setCSRFToken } = useAuth()
-    const navigate = useNavigate()
-    const [nextParams] = useSearchParams();
-    // const fromLocation = nextParams.get('next')||'/' 
 
     const handleLogin = async ()=>{
         setLoading(true)
@@ -22,7 +19,6 @@ const Login = () => {
         setUsername()
         setPassword()
         setLoading(false)
-        // navigate(fromLocation, { replace: true })
     }
     return (
         <>

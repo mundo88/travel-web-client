@@ -81,7 +81,7 @@ const MainSectionCity =({children,props})=>{
 
 const TourCard = ({tour})=>{
     return(
-        <Link to={"/tour/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
+        <Link to={"/tours/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
             <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-lg md:md:text-3xl font-bold group-hover:text-white duration-300'>{tour.destination.city.name}</div>
             <div className='w-full h-full relative'>
                 <div className='absolute bg-black/70 p-8 flex flex-col items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
@@ -294,7 +294,6 @@ const MainSectionArticle =()=>{
             setArticles(res.data.results)
         })
         return ()=>{
-
         }
     }, []);
     return (

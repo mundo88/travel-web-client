@@ -27,6 +27,8 @@ export default function PersistLogin() {
     }, [])
 
     return (
-        loading ? "Loading" : <Outlet />
+        loading ? <div className='h-screen w-screen flex items-center justify-center flex-col'>
+            <h1 className='md:text-8xl font-black text-4xl animate-bounce'>Vietmaytour.com</h1>
+        </div> : <Outlet />
     )
 }

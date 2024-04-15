@@ -8,6 +8,7 @@ import { TourCard } from '../components/section/MainSection';
 import { HashLink } from 'react-router-hash-link';
 import parse from 'html-react-parser';
 import TimeAgo from 'react-timeago'
+import useAuth from '../hooks/useAuth';
 
 const ArticleCard = ({article}) => {
     return (
@@ -37,6 +38,7 @@ const Article = () => {
     const [latestArticles,setLatestArticles] =useState([])
     const [relatedArticles,setRelatedArticles] =useState([])
     const [fullShare,setFullShare] = useState(false)
+    const {currentUser} = useAuth()
     function setTagsSearchQuery(tags){
         let params = new URLSearchParams();
         tags.map(tag=>{
@@ -140,27 +142,32 @@ const Article = () => {
                                                 <TbChevronDown></TbChevronDown>
                                             </button>
                                         </div>
-                                        <div className="flex items-center">
-                                            <div className="my-10 w-full relative">
-                                                <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pr-20 pl-4 border border-grey-500 focus:border-grey-800 duration-150 outline-none hover:border-grey-800 bg-transparent text-grey-800' placeholder='Viết bình luận' />
-                                                <span className='absolute top-1/2 -translate-y-1/2 right-0 pr-3 text-grey-500 flex items-center justify-center gap-2.5'>
-                                                    <button className='hover:text-grey-800'>
-                                                        <TbMoodSmile size={24}></TbMoodSmile>
-                                                    </button>
-                                                    <button className='hover:text-grey-800'>
-                                                        <TbPhoto size={24}></TbPhoto>
-                                                    </button>
-                                                </span>
+                                        <div className='my-10 w-full'>
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-12 h-12 min-w-12 overflow-hidden aspect-square border border-grey-500 rounded-full">
+                                                    <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className=' w-full h-full object-cover' alt="" />
+                                                </div>
+                                                <div className="w-full relative">
+                                                    <input onInput={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pr-20 pl-4 border border-grey-500 focus:border-grey-800 duration-150 outline-none hover:border-grey-800 bg-transparent text-grey-800' placeholder='Viết bình luận' />
+                                                    <span className='absolute top-1/2 -translate-y-1/2 right-0 pr-3 text-grey-500 flex items-center justify-center gap-2.5'>
+                                                        <button className='hover:text-grey-800'>
+                                                            <TbMoodSmile size={24}></TbMoodSmile>
+                                                        </button>
+                                                        <button className='hover:text-grey-800'>
+                                                            <TbPhoto size={24}></TbPhoto>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <button className={`text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
+                                                    <span>Đăng</span>
+                                                </button>
                                             </div>
-                                            <button className={`ml-4 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
-                                                <span>Đăng</span>
-                                            </button>
                                         </div>
                                         <div className='flex flex-col gap-10'>
                                             {article.comments && article.comments.map((comment,key)=>(
                                                 <div className='flex flex-col gap-2' key={key}>
                                                     <div className='flex items-center'>
-                                                        <div className='w-12 h-12 rounded-full overflow-hidden border-grey-200 border'>
+                                                        <div className='w-12 h-12 rounded-full overflow-hidden border-grey-500 border'>
                                                             <img src={comment.user.avatar} className='w-full h-full object-cover' alt="" />
                                                         </div>
                                                         <div className='ml-4'>

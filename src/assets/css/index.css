@@ -9,7 +9,7 @@
         @apply bg-[#051214]
     }
     .swiper-disabled {
-        @apply opacity-0 pointer-events-none
+        @apply !opacity-0 pointer-events-none
     }
     body,html {
         font-family: inter;
