@@ -56,7 +56,7 @@ const Navbar = ({currentUser}) => {
                     <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                         <TbHeart size={24}></TbHeart>
                     </button>
-                    <Dropdown>
+                    <Dropdown className='relative'>
                         <Dropdown.Button>
                             {currentUser.id ?
                                 <button className=' rounded-full flex items-center justify-center border-2 border-gray-300 min-h-8 min-w-8 w-8 h-8 overflow-hidden relative font-semibold hover:text-teal-300 duration-300'>
@@ -67,10 +67,10 @@ const Navbar = ({currentUser}) => {
                                 </button>
                             }
                         </Dropdown.Button>
-                        <Dropdown.DropdownContainer postion='bottom-left' className='mt-2'>
+                        <Dropdown.Container postion='bottom-left' className='mt-2 max-w-xs w-56 p-2 bg-teal-800 '>
                             <Dropdown.Item>
                                 <Dropdown.ItemIcon>
-                                    <TbSettingsFilled size={20} />
+                                    <TbSettingsFilled size={18} />
                                 </Dropdown.ItemIcon>
                                 <Dropdown.ItemText>
                                     Cài đặt
@@ -80,7 +80,7 @@ const Navbar = ({currentUser}) => {
                             {currentUser.id ?
                                 <Dropdown.Item onClick={onLogout}>
                                     <Dropdown.ItemIcon>
-                                        <IoLogOut size={20} />
+                                        <IoLogOut size={18} />
                                     </Dropdown.ItemIcon>
                                     <Dropdown.ItemText>
                                         Log out
@@ -88,7 +88,7 @@ const Navbar = ({currentUser}) => {
                                 </Dropdown.Item>:
                                 <Dropdown.Item to={'/login'}>
                                     <Dropdown.ItemIcon>
-                                        <IoLogIn size={20} />
+                                        <IoLogIn size={18} />
                                     </Dropdown.ItemIcon>
                                     <Dropdown.ItemText>
                                         Log in
@@ -96,7 +96,7 @@ const Navbar = ({currentUser}) => {
                                 </Dropdown.Item>
                             }
                             
-                        </Dropdown.DropdownContainer>
+                        </Dropdown.Container>
                     </Dropdown> 
                     
                 </div>

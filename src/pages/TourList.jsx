@@ -1,46 +1,57 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { TbArrowRight, TbChevronLeft, TbChevronRight, TbFilter, TbSearch, TbStarFilled } from 'react-icons/tb';
+import { TbArrowRight, TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
 import { axiosInstance } from '../service/axiosInstance';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useRound from '../hooks/useRound';
 import { Navigation } from 'swiper/modules';
+import Dropdown from '../components/Dropdown';
 
 
-const TourCard = ({tour,children}) =>{
+const TourCard = ({tour,galleryShow,children}) =>{
     const round = useRound()
+    
     return (
         <div className='w-full flex flex-col' to={"/tours/"+tour.id}>
             <div className="w-full h-auto aspect-square overflow-hidden relative group/tour">
-            <button className={`prev-${tour.id} absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
-                    <TbChevronLeft size={24}></TbChevronLeft>
-                </button>
-                <button className={`next-${tour.id} absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
-                    <TbChevronRight size={24}></TbChevronRight>
-                </button>
-                <Swiper 
-                    className='w-full h-full'
-                    modules={[Navigation]}
-                    navigation={{
-                        nextEl: ".next-"+tour.id,
-                        prevEl: '.prev-'+tour.id,
-                        disabledClass: "swiper-disabled"
-                    }}
-                >
-                    <SwiperSlide className='group'>
-                        <Link>
-                            <img src={tour.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
-                        </Link>
-                    </SwiperSlide>
-                    {tour.attachments.map((attachment,key)=>(
-                        <SwiperSlide key={key} className='group'>
+            {galleryShow?
+                <>
+                    <button className={`prev-${tour.id} absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
+                        <TbChevronLeft size={24}></TbChevronLeft>
+                    </button>
+                    <button className={`next-${tour.id} absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
+                        <TbChevronRight size={24}></TbChevronRight>
+                    </button>
+                    
+                    <Swiper 
+                        className='w-full h-full'
+                        modules={[Navigation]}
+                        navigation={{
+                            nextEl: ".next-"+tour.id,
+                            prevEl: '.prev-'+tour.id,
+                            disabledClass: "swiper-disabled"
+                        }}
+                    >
+                        <SwiperSlide className='group'>
                             <Link>
-                                <img src={attachment.file} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
+                                <img src={tour.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
                             </Link>
                         </SwiperSlide>
-                    ))}
-                </Swiper>
+                        {tour.attachments.map((attachment,key)=>(
+                            <SwiperSlide key={key} className='group'>
+                                <Link>
+                                    <img src={attachment.file} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
+                                </Link>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </>
+                :
+                <Link to={"/tours/"+tour.id}>
+                    <img src={tour.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
+                </Link>
+                }
             </div>
             <div className='mt-2 space-y-1'>
                 <div className='flex justify-between w-full items-start gap-4'>
@@ -66,7 +77,26 @@ const TourCard = ({tour,children}) =>{
 const TourList = () => {
     const [categories,setCategories] = useState(null)
     const [tours,setTours]= useState([])
+    const [galleryShow,setGalleryShow] = useState(true)
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [destinations,setDestinations] = useState([])
+    const handleToursByCategory = (category_id)=>{
+        setSearchParams(params=>{
+            params.set('category',category_id)
+            return params
+        });
+        console.log()
+    }
 
+    const setAllTour = ()=>{
+        setSearchParams({});
+    }
+    useEffect(()=>{
+        axiosInstance.get('tours/?page_size=15&'+searchParams.toString()).then(res=>{
+            setTours(res.data.results)
+        })
+
+    },[searchParams])
     useEffect(() => {
         axiosInstance.get("categories/").then(res=>{
             setCategories(res.data)
@@ -74,13 +104,14 @@ const TourList = () => {
         axiosInstance.get('tours/?page_size=15').then(res=>{
             setTours(res.data.results)
         })
+        axiosInstance.get('destinations/?page_size=8').then(res=>{
+            setDestinations(res.data.results)
+        })
         return () => {
         };
     }, []);
-    const [isChecked, setIsChecked] = useState(false)
-
-    const handleCheckboxChange = () => {
-      setIsChecked(!isChecked)
+    const handleGalleryChange = () => {
+        setGalleryShow(!galleryShow)
     }
     return (
         <div className='min-h-screen pb-24'>
@@ -88,27 +119,53 @@ const TourList = () => {
                 <div className='w-full container mx-auto'>
                     <div className='w-2/3 py-8 mx-auto'>
                         <div className="flex items-center w-full relative bg-teal-900">
-                            <div className='w-full flex'>
-                                <label htmlFor="" className='text-gray-100 px-6 py-4 flex flex-col gap-1 duration-150 focus:bg-teal-800 hover:bg-teal-800 w-full'>
-                                    <span className='text-sm'>Destination</span>
-                                    <input type="text" className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100' placeholder='Choose destination' name="" id="" />
-                                </label>
-                            </div>
-                            <div className='flex items-center justify-between px-6 py-4 gap-12 w-full h-full focus:bg-teal-700 hover:bg-teal-700 '>
-                                <div className='text-gray-100 flex flex-col gap-1 duration-150 '>
-                                    <span className='text-sm'>Transport</span>
-                                    <span className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100 '>Choose Transport</span>
+                            <Dropdown className='w-full relative'>
+                                <Dropdown.Button>
+                                    <label className='text-gray-100 px-6 py-4 flex flex-col gap-1 duration-150 focus:bg-teal-800 hover:bg-teal-800 w-full'>
+                                        <span className='text-sm'>Destination</span>
+                                        <input type="text" className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100' placeholder='Search destination' name="" id="" />
+                                    </label>
+                                </Dropdown.Button>
+                                <Dropdown.Container postion='bottom-right' className='w-full bg-teal-800 mt-1 p-4'>
+                                    <div className="text-gray-100 text-md font-semibold mb-4">Tìm kiếm t heo khu vực</div>
+                                    <div className="grid grid-cols-4 gap-2">
+                                        {destinations.map((destination,key)=>(
+                                            <div className='flex flex-col gap-2 p-2 hover:bg-teal-700 duration-300'  key={key}>
+                                                <div className='border-gray-500 overflow-hidden w-full aspect-square'>
+                                                    <img src="https://a0.muscache.com/pictures/f9ec8a23-ed44-420b-83e5-10ff1f071a13.jpg?im_w=320" alt="" className='w-full h-full object-cover' />
+                                                </div>
+                                                <span className='text-gray-100 truncate'>{destination.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Dropdown.Container>
+                            </Dropdown>
+                            <Dropdown className='w-full relative'>
+                                <Dropdown.Button>
+                                <div className='flex items-center relative justify-between px-6 py-4 gap-12 w-full h-full focus:bg-teal-700 hover:bg-teal-700 '>
+                                    <div className='text-gray-100 flex flex-col gap-1 duration-150 '>
+                                        <span className='text-sm'>Time</span>
+                                        <span className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100 '>Choose time</span>
+                                    </div>
+                                    <button className='font-semibold hover:bg-teal-400 h-12 w-12 min-w-12 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
+                                        <TbSearch size={32}></TbSearch>
+                                    </button>
                                 </div>
-                            </div>
-                            <div className='flex items-center justify-between px-6 py-4 gap-12 w-full h-full focus:bg-teal-700 hover:bg-teal-700 '>
-                                <div className='text-gray-100 flex flex-col gap-1 duration-150 '>
-                                    <span className='text-sm'>Time</span>
-                                    <span className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100 '>Choose time</span>
-                                </div>
-                                <button className='font-semibold hover:bg-teal-400 h-12 w-12 min-w-12 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
-                                    <TbSearch size={32}></TbSearch>
-                                </button>
-                            </div>
+                                </Dropdown.Button>
+                                <Dropdown.Container postion='bottom-left' className='w-full bg-teal-800 mt-1 p-4'>
+                                    <div className="text-gray-100 text-md font-semibold mb-4">Tìm kiếm t heo khu vực</div>
+                                    <div className="grid grid-cols-4 gap-2">
+                                        {destinations.map((destination,key)=>(
+                                            <div className='flex flex-col gap-2 p-2 hover:bg-teal-700 duration-300' key={key}>
+                                                <div className='border-gray-500 overflow-hidden w-full aspect-square'>
+                                                    <img src="https://a0.muscache.com/pictures/f9ec8a23-ed44-420b-83e5-10ff1f071a13.jpg?im_w=320" alt="" className='w-full h-full object-cover' />
+                                                </div>
+                                                <span className='text-gray-100 truncate'>{destination.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Dropdown.Container>
+                            </Dropdown>
                         </div>
                     
                     </div>
@@ -116,15 +173,23 @@ const TourList = () => {
             </div>   
             <div className='pt-3 pb-3 px-24 flex items-center justify-center gap-6 sticky top-20 z-10 bg-main border-t border-t-teal-800 '>
                 <Swiper slidesPerView={12} className='w-full' spaceBetween={20}>
+                    <SwiperSlide>
+                        <button onClick={setAllTour} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300'>
+                            <div className='flex items-center justify-center w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
+                                <TbMenuOrder size={44}></TbMenuOrder>
+                            </div>
+                            <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>Tất cả</p>
+                        </button>
+                    </SwiperSlide>
                     {categories && categories.map((category,key)=>(
-                        <SwiperSlide>
-                            <Link className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
-                                <div className='w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
-                                    <img src={category.thumbnail} alt="" className='w-full h-full object-contain' />
-                                </div>
-                                <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>{category.title}</p>
-                            </Link>
-                        </SwiperSlide>
+                    <SwiperSlide>
+                        <button onClick={()=>handleToursByCategory(category.id)} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
+                            <div className='w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
+                                <img src={category.thumbnail} alt="" className='w-full h-full object-contain' />
+                            </div>
+                            <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>{category.title}</p>
+                        </button>
+                    </SwiperSlide>
                     ))}
                 </Swiper>
                 <button className='gap-3 mb-3 text-md md:text-lg flex items-center font-semibold md:px-6 px-3 py-2 text-white hover:bg-black/60 border-2 border-teal-200 duration-300 text-center active:scale-95'>
@@ -137,12 +202,12 @@ const TourList = () => {
                         <div className='relative'>
                             <input
                                 type='checkbox'
-                                checked={isChecked}
-                                onChange={handleCheckboxChange}
+                                checked={galleryShow}
+                                onChange={handleGalleryChange}
                                 className='sr-only'
                             />
                             <div className='block h-8 w-14 border border-gray-500 focus:border-teal-300 bg-transparent'></div>
-                            <div className={` absolute top-1 h-6 w-6  duration-300 ${isChecked ? "right-1 bg-teal-300" : "left-1 bg-gray-600"}`}></div>
+                            <div className={` absolute top-1 h-6 w-6  duration-300 ${galleryShow ? "right-1 bg-teal-300" : "left-1 bg-gray-600"}`}></div>
                         </div>
                     </label>
                 </div>
@@ -150,7 +215,7 @@ const TourList = () => {
             <div className="grid grid-cols-6 gap-8 px-24 mt-6">
                 {tours.map((tour,key)=>(
                     <div key={key}>
-                        <TourCard tour={tour}/>
+                        <TourCard tour={tour} galleryShow={galleryShow}/>
                     </div>
                 ))}
             </div>

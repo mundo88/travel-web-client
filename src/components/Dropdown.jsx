@@ -12,9 +12,9 @@ const DropdownContext = createContext({
     setOpen: () => {},
 });
 // dropdown content for displaying dropdown
-const DropdownContainer =({ children ,...props})=> {
+const DropdownContainer =({ children ,postion,...props})=> {
     const { open } = useContext(DropdownContext); // get the context
-    const postion = {
+    const postions = {
         'top':'bottom-full',
         'bottom':'top-full',
         'bottom-left':'top-full -right-0',
@@ -27,7 +27,7 @@ const DropdownContainer =({ children ,...props})=> {
     return (
       <>
         {open &&
-            <div className={`absolute max-w-xs w-56 p-2 ${props.postion ? postion[props.postion]:postion['top-center']} bg-gray-800 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] right-0 z-50 ${props.className && props.className}`} >
+            <div className={`absolute ${postion ? postions[postion]:postions['top-center']} shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] right-0 z-50 ${props.className && props.className}`} >
                 {children}
             </div>
         }
@@ -45,19 +45,19 @@ const DropdownItemText = ({children}) => {
 }
 const DropdownSeparator = () => {
     return (
-        <hr className='w-full border-gray-700 border-0.5 my-1'/>
+        <hr className='w-full border-teal-700 border-0.5 my-1'/>
     )
 }
 const DropdownItemIcon = ({children}) => {
     return (
-        <span className='w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 mr-3 overflow-hidden '>
+        <span className='w-8 h-8 flex items-center justify-center rounded-full bg-teal-950 mr-3 overflow-hidden '>
             {children}
         </span>
     )
 }
 const DropdownItem = ({to,onClick, children, ...props }) => {
   return (
-    <Link to={to} onClick={onClick} className="flex items-center px-3 py-1.5 text-sm text-gray-100 capitalize transition-colors duration-150 transform hover:bg-gray-600">
+    <Link to={to} onClick={onClick} className="flex items-center px-3 py-1.5 text-sm text-gray-100 capitalize transition-colors duration-150 transform hover:bg-teal-700">
         {children}
     </Link>
   );
@@ -69,10 +69,9 @@ const DropdownButton =({ children, ...props }) => {
     // to open and close the dropdown
     function toggleOpen() {
       setOpen(!open);
-      console.log(open);
     }
     return (
-        <div className={`cursor-pointer group ${open ? 'dropdown-button-active': ''}`} onClick={toggleOpen} {...props}>
+        <div className={`cursor-pointer group w-full ${open ? 'dropdown-button-active': ''}`} onClick={toggleOpen} {...props}>
             {children}
         </div>
     )
@@ -84,9 +83,9 @@ const Dropdown = ({children,...props}) => {
     useEffect(() => {
         // close dropdown if click outside
         function close(e) {
-        if (!dropdownRef.current.contains(e.target)) {
-            setOpen(false);
-        }
+            if (!dropdownRef.current.contains(e.target)) {
+                setOpen(false);
+            }
         };
         // add or remove event listener
         if (open) {
@@ -99,8 +98,8 @@ const Dropdown = ({children,...props}) => {
     }, [open]); // only run if open state changes
 
     return (
-     <DropdownContext.Provider value={{ open, setOpen }}>
-        <div {...props} ref={dropdownRef} className="relative">
+     <DropdownContext.Provider value={{ open, setOpen }} >
+        <div {...props} ref={dropdownRef} >
             {children}
         </div>
      </DropdownContext.Provider>
@@ -108,7 +107,7 @@ const Dropdown = ({children,...props}) => {
 }
 // optional - but I like this pattern to know it must be a child of Dropdown
 Dropdown.Button = DropdownButton;
-Dropdown.DropdownContainer = DropdownContainer;
+Dropdown.Container = DropdownContainer;
 Dropdown.Item = DropdownItem;
 Dropdown.ItemText = DropdownItemText;
 Dropdown.ItemIcon = DropdownItemIcon;

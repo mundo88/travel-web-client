@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../service/axiosInstance';
 import { ScrollRestoration, useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
+import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader, TbLoader2, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { HiOutlineCheck } from "react-icons/hi";
 import { PiBowlFoodLight, PiCarProfileLight, PiMoney } from "react-icons/pi";
@@ -30,12 +30,14 @@ const TourDetail = () => {
     const [reviews,setReviews]= useState([])
     const [reviewCount,setReviewCount]= useState(null)
     const [reviewNext,setReviewNext]= useState(null)
+    const [reviewContent,setReviewContent]= useState("")
+    const [reviewLoading,setReviewLoading]=useState(false)
     const [tab,setTab]=useState('about')
     const [modalIsOpen, setIsOpen] = useState(false);
     const {currentUser} = useAuth()
     const location = useLocation()
     const [rating, setRating] = useState(5)
-    const [reviewContent,setReviewContent]= useState("")
+
     const [emojiOpen,setEmojiOpen] = useState(false)
 
     const r=(n,p=1)=>(e=>((n*e)+.5|0)/e)(10**p) // 37 bytes
@@ -69,6 +71,7 @@ const TourDetail = () => {
         })
     }
     const handlePostReview = ()=>{
+        setReviewLoading(true)
         axiosInstance.post('reviews/',{
             user_id: currentUser.id,
             content: reviewContent,
@@ -78,6 +81,7 @@ const TourDetail = () => {
             setReviews(review=>[res.data,...review])
             setReviewContent("")
             setReviewCount(reviewCount+1)
+            setReviewLoading(false)
         })
     }
     useEffect(() => {
@@ -298,7 +302,8 @@ const TourDetail = () => {
                                                     </div>
 
                                                 </div>
-                                                <button onClick={handlePostReview} className={`text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${reviewContent ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700' }`}>
+                                                <button onClick={handlePostReview} className={`flex items-center justify-center gap-3 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${reviewLoading && "pointer-events-none"} ${reviewContent ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700'}`}>
+                                                    {reviewLoading && <TbLoader2 size={20} className='animate-spin'></TbLoader2>}
                                                     <span>Post</span>
                                                 </button>
                                             </div>
