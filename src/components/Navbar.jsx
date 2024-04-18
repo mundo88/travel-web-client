@@ -18,7 +18,7 @@ const Navbar = ({currentUser}) => {
     }
     return (
         <div className='w-full bg-main text-white'>
-            <div className='flex justify-between items-center px-6 container m-auto'>
+            <div className='flex justify-between items-center md:px-0 px-4 container m-auto'>
                 <div className="flex items-center gap-6 w-28">
                     <Link to={"/"} className='md:h-12 h-8 '>
                         <img src={logo} className='h-full w-auto' alt="" />

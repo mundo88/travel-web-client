@@ -123,7 +123,7 @@ const TourDetail = () => {
         <>
             {tour &&
             <div>
-                <div className='container m-auto relative pt-12'>
+                <div className='container m-auto relative md:pt-12 pt-6'>
                     <div className="flex flex-col md:mb-8 mb-4 px-4 md:px-0">
                         <div className="flex justify-between items-center md:mb-4 mb-2">
                             <h2 className='text-gray-100 text-xl md:text-4xl'>
