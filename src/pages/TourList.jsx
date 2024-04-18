@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { TbArrowRight, TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
+import {  TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
 import { axiosInstance } from '../service/axiosInstance';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useRound from '../hooks/useRound';
 import { Navigation } from 'swiper/modules';
-import Dropdown from '../components/Dropdown';
+import { VscEmptyWindow } from 'react-icons/vsc';
 
-
-const TourCard = ({tour,galleryShow,children}) =>{
+const TourCard = ({tour,galleryShow}) =>{
     const round = useRound()
     
     return (
@@ -78,38 +77,61 @@ const TourList = () => {
     const [categories,setCategories] = useState(null)
     const [tours,setTours]= useState([])
     const [galleryShow,setGalleryShow] = useState(true)
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [destinations,setDestinations] = useState([])
-    const handleToursByCategory = (category_id)=>{
-        setSearchParams(params=>{
-            params.set('category',category_id)
-            return params
-        });
-        console.log()
-    }
+    const [searchDestination,setSearchDestination] = useState([])
+    const [next,setNext] = useState(null)
+    const [loading,setLoading] = useState(false)
 
-    const setAllTour = ()=>{
-        setSearchParams({});
-    }
-    useEffect(()=>{
-        axiosInstance.get('tours/?page_size=15&'+searchParams.toString()).then(res=>{
+
+    const tourApi = "tours/?page_size=15&ordering=-id&"
+
+    const searchToursByCategory = (category_id)=>{
+        setLoading(true)
+        setTours([])
+        axiosInstance.get(tourApi+'category='+category_id).then(res=>{
             setTours(res.data.results)
+            setNext(res.data.next)
+            setLoading(false)
         })
+    }
+    const searchTours = ()=>{
+        if (searchDestination) {
+            setLoading(true)
+            setTours([])
+            axiosInstance.get(tourApi+'search='+searchDestination).then(res=>{
+                setTours(res.data.results)
+                setNext(res.data.next)
+                setLoading(false)
+            })
+        }
+    }
+    const handleNext= ()=>{
+        axiosInstance.get(next).then(res=>{
+            setTours(t =>[...t,...res.data.results])
+            setNext(res.data.next)
+        })
+    }
+    useEffect(() => {
+        const sendSearchRequest = setTimeout(() => {
+            searchTours()
+        }, 500);
+        return () => clearTimeout(sendSearchRequest);
+      }, [searchDestination]);
 
-    },[searchParams])
+    
     useEffect(() => {
         axiosInstance.get("categories/").then(res=>{
             setCategories(res.data)
         })
-        axiosInstance.get('tours/?page_size=15').then(res=>{
+        axiosInstance.get(tourApi).then(res=>{
             setTours(res.data.results)
-        })
-        axiosInstance.get('destinations/?page_size=8').then(res=>{
-            setDestinations(res.data.results)
+            setNext(res.data.next)
         })
         return () => {
         };
     }, []);
+
+
+
     const handleGalleryChange = () => {
         setGalleryShow(!galleryShow)
     }
@@ -119,62 +141,21 @@ const TourList = () => {
                 <div className='w-full container mx-auto'>
                     <div className='w-2/3 py-8 mx-auto'>
                         <div className="flex items-center w-full relative bg-teal-900">
-                            <Dropdown className='w-full relative'>
-                                <Dropdown.Button>
-                                    <label className='text-gray-100 px-6 py-4 flex flex-col gap-1 duration-150 focus:bg-teal-800 hover:bg-teal-800 w-full'>
-                                        <span className='text-sm'>Destination</span>
-                                        <input type="text" className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100' placeholder='Search destination' name="" id="" />
-                                    </label>
-                                </Dropdown.Button>
-                                <Dropdown.Container postion='bottom-right' className='w-full bg-teal-800 mt-1 p-4'>
-                                    <div className="text-gray-100 text-md font-semibold mb-4">Tìm kiếm t heo khu vực</div>
-                                    <div className="grid grid-cols-4 gap-2">
-                                        {destinations.map((destination,key)=>(
-                                            <div className='flex flex-col gap-2 p-2 hover:bg-teal-700 duration-300'  key={key}>
-                                                <div className='border-gray-500 overflow-hidden w-full aspect-square'>
-                                                    <img src="https://a0.muscache.com/pictures/f9ec8a23-ed44-420b-83e5-10ff1f071a13.jpg?im_w=320" alt="" className='w-full h-full object-cover' />
-                                                </div>
-                                                <span className='text-gray-100 truncate'>{destination.name}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Dropdown.Container>
-                            </Dropdown>
-                            <Dropdown className='w-full relative'>
-                                <Dropdown.Button>
-                                <div className='flex items-center relative justify-between px-6 py-4 gap-12 w-full h-full focus:bg-teal-700 hover:bg-teal-700 '>
-                                    <div className='text-gray-100 flex flex-col gap-1 duration-150 '>
-                                        <span className='text-sm'>Time</span>
-                                        <span className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100 '>Choose time</span>
-                                    </div>
-                                    <button className='font-semibold hover:bg-teal-400 h-12 w-12 min-w-12 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
-                                        <TbSearch size={32}></TbSearch>
-                                    </button>
-                                </div>
-                                </Dropdown.Button>
-                                <Dropdown.Container postion='bottom-left' className='w-full bg-teal-800 mt-1 p-4'>
-                                    <div className="text-gray-100 text-md font-semibold mb-4">Tìm kiếm t heo khu vực</div>
-                                    <div className="grid grid-cols-4 gap-2">
-                                        {destinations.map((destination,key)=>(
-                                            <div className='flex flex-col gap-2 p-2 hover:bg-teal-700 duration-300' key={key}>
-                                                <div className='border-gray-500 overflow-hidden w-full aspect-square'>
-                                                    <img src="https://a0.muscache.com/pictures/f9ec8a23-ed44-420b-83e5-10ff1f071a13.jpg?im_w=320" alt="" className='w-full h-full object-cover' />
-                                                </div>
-                                                <span className='text-gray-100 truncate'>{destination.name}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Dropdown.Container>
-                            </Dropdown>
-                        </div>
-                    
+                            <label className='text-gray-100 px-6 py-4 flex flex-col gap-1 w-full'>
+                                <span className='text-sm'>Destination</span>
+                                <input value={searchDestination} onInput={(e)=>setSearchDestination(e.target.value)} type="text" className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100' placeholder='Search destination' name="" id=""/>
+                            </label>
+                            <button onClick={searchTours} className='font-semibold mx-5 hover:bg-teal-400 h-12 w-12 min-w-12 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
+                                <TbSearch size={32}></TbSearch>
+                            </button>
+                        </div>            
                     </div>
                 </div>
             </div>   
             <div className='pt-3 pb-3 px-24 flex items-center justify-center gap-6 sticky top-20 z-10 bg-main border-t border-t-teal-800 '>
                 <Swiper slidesPerView={12} className='w-full' spaceBetween={20}>
                     <SwiperSlide>
-                        <button onClick={setAllTour} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300'>
+                        <button onClick={()=>searchToursByCategory("")} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300'>
                             <div className='flex items-center justify-center w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
                                 <TbMenuOrder size={44}></TbMenuOrder>
                             </div>
@@ -183,7 +164,7 @@ const TourList = () => {
                     </SwiperSlide>
                     {categories && categories.map((category,key)=>(
                     <SwiperSlide>
-                        <button onClick={()=>handleToursByCategory(category.id)} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
+                        <button onClick={()=>searchToursByCategory(category.id)} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
                             <div className='w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
                                 <img src={category.thumbnail} alt="" className='w-full h-full object-contain' />
                             </div>
@@ -212,18 +193,40 @@ const TourList = () => {
                     </label>
                 </div>
             </div>
-            <div className="grid grid-cols-6 gap-8 px-24 mt-6">
-                {tours.map((tour,key)=>(
-                    <div key={key}>
-                        <TourCard tour={tour} galleryShow={galleryShow}/>
+            {
+                tours.length && <div className="grid grid-cols-6 gap-8 px-24 mt-6">
+                {
+                    tours.map((tour,key)=>(
+                        <div key={key}>
+                            <TourCard tour={tour} galleryShow={galleryShow}/>
+                        </div>
+                    ))
+                }
+            </div>}
+            {loading &&
+                <div className='text-xl text-gray-100 mx-auto text-center mt-28 flex flex-col items-center justify-center gap-8'>
+                    <div role="status">
+                        <svg aria-hidden="true" class="inline w-10 h-10 text-gray-200 animate-spin fill-teal-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                        <span class="sr-only">Loading...</span>
                     </div>
-                ))}
-            </div>
+                </div>
+                }
+            {
+                !loading && tours.length===0 && 
+                <div className='text-xl text-gray-100 mx-auto text-center mt-24 flex flex-col items-center justify-center gap-8'>
+                    <VscEmptyWindow size={120}></VscEmptyWindow>
+                    Không tìm thấy tour, vui lòng thử lại
+                </div>
+            }
+            {next && 
             <div className='mx-auto w-full flex items-center justify-center'>
-                <Link class="hover:bg-black/60 active:scale-95 focus:border-teal-300 mt-12 w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150" to="/tours">
+                <button onClick={handleNext} class="hover:bg-black/60 active:scale-95 focus:border-teal-300 mt-12 w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150" to="/tours">
                     View more tour
-                </Link>
-            </div>
+                </button>
+            </div>}
         </div>
     );
 }

@@ -76,6 +76,14 @@ const DropdownButton =({ children, ...props }) => {
         </div>
     )
 };
+// dropdown button for triggering open
+const DropdownInput =({ children, ...props }) => {
+    const { setOpen } = useContext(DropdownContext); // get the context
+    return (
+        <input onFocus={()=>setOpen(true)} {...props}/>
+    )
+};
+
 const Dropdown = ({children,...props}) => {
     const [open,setOpen] = useState(false)
     const dropdownRef = useRef(0);
@@ -112,5 +120,7 @@ Dropdown.Item = DropdownItem;
 Dropdown.ItemText = DropdownItemText;
 Dropdown.ItemIcon = DropdownItemIcon;
 Dropdown.Separator = DropdownSeparator;
+Dropdown.Input = DropdownInput;
+Dropdown.Context = DropdownContext;
 
 export default Dropdown;

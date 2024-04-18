@@ -6,8 +6,11 @@ import 'swiper/css/effect-fade';
 import HeaderTitle from './section/HeaderTitle';
 import MainSection from './section/MainSection';
 import Footer from './Footer';
+import { useState } from "react";
 
 const MainContent = () => {
+
+
     return (
         <>
             <div className='bg-main relative h-full pb-32'>

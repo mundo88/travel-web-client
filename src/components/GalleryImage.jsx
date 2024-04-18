@@ -30,8 +30,8 @@ const GalleryImage = ({attachments}) => {
             </div>
             <div className="flex items-center justify-center overflow-hidden flex-1 w-full h-full relative z-20">
                 <div className='w-full flex items-center justify-center h-full'>
-                    <div className="h-full px-4 flex items-center justify-center">
-                        <button className='swiper-button prev w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <div className="h-full px-4 flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-1 z-10">
+                        <button className='swiper-button prev md:w-12 md:h-12 w-8 h-8 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                             <TbChevronLeft size={26}></TbChevronLeft>
                         </button>
                     </div>
@@ -55,15 +55,15 @@ const GalleryImage = ({attachments}) => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <div className="h-full px-4 flex items-center justify-center">
-                        <button className='swiper-button next w-12 h-12 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
+                    <div className="h-full px-4 flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-1 z-10 md:relative">
+                        <button className='swiper-button next md:w-12 md:h-12 w-8 h-8 backdrop-blur-lg  flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 bg-white/10'>
                             <TbChevronRight size={26}></TbChevronRight>
                         </button>
                     </div>
                 </div>
             </div>
             <div className="w-full overflow-hidden flex items-center justify-center pb-4 relative z-20">
-                <div className='container m-auto flex items-center justify-center h-20'>
+                <div className='container m-auto flex items-center justify-center h-20 px-4 md:px-0'>
                     <Swiper
                         onSwiper={setThumbsSwiper}
                         slidesPerView={attachments.length}

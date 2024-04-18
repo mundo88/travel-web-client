@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance } from '../service/axiosInstance';
+import { axiosInstance, axiosPrivateInstance } from '../service/axiosInstance';
 import { ScrollRestoration, useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader, TbLoader2, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
@@ -37,6 +37,7 @@ const TourDetail = () => {
     const {currentUser} = useAuth()
     const location = useLocation()
     const [rating, setRating] = useState(5)
+    const [relatedTours,setRelatedTours] =useState([])
 
     const [emojiOpen,setEmojiOpen] = useState(false)
 
@@ -62,7 +63,6 @@ const TourDetail = () => {
         const appendEmoji = reviewContent + emoji.emoji
         setReviewContent(appendEmoji)
     }
-
     const handleNextReview = ()=>{
         axiosInstance.get(reviewNext).then(res=>{
             const newReviews = reviews.concat(res.data.results.filter(x=> x != reviews.some(y=>y.id==x.id)))
@@ -72,7 +72,7 @@ const TourDetail = () => {
     }
     const handlePostReview = ()=>{
         setReviewLoading(true)
-        axiosInstance.post('reviews/',{
+        axiosPrivateInstance.post('reviews/',{
             user_id: currentUser.id,
             content: reviewContent,
             star: rating,
@@ -84,10 +84,27 @@ const TourDetail = () => {
             setReviewLoading(false)
         })
     }
+    
+    function setTagsSearchQuery(tags){
+        let params = new URLSearchParams();
+        tags.map(tag=>{
+            params.append("tags", tag.id);
+        })
+        return params.toString()
+    }
     useEffect(() => {
         axiosInstance.get("tours/"+id+"/").then(res=>{
             setTour(res.data)
-            console.log(res.data)
+            axiosInstance.get("tours/?"+ setTagsSearchQuery(res.data.tags)).then(res=>{
+                if (res.data.results.length===0){
+                    axiosInstance.get('articles/?page_size=3&ordering=-id').then(res=>{
+                        setRelatedTours(res.data.results)
+                    })
+                }else{
+                    setRelatedTours(res.data.results)
+                }
+            })
+            
         })
         axiosInstance.get('tours/').then(res=>{
             setTours(res.data.results)
@@ -107,30 +124,30 @@ const TourDetail = () => {
             {tour &&
             <div>
                 <div className='container m-auto relative pt-12'>
-                    <div className="flex flex-col mb-8">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className='text-gray-200 text-4xl'>
+                    <div className="flex flex-col md:mb-8 mb-4 px-4 md:px-0">
+                        <div className="flex justify-between items-center md:mb-4 mb-2">
+                            <h2 className='text-gray-100 text-xl md:text-4xl'>
                                 {tour.name}
                             </h2>
                             <button className='text-gray-300 hover:text-teal-300 duration-150'>
-                                <TbBookmark size={24}></TbBookmark> 
+                                <TbHeart size={24}></TbHeart> 
                             </button>
                         </div>
-                        <div className='flex items-center gap-8 text-gray-400'>
-                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-sm'>
+                        <div className='flex items-center md:gap-8 gap-4 text-gray-400'>
+                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-xs md:text-sm'>
                                 <TbEye  size={20}/>
                                 3,2 M
                             </div>
-                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-sm'>
+                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-xs md:text-sm'>
                                 <TbSend  size={20}/>
                                 457
                             </div>
-                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-sm'>
+                            <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-xs md:text-sm'>
                                 <TbMessage  size={20}/>
                                 28
                             </div>
                         </div>
-                        <div className="flex items-center gap-4 mt-4">
+                        <div className="flex items-center gap-4 md:mt-4 mt-3">
                             {tour.tags.map((tag,key)=>(
                                 <Link className="py-1 px-2 text-xs border border-teal-500 hover:bg-teal-500/50 text-gray-300" key={key}>
                                     {tag.title}
@@ -138,17 +155,18 @@ const TourDetail = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="grid grid-cols-5 grid-rows-2 gap-4">
-                        <div className="col-span-3 row-span-2 group overflow-hidden" onClick={openGalleryView}>
+                    <div className="grid md:grid-cols-5 grid-cols-4 md:grid-rows-2 grid-rows-3 gap-y-2 md:gap-y-4 md:gap-x-4">
+                        <div className="md:col-span-3 col-span-4 row-span-2 group overflow-hidden" onClick={openGalleryView}>
                             <img src={tour.thumbnail} alt="" className='w-full h-full object-cover group-hover:scale-110 duration-300'/>
                         </div>
-                        <div className="grid col-span-2 row-span-2 grid-cols-2 gap-4">
+                        <div className="grid md:col-span-2 md:row-span-2 md:grid-cols-2 md:gap-4 gap-2 grid-cols-4 col-span-5">
                             {tour.attachments.slice(0,4).map((attachment,key)=>(
                                 <div className="w-full h-full relative overflow-hidden group" onClick={openGalleryView} key={key}>
                                     {key ===3 &&
                                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-20">
-                                            <button className='flex items-center gap-2 w-fit font-semibold hover:border-teal-300 hover:bg-black/60 px-6 py-3 border-gray-300 duration-300 text-center active:scale-95 border-2 text-white'>
-                                                Xem tất cả
+                                            <button className='flex items-center gap-2 w-fit font-semibold border-none hover:bg-black/60 px-6 py-3  duration-300 text-center active:scale-95 border-2 text-white'>
+                                                <span className='md:block hidden'>Xem tất cả</span>
+                                                <TbEye className='md:hidden block' size={24}></TbEye>
                                             </button>
                                         </div>
                                     }
@@ -158,16 +176,16 @@ const TourDetail = () => {
                         </div>
                         
                     </div>                    
-                    <div className='flex justify-between pb-12'>
-                        <div className='flex flex-col'>
-                            <div className="flex items-center mt-8">
-                                <button onClick={()=>{setTab('about')}} className={`py-3 px-8 border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent text-lg font-medium duration-150 ${tab==='about'?'active':''}`}>
+                    <div className='flex justify-between pb-6 px-4 md:pb-12 w-full'>
+                        <div className='flex flex-col w-full'>
+                            <div className="flex items-center justify-between md:justify-start mt-6 md:mt-8">
+                                <button onClick={()=>{setTab('about')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='about'?'active':''}`}>
                                     Mô tả
                                 </button>
-                                <button onClick={()=>{setTab('schedule')}} className={`py-3 px-8 border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent text-lg font-medium duration-150 ${tab==='schedule'?'active':''}`}>
+                                <button onClick={()=>{setTab('schedule')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='schedule'?'active':''}`}>
                                     Lịch trình
                                 </button>
-                                <button onClick={()=>{setTab('rules')}} className={`py-3 px-8 border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
+                                <button onClick={()=>{setTab('rules')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
                                     Quy định
                                 </button>
                             </div>
@@ -187,8 +205,8 @@ const TourDetail = () => {
                                     </>
                                 }
                             </div>
-                            <div className="mt-24 flex items-start">
-                                <div className="w-96 sticky top-10">
+                            <div className="mt-12 md:mt-24 flex items-start flex-col md:flex-row gap-6 md:gap-24">
+                                <div className="md:w-96 w-full md:sticky md:top-10">
                                     <div className="flex gap-2 text-2xl items-center text-gray-300">
                                         <TbStarFilled className='text-yellow-300' size={36} ></TbStarFilled>
                                         <span>{r(tour.aggregate_rating)}</span>
@@ -251,7 +269,7 @@ const TourDetail = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex-1 pl-24">
+                                <div className="md:flex-1">
                                     <div className="flex items-center justify-between w-full">
                                         <div className="text-2xl text-gray-300">
                                             {reviewCount} reviews
@@ -261,14 +279,14 @@ const TourDetail = () => {
                                             <TbChevronDown></TbChevronDown>
                                         </div>
                                     </div>
-                                    <div className='my-10 w-full '>
+                                    <div className='my-10 w-full'>
                                         {currentUser.id ?  
                                             <div className="flex items-center gap-4">
                                                 <div className='min-w-12 h-12 aspect-square overflow-hidden rounded-full border border-gray-300'>
                                                     <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className='w-full h-full object-cover' alt="" />
                                                 </div>
                                                 <div className="relative w-full">
-                                                    <input value={reviewContent} onChange={(e)=>{setReviewContent(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 pr-44 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`Hey ${currentUser.username}, what are you thinking?`} />
+                                                    <input value={reviewContent} onChange={(e)=>{setReviewContent(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 pr-4 md:pr-44 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`Hey ${currentUser.username}, what are you thinking?`} />
                                                     <div className='absolute top-1/2 -translate-y-1/2 left-0 pl-4 text-gray-300 peer-focus:text-teal-300'>
                                                         <button onClick={handleOpenEmoji} className='flex items-center justify-center'>
                                                             {
@@ -285,7 +303,7 @@ const TourDetail = () => {
                                                             </OutsideClickHandler>
                                                         </div>
                                                     </div>
-                                                    <div className='absolute top-1/2 -translate-y-1/2 pb-1 right-0 pr-4 text-gray-300 peer-focus:text-teal-300 flex items-center justify-center'>
+                                                    <div className='absolute top-1/2 -translate-y-1/2 pb-1 right-0 pr-4 text-gray-300 peer-focus:text-teal-300 hidden md:flex items-center justify-center'>
                                                         <StarRatings
                                                             rating={rating}
                                                             starRatedColor="#fde047"
@@ -302,9 +320,12 @@ const TourDetail = () => {
                                                     </div>
 
                                                 </div>
-                                                <button onClick={handlePostReview} className={`flex items-center justify-center gap-3 text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${reviewLoading && "pointer-events-none"} ${reviewContent ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700'}`}>
-                                                    {reviewLoading && <TbLoader2 size={20} className='animate-spin'></TbLoader2>}
+                                                <button onClick={handlePostReview} className={`flex items-center justify-center gap-3 text-md font-semibold px-2 md:px-8 duration-300 text-center active:scale-95 h-12 ${reviewLoading && "pointer-events-none"} ${reviewContent ? 'hover:bg-teal-400 text-black bg-teal-300' : 'pointer-events-none text-gray-500 bg-gray-700'}`}>
+                                                    {reviewLoading ? 
+                                                    <TbLoader2 size={20} className='animate-spin'></TbLoader2>
+                                                    :
                                                     <span>Post</span>
+                                                    }
                                                 </button>
                                             </div>
                                             :
@@ -313,8 +334,8 @@ const TourDetail = () => {
                                     </div>
                                     <div className='flex flex-col gap-10'>
                                         {reviews.length ===0 ? 
-                                        <div className='w-full h-full flex flex-col items-center justify-center text-gray-300 pt-24'>
-                                            <VscEmptyWindow size={88}></VscEmptyWindow>
+                                        <div className='w-full h-full flex flex-col items-center justify-center text-gray-300 md:pt-24 '>
+                                            <VscEmptyWindow className='w-16 h-16 md:w-36 md:h-36'></VscEmptyWindow>
                                             <span className='mt-6'>Tour currently has no reviews,<Link className='text-teal-300 hover:underline ml-1'>review now!</Link></span>
                                         </div>
                                         :
@@ -342,9 +363,9 @@ const TourDetail = () => {
                                                         ))}
                                                     </div>
                                                     <div className='space-y-2'>
-                                                        <div className='text-gray-200 tour'>
+                                                        <p className='text-gray-200 tour break-all'>
                                                             {parse(review.content)}
-                                                        </div>
+                                                        </p>
                                                         {review.attachments.length >0 && 
                                                         <div className='flex gap-2 pb-1'>
                                                             {review.attachments.map((attachment,key)=>(
@@ -384,11 +405,11 @@ const TourDetail = () => {
                     <div>
                     </div>
                 </div>
-                <div className="container mx-auto mt-24">
+                <div className="container mx-auto md:mt-24 mt-12 px-4 md:px-0">
                     <HeaderTitle title={"Có thể bạn sẽ thích"} desciption={"Take a look the best places"}></HeaderTitle>
                     <div className='mb-24 relative flex items-center flex-col justify-center'>
                         <div className='grid md:grid-cols-3 grid-cols-1 gap-12 mt-12'>
-                            {tours && tours.slice(0,3).map((tour,key)=>(
+                            {relatedTours && relatedTours.slice(0,3).map((tour,key)=>(
                                 <div key={key}>
                                     <TourCard tour={tour}></TourCard>
                                 </div>
@@ -399,13 +420,13 @@ const TourDetail = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="sticky bottom-0 w-full z-40">
+                <div className="sticky bottom-0 w-full z-40 hidden">
                     <div className=' duration-300 transition-opacity rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 '>
                         <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                             <TbMapPin size={'36'}></TbMapPin> 
                             <div className='flex flex-col'>
                                 <span className='text-sm'>Destination</span>
-                                <span className='text-lg'>{tour.destination.city.name}</span>
+                                <span className='text-lg'>{tour.destination.name}</span>
                             </div>
                         </div>
                         <div className='h-8 w-0.5 bg-gray-400'></div>

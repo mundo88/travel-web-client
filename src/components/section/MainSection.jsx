@@ -24,10 +24,10 @@ const MainSection = ({children}) => {
 
 
 const MainSectionCity =({children,props})=>{
-    const [cities,setCities] = useState([])
+    const [destinations,setDestinations] = useState([])
     useEffect(() => {
-        axiosInstance.get("cities/?featured=true").then(res=>{
-            setCities(res.data.results)
+        axiosInstance.get("destinations/?featured=true").then(res=>{
+            setDestinations(res.data.results)
         })
         return () => {
         };
@@ -62,13 +62,13 @@ const MainSectionCity =({children,props})=>{
                             disabledClass: "swiper-disabled"
                         }}
                         cont>
-                    {cities && cities.map((city,key)=>(
+                    {destinations && destinations.map((destination,key)=>(
                         <SwiperSlide className=' md:even:mt-16'>
                             <div className='flex flex-col gap-6 w-full overflow-hidden group'>
                                 <div className='w-full h-auto aspect-square overflow-hidden shadow-md shadow-black'>
-                                    <img src={city.thumbnail} alt="" className='w-full h-full object-cover' />
+                                    <img src={destination.thumbnail} alt="" className='w-full h-full object-cover' />
                                 </div>
-                                <p className='text-3xl uppercase text-gray-500 group-hover:text-white text-center duration-300 font-bold'>{city.name}</p>
+                                <p className='text-3xl uppercase text-gray-500 group-hover:text-white text-center duration-300 font-bold truncate px-6'>{destination.name}</p>
                             </div>
                         </SwiperSlide>
                     ))}
@@ -82,7 +82,7 @@ const MainSectionCity =({children,props})=>{
 const TourCard = ({tour})=>{
     return(
         <Link to={"/tours/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-lg md:md:text-3xl font-bold group-hover:text-white duration-300'>{tour.destination.city.name}</div>
+            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-lg md:md:text-3xl font-bold group-hover:text-white duration-300 truncate'>{tour.destination.name}</div>
             <div className='w-full h-full relative'>
                 <div className='absolute bg-black/70 p-8 flex flex-col items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
                     <div className="text-white text-xl font-semibold truncate max-w-full">
@@ -101,7 +101,7 @@ const TourCard = ({tour})=>{
 const MainSectionTour = ({children,props})=>{
     const [tours,setTours]= useState([])
     useEffect(() => {
-        axiosInstance.get('tours/?featured=true').then(res=>{
+        axiosInstance.get('tours/?page_size=9&ordering=-id').then(res=>{
             setTours(res.data.results)
         })
         return ()=>{
