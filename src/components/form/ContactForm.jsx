@@ -18,6 +18,7 @@ const ContactForm = ({onSubmit,loading}) => {
         register,
         handleSubmit,
         reset,
+        setError,
         formState: { errors ,isSubmitSuccessful },
     } = useForm();
     useEffect(() => {
@@ -25,22 +26,21 @@ const ContactForm = ({onSubmit,loading}) => {
       
       }, [isSubmitSuccessful])
     
-    const callbackRes = (status,username)=>{
-        if (status ===201) {
-            toast.custom((t) => <CustomToast t={t} msg={`Hi ${username}, thank you for contacting us`}/>,{duration:5000})
-            reset()
-        }
+    const handleSuccess =(message)=>{
+        reset()
+        toast.custom((t) => <CustomToast t={t} msg={message}/>,{duration:5000})
     }
     const controlForm = (data)=>{
         data.phone_number = "+"+data.phone_number
-        onSubmit(data,callbackRes)
+        onSubmit(data,handleSuccess)
     }
+    
     return (
         <form className='flex flex-col gap-10' onSubmit={handleSubmit((data) => controlForm(data))}>
             <div>
                 <label htmlFor='username' className='text-gray-300'>What's your name?</label>
-                <input type="text" {...register('username',{ required: true })} id="username" className='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white text-xl md:text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 placeholder:text-2xl' placeholder='Marvin McKinney' />
-                {errors.username && <p className='text-red-400 mt-2'>username is required.</p>}
+                <input type="text" {...register('username',{ required: 'Username is required.' })} id="username" className='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white text-xl md:text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 placeholder:text-2xl' placeholder='Marvin McKinney' />
+                {errors.username && <p className='text-red-400 mt-2'>{errors.username.message}</p>}
             </div>                   
             <div>
                 <label htmlFor='phone_number' className='text-gray-300'>What's your phone number?</label>
@@ -48,20 +48,23 @@ const ContactForm = ({onSubmit,loading}) => {
                     <Controller
                         control={control}
                         name="phone_number"
-                        rules={{ required: true }}
+                        rules={
+                            { 
+                                required: "Phone number is required." ,
+                                validate: (value) => isValidPhoneNumber("+"+value) || "Invalid phone number.",
+                                
+                            }
+                        }
                         render={({ field: { ref, ...field } }) => (
                         <ReactPhoneInput
                             {...field}
                             containerClass='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white  focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 [&::-webkit-inner-spin-button]:appearance-none'
-                            inputClass='!py-2  w-full !bg-transparent !border-none !outline-none !text-white  !text-xl md:!text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 '
+                            inputClass='!py-2  w-full !bg-transparent !border-none !outline-none !w-full !text-white !text-xl md:!text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 '
                             inputExtraProps={{
                               ref,
                               required: true,
                               autoFocus: true
                             }}
-                            rules={{
-                                validate: (value) => isValidPhoneNumber(value)
-                              }}
                             country={"vn"}
                             enableSearch={true}
                             dropdownClass='text-black !max-h-[300px]'
@@ -71,12 +74,26 @@ const ContactForm = ({onSubmit,loading}) => {
                         )}
                     />
                 </div>
-                {errors.phone_number && <span className='text-red-400 mt-2 inline-block'>Phone number is required.</span>}
+                {errors.phone_number && <span className='text-red-400 mt-2 inline-block'>{errors.phone_number.message}</span>}
             </div>                   
             <div>
                 <label htmlFor='email' className='text-gray-300'>What's your email?</label>
-                <input type="email"id="email" {...register('email',{ required: true })}  className='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white text-xl md:text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 placeholder:text-2xl' placeholder='marvin_mckinney@gmail.com'/>
-                {errors.email && <span className='text-red-400 mt-2 inline-block'>Email is required.</span>}
+                <input 
+                    type="email"
+                    id="email" 
+                    {...register('email',
+                        { 
+                            required: 'Email is required' ,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Invalid email address."
+                              }
+                        }
+                    )}
+                    className='py-2 border-b-2 border-b-gray-500 w-full bg-transparent outline-none text-white text-xl md:text-3xl focus:border-teal-300 duration-300 mt-2 placeholder:text-gray-500 placeholder:text-2xl' 
+                    placeholder='marvin_mckinney@gmail.com'
+                />
+                {errors.email && <span className='text-red-400 mt-2 inline-block'>{errors.email.message}</span>}
             </div>                   
             <div>
                 <label htmlFor='note' className='text-gray-300'>Share your thoughts</label>

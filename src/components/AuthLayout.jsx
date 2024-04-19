@@ -1,6 +1,7 @@
 import React from 'react';
 import { TbArrowNarrowLeft } from 'react-icons/tb';
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 const AuthLayout = () => {
     return (
@@ -14,6 +15,7 @@ const AuthLayout = () => {
                     <Outlet></Outlet>      
                 </div>
             </div>
+            <Toaster/>
         </div>
     );
 }

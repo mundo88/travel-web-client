@@ -42,12 +42,15 @@ const TourDetail = () => {
     const [emojiOpen,setEmojiOpen] = useState(false)
 
     const [loadingContact,setLoadingSendContact] = useState(false)
-    const onSubmit =(contact,callbackRes)=>{
+    
+    const onSubmit = (contact,handleSuccess)=>{
         setLoadingSendContact(true)
         axiosInstance.post('orders/',{contact:contact,tour:tour.id}).then(res=>{
-            callbackRes(res.status,res.data.contact.username)
+            handleSuccess(`Hi ${res.data.contact.username}, thank for contacting us.`)
             setLoadingSendContact(false)
             closeModal()
+        }).catch(err=>{
+            setLoadingSendContact(false)
         })
     }
 

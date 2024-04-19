@@ -395,10 +395,10 @@ const MainSectionSeason = ()=>{
 
 const MainSectionContact = ({children})=>{
     const [loading,setLoading] = useState(false)
-    const onSubmit =(data,callbackRes)=>{
+    const onSubmit =(data,handleSuccess)=>{
         setLoading(true)
         axiosInstance.post('contacts/',data).then(res=>{
-            callbackRes(res.status,res.username)
+            handleSuccess(`Hi ${res.data.username}, thank for contacting us.`)
             setLoading(false)
         })
     }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import {  TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
 import { axiosInstance } from '../service/axiosInstance';
-import { Link, useParams, useSearchParams, } from 'react-router-dom';
+import { Link, useSearchParams, } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useRound from '../hooks/useRound';
 import { Navigation } from 'swiper/modules';
@@ -77,7 +77,7 @@ const TourCard = ({tour,galleryShow}) =>{
 const TourList = () => {
     const [categories,setCategories] = useState(null)
     const [tours,setTours]= useState([])
-    const [galleryShow,setGalleryShow] = useState(true)
+    const [galleryShow,setGalleryShow] = useState(false)
     const [searchDestination,setSearchDestination] = useState([])
     const [next,setNext] = useState(null)
     const [loading,setLoading] = useState(false)
