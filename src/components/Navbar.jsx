@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from "../assets/images/logo.png"
 import line from "../assets/images/SVG/line.svg"
 import { NavHashLink } from 'react-router-hash-link';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { TbArticle, TbCompass, TbHeart, TbHome, TbLogin, TbLogin2, TbLogout, TbMapPin, TbMenu2,  TbSearch, TbSettingsFilled, TbUser, TbX } from 'react-icons/tb';
 import Dropdown from './Dropdown';
 import { IoLogIn, IoLogOut } from 'react-icons/io5';
@@ -16,7 +16,9 @@ const Navbar = () => {
     const [loading, setLoading] = useState(false)
     const {currentUser} = useAuth()
     const [show, setShow] = useState();
+    const location = useLocation();
     const logout = useLogout()
+    const {viewportWidth} = useViewport()
     const onLogout = async() =>{
         setLoading(true)
         await logout()
@@ -28,8 +30,9 @@ const Navbar = () => {
             document.body.classList.remove('overflow-hidden')
         }
     },[show])
-    const {viewportWidth} = useViewport()
-
+    useEffect(() => {
+        setShow(false)
+    }, [location])
     return (
         <>
             <div className='w-full bg-main text-white relative z-50'>
@@ -134,7 +137,7 @@ const Navbar = () => {
                                     <div className="w-8 h-8 overflow-hidden rounded-full border border-teal-900">
                                         <img src={ process.env.REACT_APP_SERVER_URL + currentUser.avatar} alt={`Ảnh đại diện ${currentUser.username} `} className='h-full w-full object-cover' />
                                     </div>
-                                    <div className='text-gray-200 font-semibold ml-4'>
+                                    <div className='text-gray-200 font-semibold ml-4 truncate max-w-44'>
                                         {currentUser.username}
                                     </div>
                                 </div>
