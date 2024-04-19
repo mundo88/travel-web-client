@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { axiosInstance }  from "../../service/axiosInstance"
 import { Link } from 'react-router-dom';
 import ContactForm from '../form/ContactForm';
+import { Toaster } from 'react-hot-toast';
 
 const MainSection = ({children}) => {
     return (
@@ -412,6 +413,7 @@ const MainSectionContact = ({children})=>{
                     <ContactForm onSubmit={onSubmit} loading={loading}/>
                 </div>
             </div>
+            <Toaster></Toaster>
         </>
     )
 }
