@@ -342,9 +342,9 @@ const MainSectionArticle =()=>{
                 ))}
             </div>
             <div className='m-auto mt-8 flex justify-center'>
-                <button className='w-fit text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>
+                <Link to={"/articles"} className='w-fit text-md font-semibold px-8 py-2 hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>
                     /View all
-                </button>
+                </Link>
             </div>
         </>
     )
@@ -398,7 +398,7 @@ const MainSectionContact = ({children})=>{
     const onSubmit =(data,callbackRes)=>{
         setLoading(true)
         axiosInstance.post('contacts/',data).then(res=>{
-            callbackRes(res)
+            callbackRes(res.status,res.username)
             setLoading(false)
         })
     }

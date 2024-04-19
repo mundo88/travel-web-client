@@ -41,6 +41,16 @@ const TourDetail = () => {
 
     const [emojiOpen,setEmojiOpen] = useState(false)
 
+    const [loadingContact,setLoadingSendContact] = useState(false)
+    const onSubmit =(contact,callbackRes)=>{
+        setLoadingSendContact(true)
+        axiosInstance.post('orders/',{contact:contact,tour:tour.id}).then(res=>{
+            callbackRes(res.status,res.data.contact.username)
+            setLoadingSendContact(false)
+            closeModal()
+        })
+    }
+
     const r=(n,p=1)=>(e=>((n*e)+.5|0)/e)(10**p) // 37 bytes
 
     function openModal() {
@@ -475,15 +485,17 @@ const TourDetail = () => {
                     <button className='absolute top-0 right-0 p-4'>
                         <IoClose size={36} className="text-gray-500 hover:text-gray-200 duration-150" onClick={closeModal}></IoClose>
                     </button>
-                    <ContactForm></ContactForm>
+                    <ContactForm onSubmit={onSubmit} loading={loadingContact}/>
                 </div>
             </Modal>}     
-            {galleryView && <Modal show={galleryView} onClose={closeGalleryView}>
+                {galleryView  && 
+                <Modal show={galleryView} onClose={closeGalleryView}>
                     <button className='absolute top-0 right-0 p-4 z-50'>
                         <IoClose size={36} className="text-gray-200 duration-150" onClick={closeGalleryView}></IoClose>
                     </button>
-                <GalleryImage attachments={tour.attachments}></GalleryImage>
-            </Modal>}
+                    <GalleryImage attachments={tour.attachments}></GalleryImage>
+                </Modal>
+            }
         </>
     );
 }

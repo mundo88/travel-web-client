@@ -147,15 +147,15 @@ const Navbar = () => {
                             <TbHome size={20}></TbHome>
                             <span>Home</span>
                         </Link>
-                        <Link to='/#desination' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
+                        <Link to='/tours' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <TbMapPin size={20}></TbMapPin>
                             <span>Destination</span>
                         </Link>
-                        <Link to='/#featured' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
+                        <Link to='/tours' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <MdOutlineFeaturedPlayList size={20}></MdOutlineFeaturedPlayList>
                             <span>Featured</span>
                         </Link>
-                        <Link to={'/#explore'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
+                        <Link to={'/tours'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <TbCompass size={20}></TbCompass>
                             <span>Explore</span>
                         </Link>
