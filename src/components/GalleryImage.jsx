@@ -64,13 +64,26 @@ const GalleryImage = ({attachments}) => {
             </div>
             <div className="w-full overflow-hidden flex items-center justify-center pb-4 relative z-20">
                 <div className='container m-auto flex items-center justify-center h-20 px-4 md:px-0'>
+                  
                     <Swiper
                         onSwiper={setThumbsSwiper}
-                        slidesPerView={attachments.length}
                         modules={[ Thumbs]}
                         className='w-full h-full'
                         spaceBetween={10}
                         centerInsufficientSlide={true}
+                        breakpoints={
+                            {
+                                390: {
+                                    slidesPerView: 5  
+                                },
+                                768: {
+                                    slidesPerView: 6  
+                                },
+                                1024: {
+                                    slidesPerView: attachments.length < 10 ? attachments.length : 10  
+                                }
+                            }
+                        }
                     >
                         {attachments.map((attachment,key)=>(
                             <SwiperSlide className='w-full h-full'>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { axiosInstance, axiosPrivateInstance } from '../service/axiosInstance';
-import { ScrollRestoration, useLocation, useParams } from 'react-router-dom';
+import {  useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { TbBookmark, TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader, TbLoader2, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
+import { TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader2, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { HiOutlineCheck } from "react-icons/hi";
 import { PiBowlFoodLight, PiCarProfileLight, PiMoney } from "react-icons/pi";
@@ -97,7 +97,7 @@ const TourDetail = () => {
             setTour(res.data)
             axiosInstance.get("tours/?"+ setTagsSearchQuery(res.data.tags)).then(res=>{
                 if (res.data.results.length===0){
-                    axiosInstance.get('articles/?page_size=3&ordering=-id').then(res=>{
+                    axiosInstance.get('tours/?page_size=3&ordering=-id').then(res=>{
                         setRelatedTours(res.data.results)
                     })
                 }else{
@@ -133,6 +133,7 @@ const TourDetail = () => {
                                 <TbHeart size={24}></TbHeart> 
                             </button>
                         </div>
+                        
                         <div className='flex items-center md:gap-8 gap-4 text-gray-400'>
                             <div className='flex gap-1 items-center hover:text-gray-200 duration-150 text-xs md:text-sm'>
                                 <TbEye  size={20}/>
@@ -407,7 +408,7 @@ const TourDetail = () => {
                 </div>
                 <div className="container mx-auto md:mt-24 mt-12 px-4 md:px-0">
                     <HeaderTitle title={"Có thể bạn sẽ thích"} desciption={"Take a look the best places"}></HeaderTitle>
-                    <div className='mb-24 relative flex items-center flex-col justify-center'>
+                    <div className='md:mb-24 mb-44 relative flex items-center flex-col justify-center'>
                         <div className='grid md:grid-cols-3 grid-cols-1 gap-12 mt-12'>
                             {relatedTours && relatedTours.slice(0,3).map((tour,key)=>(
                                 <div key={key}>
@@ -420,52 +421,54 @@ const TourDetail = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="sticky bottom-0 w-full z-40 hidden">
-                    <div className=' duration-300 transition-opacity rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 '>
-                        <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
-                            <TbMapPin size={'36'}></TbMapPin> 
-                            <div className='flex flex-col'>
-                                <span className='text-sm'>Destination</span>
-                                <span className='text-lg'>{tour.destination.name}</span>
+                <div className="md:sticky fixed bottom-0 w-full z-40">
+                    <div className='duration-300 transition-opacity rounded-lg py-4 px-4 backdrop-blur-xl flex flex-col md:flex-row justify-between items-center gap-4'>
+                        <div className='md:flex grid grid-cols-2 justify-between items-center gap-4 w-full'>
+                            <div className='flex items-center gap-4 md:p-2 text-white md:hover:bg-white/15 duration-300 w-full'>
+                                <TbMapPin size={'36'}></TbMapPin> 
+                                <div className='flex flex-col'>
+                                    <span className='text-xs md:text-sm'>Destination</span>
+                                    <span className='md:text-lg text-sm truncate md:max-w-none max-w-[119px]'>{tour.destination.name}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div className='h-8 w-0.5 bg-gray-400'></div>
-                        <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
-                            <TbSend size={'36'}></TbSend> 
-                            <div className='flex flex-col'>
-                                <span className='text-sm'>Transport</span>
-                                <span className='text-lg'>{tour.transport}</span>
+                            <div className='h-8 w-0.5 bg-gray-400 hidden md:block'></div>
+                            <div className='flex items-center gap-4 md:p-2 text-white md:hover:bg-white/15 duration-300 w-full'>
+                                <TbSend size={'36'}></TbSend> 
+                                <div className='flex flex-col'>
+                                    <span className='text-xs md:text-sm'>Transport</span>
+                                    <span className='md:text-lg text-sm truncate md:max-w-none max-w-[119px]'>{tour.transport}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div className='h-8 w-0.5 bg-gray-400'></div>
-                        <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
-                            <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
-                            <div className='flex flex-col'>
-                                <span className='text-sm'>Price</span>
-                                <span className='text-lg'>{tour.price.toLocaleString("en-US",{style:"currency",currency:'USD'})}</span>
+                            <div className='h-8 w-0.5 bg-gray-400 hidden md:block'></div>
+                            <div className='flex items-center gap-4 md:p-2 text-white md:hover:bg-white/15 duration-300 w-full'>
+                                <MdOutlineAttachMoney size={'36'}></MdOutlineAttachMoney> 
+                                <div className='flex flex-col'>
+                                    <span className='text-xs md:text-sm'>Price</span>
+                                    <span className='md:text-lg text-sm truncate md:max-w-none max-w-[119px]'>{tour.price.toLocaleString("en-US",{style:"currency",currency:'USD'})}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div className='h-8 w-0.5 bg-gray-400'></div>
-                        <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
-                            <TbCalendarEvent size={'36'}></TbCalendarEvent> 
-                            <div className='flex flex-col'>
-                                <span className='text-sm'>Time</span>
-                                <span className='text-lg'>{tour.time}</span>
+                            <div className='h-8 w-0.5 bg-gray-400 hidden md:block'></div>
+                            <div className='flex items-center gap-4 md:p-2 text-white md:hover:bg-white/15 duration-300 w-full'>
+                                <TbCalendarEvent size={'36'}></TbCalendarEvent> 
+                                <div className='flex flex-col'>
+                                    <span className='text-xs md:text-sm'>Time</span>
+                                    <span className='md:text-lg text-sm truncate md:max-w-none max-w-[119px]'>{tour.time}</span>
+                                </div>
                             </div>
+                            <div className='h-8 w-0.5 bg-gray-400 hidden md:block'></div>
                         </div>
-                        <div className='h-8 w-0.5 bg-gray-400'></div>
-                        <button  onClick={openModal} className='ml-2 text-2xl font-semibold hover:bg-teal-400 px-4 py-4 text-black bg-teal-300 duration-300 w-full text-center active:scale-95'>
-                            <span>Book now</span>
+                        <button onClick={openModal} className='ml-2 text-2xl font-semibold hover:bg-teal-400 md:w-1/5 w-full px-4 py-4 text-black bg-teal-300 duration-300 text-center active:scale-95'>
+                            <span className='whitespace-nowrap'>Book now</span>
                         </button>
                     </div>
                 </div>
             </div> }  
             {modalIsOpen && <Modal show={modalIsOpen} onClose={closeModal}>
-                <div className=' bg-teal-950 p-16 relative'>
+                <div className=' bg-teal-950 md:p-16 p-4 flex flex-col justify-center relative w-full h-full'>
                     <div className="mb-12 flex gap-4 items-center">
                         <img src={tour.thumbnail} alt=""  className='h-16 w-auto'/>
                         <div className="flex flex-col">
-                            <span className='text-lg truncate text-gray-200'>{tour.name}</span>
+                            <span className='text-lg text-gray-200'>{tour.name}</span>
                             <span className='text-md mt-1 text-gray-300'>{tour.schedule}</span>
                         </div>
                     </div>

@@ -60,16 +60,15 @@ const MainSectionCity =({children,props})=>{
                             nextEl: ".next-city",
                             prevEl: ".prev-city",
                             disabledClass: "swiper-disabled"
-                        }}
-                        cont>
+                        }}>
                     {destinations && destinations.map((destination,key)=>(
                         <SwiperSlide className=' md:even:mt-16'>
-                            <div className='flex flex-col gap-6 w-full overflow-hidden group'>
+                            <Link to={"/tours?destination="+destination.id} className='flex flex-col gap-6 w-full overflow-hidden group'>
                                 <div className='w-full h-auto aspect-square overflow-hidden shadow-md shadow-black'>
                                     <img src={destination.thumbnail} alt="" className='w-full h-full object-cover' />
                                 </div>
                                 <p className='text-3xl uppercase text-gray-500 group-hover:text-white text-center duration-300 font-bold truncate px-6'>{destination.name}</p>
-                            </div>
+                            </Link>
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -314,7 +313,7 @@ const MainSectionArticle =()=>{
                                 <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-4 md:text-sm text-gray-300">
                                     {article.description}
                                 </div>
-                                <Link to={"/article/"+article.id} className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
+                                <Link to={"/articles/"+article.id} className='w-full text-md font-semibold px-8 py-2  hover:bg-black/60 text-white duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                             </div>
                         </div>
                     </div>:
@@ -329,7 +328,7 @@ const MainSectionArticle =()=>{
                                     <div className="mt-1 mb-4 text-xs line-clamp-2 md:line-clamp-4 md:text-sm text-gray-800 ">
                                         {article.description}
                                     </div>
-                                    <Link to={"/article/"+article.id} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
+                                    <Link to={"/articles/"+article.id} className='w-full text-md font-semibold px-8 py-2 hover:bg-white/20 text-black duration-300 text-center active:scale-95 border-2 border-teal-400'>View detail</Link>
                                 </div>
                                 <div className='h-full relative md:block hidden'>
                                     <img src={AssetImg3} alt="" className='w-2/3 h-auto object-cover absolute -bottom-12 -right-12' />
@@ -395,6 +394,14 @@ const MainSectionSeason = ()=>{
 
 
 const MainSectionContact = ({children})=>{
+    const [loading,setLoading] = useState(false)
+    const onSubmit =(data,callbackRes)=>{
+        setLoading(true)
+        axiosInstance.post('contacts/',data).then(res=>{
+            callbackRes(res)
+            setLoading(false)
+        })
+    }
     return (
         <>
             <div className="grid md:grid-cols-2 md:gap-24 gap-8 items-center">
@@ -402,7 +409,7 @@ const MainSectionContact = ({children})=>{
                     <ContactContent/>
                 </div>
                 <div className='flex flex-col justify-between pt-0 px-4 md:px-0 md:pt-12'>
-                    <ContactForm/>
+                    <ContactForm onSubmit={onSubmit} loading={loading}/>
                 </div>
             </div>
         </>

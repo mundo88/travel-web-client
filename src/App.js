@@ -4,7 +4,8 @@ import "./assets/css/index.css"
 import Home from "./pages/Home";
 import TourDetail from "./pages/TourDetail";
 import TouchList from "./pages/TourList"
-import Article from "./pages/Article";
+import ArticleDetail from "./pages/ArticleDetail";
+import ArticleList from "./pages/ArticleList"
 import Contact from "./pages/Contact";
 import AuthLayout from "./components/AuthLayout";
 import Login from "./pages/Login";
@@ -13,6 +14,7 @@ import  { AnonymousMiddleware } from './middleware/Auth';
 import PersistLogin from './middleware/PersistLogin';
 import Layout from "./components/Layout";
  
+
 function App() {
   return (
       <Routes>
@@ -22,7 +24,8 @@ function App() {
             <Route path="/contact" element={<Contact/> }></Route>
             <Route path="/tours/:id" element={<TourDetail/>}></Route>
             <Route path="/tours" element={<TouchList/>}></Route>
-            <Route path="/article/:id" element={<Article/>}></Route>
+            <Route path="/articles/:id" element={<ArticleDetail/>}></Route>
+            <Route path="/articles" element={<ArticleList/>}></Route>
           </Route>
           <Route element={<AnonymousMiddleware/>}>
             <Route element={<AuthLayout/>}>

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import {  TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
 import { axiosInstance } from '../service/axiosInstance';
-import { Link, } from 'react-router-dom';
+import { Link, useParams, useSearchParams, } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useRound from '../hooks/useRound';
 import { Navigation } from 'swiper/modules';
 import { VscEmptyWindow } from 'react-icons/vsc';
+
 
 const TourCard = ({tour,galleryShow}) =>{
     const round = useRound()
@@ -16,10 +17,10 @@ const TourCard = ({tour,galleryShow}) =>{
             <div className="w-full h-auto aspect-square overflow-hidden relative group/tour">
             {galleryShow?
                 <>
-                    <button className={`prev-${tour.id} absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
+                    <button className={`prev-${tour.id} absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next md:opacity-0 group-hover/tour:opacity-100 z-20`}>
                         <TbChevronLeft size={24}></TbChevronLeft>
                     </button>
-                    <button className={`next-${tour.id} absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next opacity-0 group-hover/tour:opacity-100 z-20`}>
+                    <button className={`next-${tour.id} absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next md:opacity-0 group-hover/tour:opacity-100 z-20`}>
                         <TbChevronRight size={24}></TbChevronRight>
                     </button>
                     
@@ -80,7 +81,7 @@ const TourList = () => {
     const [searchDestination,setSearchDestination] = useState([])
     const [next,setNext] = useState(null)
     const [loading,setLoading] = useState(false)
-
+    const [params,setParams] = useSearchParams()
 
     const tourApi = "tours/?page_size=15&ordering=-id&"
 
@@ -94,15 +95,14 @@ const TourList = () => {
         })
     }
     const searchTours = ()=>{
-        if (searchDestination) {
-            setLoading(true)
-            setTours([])
-            axiosInstance.get(tourApi+'search='+searchDestination).then(res=>{
-                setTours(res.data.results)
-                setNext(res.data.next)
-                setLoading(false)
-            })
-        }
+        setLoading(true)
+        setTours([])
+        axiosInstance.get(tourApi+'search='+searchDestination).then(res=>{
+            setTours(res.data.results)
+            setNext(res.data.next)
+            setLoading(false)
+            window.scrollTo(0,0)
+        })
     }
     const handleNext= ()=>{
         axiosInstance.get(next).then(res=>{
@@ -112,7 +112,9 @@ const TourList = () => {
     }
     useEffect(() => {
         const sendSearchRequest = setTimeout(() => {
-            searchTours()
+            if (searchDestination && searchDestination.length > 2) {
+                searchTours()
+            }
         }, 500);
         return () => clearTimeout(sendSearchRequest);
       }, [searchDestination]);
@@ -122,7 +124,7 @@ const TourList = () => {
         axiosInstance.get("categories/").then(res=>{
             setCategories(res.data)
         })
-        axiosInstance.get(tourApi).then(res=>{
+        axiosInstance.get(tourApi+params.toString()).then(res=>{
             setTours(res.data.results)
             setNext(res.data.next)
         })
@@ -137,64 +139,102 @@ const TourList = () => {
     }
     return (
         <div className='min-h-screen pb-24'>
-            <div className='bg-main '>
+            <div className='bg-main sticky -top-px z-40'>
                 <div className='w-full container mx-auto'>
-                    <div className='w-2/3 py-8 mx-auto'>
+                    <div className='md:w-2/3 md:py-8 py-4 mx-auto w-full md:px-0 px-4 flex items-center justify-center'>
                         <div className="flex items-center w-full relative bg-teal-900">
-                            <label className='text-gray-100 px-6 py-4 flex flex-col gap-1 w-full'>
-                                <span className='text-sm'>Destination</span>
+                            <label className='text-gray-100 md:px-6 px-4 py-4 flex flex-col gap-1 w-full'>
+                                <span className='text-sm hidden md:block'>Destination</span>
                                 <input value={searchDestination} onInput={(e)=>setSearchDestination(e.target.value)} type="text" className='text-md font-semibold bg-transparent outline-none placeholder:text-gray-100' placeholder='Search destination' name="" id=""/>
                             </label>
-                            <button onClick={searchTours} className='font-semibold mx-5 hover:bg-teal-400 h-12 w-12 min-w-12 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
-                                <TbSearch size={32}></TbSearch>
+                            <button onClick={searchTours} className='font-semibold mx-3 md:mx-5 hover:bg-teal-400 md:h-12 h-8 md:w-12 w-8 md:min-w-12 min-w-8 text-black bg-teal-300 duration-300 flex items-center justify-center active:scale-95'>
+                                <TbSearch className='w-6 h-6 md:w-8 md:h-8'></TbSearch>
                             </button>
-                        </div>            
+                        </div>          
+                        <button className='text-md relative md:text-lg flex md:hidden items-center font-semibold px-4 py-4 text-gray-200 duration-300 text-center active:scale-95'>
+                            <TbFilter size={24}></TbFilter>
+                            <span className='text-xs absolute bottom-3 right-px '>Lọc</span>
+                        </button>  
+                    </div>
+                </div>
+                <div className='md:py-3 py-1 shadow-xl px-4 md:px-24 flex items-center justify-center md:gap-6 gap-3 md:top-20 z-50 bg-main border-t border-t-teal-800 '>
+                    <button className={`prev-category [&.category-swiper-disabled]:text-gray-500 [&.category-swiper-disabled]:pointer-events-none md:min-w-10 md:w-10 h-10 backdrop-blur-lg flex items-center justify-center md:hover:bg-white md:hover:text-black text-white active:scale-95 duration-300`}>
+                        <TbChevronLeft size={24}></TbChevronLeft>
+                    </button>
+                    <Swiper 
+                        breakpoints={
+                            {
+                                390: {
+                                    slidesPerView: 4 ,
+                                    slidesPerGroup:4
+                                    
+                                },
+                                768: {
+                                    slidesPerView: 7,
+                                    slidesPerGroup:7
+                                },
+                                1024: {
+                                    slidesPerView: 12,
+                                    slidesPerGroup:12
+                                }
+                            }
+                        } 
+                        
+                        modules={[Navigation]}
+                        className='w-full' 
+                        spaceBetween={20}
+                        navigation={{
+                            nextEl: ".next-category",
+                            prevEl: '.prev-category',
+                            disabledClass: "category-swiper-disabled"
+                        }}
+                        >
+                        <SwiperSlide>
+                            <button onClick={()=>searchToursByCategory("")} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300'>
+                                <div className='flex items-center justify-center w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
+                                    <TbMenuOrder size={44}></TbMenuOrder>
+                                </div>
+                                <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>Tất cả</p>
+                            </button>
+                        </SwiperSlide>
+                        {categories && categories.map((category,key)=>(
+                        <SwiperSlide>
+                            <button onClick={()=>searchToursByCategory(category.id)} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
+                                <div className='w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
+                                    <img src={category.thumbnail} alt="" className='w-full h-full object-contain' />
+                                </div>
+                                <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>{category.title}</p>
+                            </button>
+                        </SwiperSlide>
+                        ))}
+                    </Swiper>
+                    <button className={`next-category [&.category-swiper-disabled]:text-gray-500 [&.category-swiper-disabled]:pointer-events-none md:min-w-10 md:w-10 h-10 backdrop-blur-lg flex items-center justify-center md:hover:bg-white md:hover:text-black text-white active:scale-95 duration-300`}>
+                        <TbChevronRight size={24}></TbChevronRight>
+                    </button>
+                    <button className='gap-3 text-md md:text-lg hidden md:flex items-center font-semibold md:px-6 px-3 py-2 text-white hover:bg-black/60 border-2 border-teal-200 duration-300 text-center active:scale-95'>
+                        <TbFilter size={24}></TbFilter>
+                        <span className='whitespace-nowrap'>Filter</span>
+                    </button>
+  
+                    <div className='gap-3 text-md md:text-lg md:flex hidden items-center font-semibold pl-6 pr-2 py-2 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center'>
+                        <span className='whitespace-nowrap'>Gallery</span>
+                        <label className='flex cursor-pointer select-none items-center'>
+                            <div className='relative'>
+                                <input
+                                    type='checkbox'
+                                    checked={galleryShow}
+                                    onChange={handleGalleryChange}
+                                    className='sr-only'
+                                />
+                                <div className='block md:h-7 h-6 w-14 border border-gray-500 focus:border-teal-300 bg-transparent'></div>
+                                <div className={` absolute top-1 md:h-5 md:w-5 h-4 w-4 duration-300 ${galleryShow ? "right-1 bg-teal-300" : "left-1 bg-gray-600"}`}></div>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>   
-            <div className='pt-3 pb-3 px-24 flex items-center justify-center gap-6 sticky top-20 z-10 bg-main border-t border-t-teal-800 '>
-                <Swiper slidesPerView={12} className='w-full' spaceBetween={20}>
-                    <SwiperSlide>
-                        <button onClick={()=>searchToursByCategory("")} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300'>
-                            <div className='flex items-center justify-center w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
-                                <TbMenuOrder size={44}></TbMenuOrder>
-                            </div>
-                            <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>Tất cả</p>
-                        </button>
-                    </SwiperSlide>
-                    {categories && categories.map((category,key)=>(
-                    <SwiperSlide>
-                        <button onClick={()=>searchToursByCategory(category.id)} className='flex flex-col items-center py-3 justify-center w-full max-w-full group border-b-2 hover:border-b-teal-300 border-transparent duration-300' key={key}>
-                            <div className='w-8 h-8 bg-teal-300 overflow-hidden p-1 hover:bg-teal-400 duration-300'>
-                                <img src={category.thumbnail} alt="" className='w-full h-full object-contain' />
-                            </div>
-                            <p className='text-gray-100 truncate text-sm mt-2 max-w-full'>{category.title}</p>
-                        </button>
-                    </SwiperSlide>
-                    ))}
-                </Swiper>
-                <button className='gap-3 mb-3 text-md md:text-lg flex items-center font-semibold md:px-6 px-3 py-2 text-white hover:bg-black/60 border-2 border-teal-200 duration-300 text-center active:scale-95'>
-                    <TbFilter size={24}></TbFilter>
-                    <span className='whitespace-nowrap'>Filter</span>
-                </button>
-                <div className='gap-3 mb-3 text-md md:text-lg flex items-center font-semibold pl-6 pr-2 py-2 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center'>
-                    <span className='whitespace-nowrap'>Gallery</span>
-                    <label className='flex cursor-pointer select-none items-center'>
-                        <div className='relative'>
-                            <input
-                                type='checkbox'
-                                checked={galleryShow}
-                                onChange={handleGalleryChange}
-                                className='sr-only'
-                            />
-                            <div className='block h-8 w-14 border border-gray-500 focus:border-teal-300 bg-transparent'></div>
-                            <div className={` absolute top-1 h-6 w-6  duration-300 ${galleryShow ? "right-1 bg-teal-300" : "left-1 bg-gray-600"}`}></div>
-                        </div>
-                    </label>
-                </div>
-            </div>
             {
-                tours.length && <div className="grid grid-cols-6 gap-8 px-24 mt-6">
+                tours.length && <div className="grid grid-cols-1 md:grid-cols-6 gap-8 md:px-24 px-4 mt-6">
                 {
                     tours.map((tour,key)=>(
                         <div key={key}>

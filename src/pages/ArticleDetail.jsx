@@ -14,7 +14,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 const ArticleCard = ({article}) => {
     return (
-        <Link to={'/article/'+article.id} className='flex flex-col gap-3 group/article' key={article.id}>
+        <Link to={'/articles/'+article.id} className='flex flex-col gap-3 group/article' key={article.id}>
             <div className="w-full aspect-video relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/60 group-hover/article:opacity-100 opacity-0 duration-300 z-20"></div>
                 <img className='w-full h-full object-cover group-hover/article:scale-110 duration-300' src={article.thumbnail} alt="" />
@@ -32,7 +32,7 @@ const ArticleCard = ({article}) => {
     )
 }
 
-const Article = () => {
+const ArticleDetail = () => {
     const { id } = useParams()
     const [comments,setComments] =useState(null)
     const [comment,setComment] =useState('')
@@ -121,36 +121,36 @@ const Article = () => {
     return (
         <>
             <div className='h-full bg-grey-50'>
-                <div className='container mx-auto py-24'>
-                    <div className="w-full flex gap-24">
+                <div className='container mx-auto py-12 md:py-24'>
+                    <div className="w-full flex gap-12 md:gap-24 md:flex-row flex-col">
                         <div className='flex items-start gap-10'>
-                            <div className="flex flex-col gap-2 mt-12 sticky top-28">
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                            <div className="flex flex-col gap-2 md:mt-12 mt-8 md:sticky fixed bottom-4 z-50 right-4 md:top-28 md:right-0">
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 bg-grey-50 hover:border-teal-500 hover:text-white w-10 md:w-14 h-10 md:h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandFacebookFilled className='relative z-10' size={24}></TbBrandFacebookFilled>
                                 </button>
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 bg-grey-50 hover:border-teal-500 hover:text-white w-10 md:w-14 h-10 md:h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandTiktokFilled  className='relative z-10' size={24}></TbBrandTiktokFilled>
                                 </button>
-                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 hover:border-teal-500 hover:text-white w-14 h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                <button className='flex items-center justify-center gap-2 font-semibold text-grey-800 bg-grey-50 hover:border-teal-500 hover:text-white w-10 md:w-14 h-10 md:h-14 border-grey-700 duration-300 text-center active:scale-95 border-2  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                     <TbBrandTwitterFilled  className='relative z-10' size={24}></TbBrandTwitterFilled>
                                 </button>
                                 <div className="flex flex-col items-center justify-center gap-2 font-semibold text-grey-800">
                                     
                                     {fullShare &&
-                                    <><button className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2  hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                    <><button className='flex items-center justify-center w-10 md:w-14 h-10 md:h-14 hover:border-teal-500 bg-grey-50 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                         <TbMailFilled  className='relative z-10' size={28}></TbMailFilled>
                                     </button>
-                                    <button className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                    <button className='flex items-center justify-center w-10 md:w-14 h-10 md:h-14 hover:border-teal-500 bg-grey-50 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                         <TbLink onClick={() => {navigator.clipboard.writeText(window.location.href)}} className='relative z-10' size={28}></TbLink>
                                     </button></>}
-                                    <button onClick={()=>setFullShare(!fullShare)} className='flex items-center justify-center w-14 h-14 hover:border-teal-500 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
+                                    <button onClick={()=>setFullShare(!fullShare)} className='flex items-center bg-grey-50 justify-center w-10 md:w-14 h-10 md:h-14 hover:border-teal-500 border-2 hover:text-white border-grey-700 duration-300 text-center active:scale-95  after:absolute after:bottom-0 after:left-0 after:right-0 hover:after:h-full after:h-0 after:z-0 after:duration-150 after:bg-teal-500 relative'>
                                         <TbDots className='relative z-10' size={28}></TbDots>
                                     </button>
                                 </div>
                             </div>
                             {article &&
                                 <div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-2 px-4 md:px-0">
                                         <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
                                             Du lịch
                                         </span>
@@ -161,8 +161,8 @@ const Article = () => {
                                             Phú Quốc
                                         </span>
                                     </div>
-                                    <h1 className='text-gray-800 text-4xl font-bold mt-4'>{article.title}</h1>
-                                    <div className="mt-6 flex items-center gap-1">
+                                    <h1 className='text-gray-800 md:text-4xl text-2xl font-bold mt-2 md:mt-4 px-4 md:px-0'>{article.title}</h1>
+                                    <div className="md:mt-6 mt-2 flex items-center gap-1 px-4 md:px-0">
                                         <TbTimeline size={24} className='text-teal-700'></TbTimeline>
                                         <span className='font-bold text-lg text-grey-800'>{new Date(article.updated_at).toLocaleDateString('vi-VN')}</span>
                                         <div className="flex items-center gap-1 ml-4 hover:underline">
@@ -178,15 +178,15 @@ const Article = () => {
                                             <span className='font-bold text-lg text-grey-800'>14</span>
                                         </div>
                                     </div>
-                                    <div className="mt-12">
+                                    <div className="md:mt-12 mt-6">
                                         <img src={article.thumbnail} alt="" />
                                     </div>
-                                    <div className="mt-12">
-                                        <span className='whitespace-pre-wrap text-grey-800 text-xl leading-9 article'>
+                                    <div className="md:mt-12 mt-6">
+                                        <div className='whitespace-pre-wrap text-grey-800 text-md md:text-xl leading-9 article px-4 md:px-0'>
                                             {parse(article.content)}
-                                        </span>
+                                        </div>
                                     </div>
-                                    <div className="flex-1 mt-24" id='comment'>
+                                    <div className="flex-1 md:mt-24 mt-12 md:px-0 px-4" id='comment'>
                                         <div className="flex items-center justify-between w-full">
                                             <div className="text-2xl text-grey-800">
                                                 {commentsCount} comments
@@ -196,8 +196,8 @@ const Article = () => {
                                                 <TbChevronDown></TbChevronDown>
                                             </button>
                                         </div>
-                                        <div className='my-10 w-full'>
-                                            <div className="flex items-center gap-4">
+                                        <div className='my-10 w-full '>
+                                            <div className="flex items-center gap-2 md:gap-4 w-full">
                                                 <div className="w-12 h-12 min-w-12 overflow-hidden aspect-square border border-grey-500 rounded-full">
                                                     <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className=' w-full h-full object-cover' alt="" />
                                                 </div>
@@ -207,7 +207,6 @@ const Article = () => {
                                                         <button onClick={handleOpenEmoji} className='hover:text-grey-800'>
                                                             <TbMoodSmile size={24}></TbMoodSmile>
                                                         </button>
-                                                        
                                                         <button className='hover:text-grey-800'>
                                                             <TbPhoto size={24}></TbPhoto>
                                                         </button>
@@ -218,9 +217,11 @@ const Article = () => {
                                                         </OutsideClickHandler>
                                                     </div>
                                                 </div>
-                                                <button onClick={handlePostComment} className={`text-md font-semibold px-8 duration-300 text-center active:scale-95 h-12 ${comment || commentLoading ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
-                                                    <span>Post</span>
-                                                </button>
+                                                <div>
+                                                    <button onClick={handlePostComment} className={`text-md font-semibold px-2 md:px-8 duration-300 text-center active:scale-95 h-12 ${comment || commentLoading ? 'hover:bg-teal-800 text-white bg-teal-700' : 'pointer-events-none text-grey-500 bg-grey-300' }`}>
+                                                        <span>Post</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className='flex flex-col gap-10'>
@@ -278,7 +279,7 @@ const Article = () => {
                                 </div> 
                             }
                         </div>
-                        <div className="min-w-96">
+                        <div className="md:min-w-96 px-4 md:px-0">
                             <div className='text-gray-800 text-4xl font-bold relative'>
                                 Latest News
                                 <div className="absolute w-full -bottom-4 left-0">
@@ -293,9 +294,8 @@ const Article = () => {
                                 ))}
                             </div>
                         </div>
-                    
                     </div>
-                    <div className='mt-24'>
+                    <div className='md:mt-24 mt-12 px-4 md:px-0'>
                         <div className='flex flex-col'>
                                 <div className='flex items-center justify-between w-full'>
                                 <div className='text-gray-800 text-4xl font-bold relative w-fit'>
@@ -306,7 +306,7 @@ const Article = () => {
                                 </div>
                                 <button className="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</button>
                                 </div>
-                            <div className="grid grid-cols-3 gap-8 mt-12">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:mt-12 mt-8">
                                 {relatedArticles && relatedArticles.slice(0,3).map((latestArticle,key)=>(
                                     <div key={key}>
                                         <ArticleCard article={latestArticle} />
@@ -324,7 +324,7 @@ const Article = () => {
                                 </div>
                                 <Link to={"/tours"} className="text-md font-semibold px-8 py-2 text-grey-800 duration-300 text-center active:scale-95 border border-grey-500 hover:border-teal-700">/View all</Link>
                                 </div>
-                            <div className="grid grid-cols-3 gap-8 mt-12">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:mt-12 mt-8">
                                 {relatedTours && relatedTours.slice(0,3).map((tour,key)=>(
                                     <div key={key}>
                                         <TourCard tour={tour}></TourCard>
@@ -339,4 +339,4 @@ const Article = () => {
     );
 }
 
-export default Article;
+export default ArticleDetail;

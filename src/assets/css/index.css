@@ -27,7 +27,11 @@
     .article figure.attachment{
         @apply my-6
     }
+    .article img{
+        @apply w-full h-auto object-contain
+    }
     .article h4 {
         @apply font-semibold my-1
     }
+
 }
