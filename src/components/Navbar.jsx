@@ -113,7 +113,6 @@ const Navbar = () => {
                                         </Dropdown.ItemText>
                                     </Dropdown.Item>
                                 }
-                                
                             </Dropdown.Container>
                         </Dropdown> 
                     </div>
@@ -187,7 +186,7 @@ const Navbar = () => {
                             :
                             <Link to={'/login'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                                 <TbLogin2 size={20}></TbLogin2>
-                                <span>Logout</span>
+                                <span>Login</span>
                             </Link>
                         }
                     </div>       
