@@ -138,7 +138,7 @@ const TourDetail = () => {
         <>
             {tour &&
             <div>
-                 <Meta title={tour.name} description={tour.about} thumbnail={tour.thumbnail}></Meta>
+                 <Meta title={tour.name} description={tour.about.slice(0,160)} thumbnail={tour.thumbnail}></Meta>
                 <div className='container m-auto relative md:pt-12 pt-6'>
                     <div className="flex flex-col md:mb-8 mb-4 px-4 md:px-0">
                         <div className="flex justify-between items-center md:mb-4 mb-2">

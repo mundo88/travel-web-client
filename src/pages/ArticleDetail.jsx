@@ -151,7 +151,7 @@ const ArticleDetail = () => {
                             </div>
                             {article &&
                                 <div>
-                                    <Meta title={article.title} description={article.description} thumbnail={article.thumbnail}></Meta>
+                                    <Meta title={article.title} description={article.description.slice(0,160)} thumbnail={article.thumbnail}></Meta>
                                     <div className="flex items-center gap-2 px-4 md:px-0">
                                         <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
                                             Du lịch
