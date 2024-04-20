@@ -13,6 +13,7 @@ const Favourite = () => {
             })
         }
     },[tourIdArr])
+
     return (
         <div className='min-h-screen pb-24'>
             <h2 className='text-3xl font-bold text-gray-100 mb-2 md:px-0 px-4 text-center w-full mt-12'>Favourites Tours</h2>
