@@ -71,9 +71,9 @@ const Navbar = () => {
                         <Link to={"/tours"} className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                             <TbSearch size={24}></TbSearch>
                         </Link>
-                        <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
+                        <Link to={"/favourites"} className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                             <TbHeart size={24}></TbHeart>
-                        </button>
+                        </Link>
                         <Dropdown className='relative'>
                             <Dropdown.Button>
                                 {currentUser.id ?
@@ -86,15 +86,6 @@ const Navbar = () => {
                                 }
                             </Dropdown.Button>
                             <Dropdown.Container postion='bottom-left' className='mt-2 max-w-xs w-56 p-2 bg-teal-800 '>
-                                {/* <Dropdown.Item>
-                                    <Dropdown.ItemIcon>
-                                        <TbSettingsFilled size={18} />
-                                    </Dropdown.ItemIcon>
-                                    <Dropdown.ItemText>
-                                        Cài đặt
-                                    </Dropdown.ItemText>
-                                </Dropdown.Item>
-                                <Dropdown.Separator/> */}
                                 {currentUser.id ?
                                     <Dropdown.Item onClick={onLogout}>
                                         <Dropdown.ItemIcon>
@@ -173,9 +164,9 @@ const Navbar = () => {
                             <TbSearch size={20}></TbSearch>
                             <span>Search</span>
                         </Link>
-                        <Link to={'/favourited'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
+                        <Link to={'/favourites'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <TbHeart size={20}></TbHeart>
-                            <span>Favourited</span>
+                            <span>Favourites</span>
                         </Link>
                         <div className='w-full h-px bg-teal-900'></div>
                         {currentUser.id ? 

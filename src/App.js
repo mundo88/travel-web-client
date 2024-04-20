@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import  { AnonymousMiddleware } from './middleware/Auth';
 import PersistLogin from './middleware/PersistLogin';
 import Layout from "./components/Layout";
+import Favourite from "./pages/Favourite";
  
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/tours" element={<TouchList/>}></Route>
             <Route path="/articles/:id" element={<ArticleDetail/>}></Route>
             <Route path="/articles" element={<ArticleList/>}></Route>
+            <Route path="/favourites" element={<Favourite/>}></Route>
           </Route>
           <Route element={<AnonymousMiddleware/>}>
             <Route element={<AuthLayout/>}>

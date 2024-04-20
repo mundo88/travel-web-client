@@ -6,7 +6,7 @@ import { TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader2, TbMapPin, Tb
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { HiOutlineCheck } from "react-icons/hi";
 import { PiBowlFoodLight, PiCarProfileLight, PiMoney } from "react-icons/pi";
-import {TourCard} from "../components/section/MainSection"
+import { TourCard } from '../components/TourCard';
 import HeaderTitle from '../components/section/HeaderTitle';
 import Modal from "../components/Modal"
 import  ContactForm  from '../components/form/ContactForm';
@@ -21,6 +21,10 @@ import EmojiPicker from 'emoji-picker-react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Meta from '../components/Meta';
+import { useLocalStorage } from 'usehooks-ts';
+import toast from 'react-hot-toast';
+import CustomToast from '../components/CustomToast';
+import FavouriteTourButton from '../components/FavouriteTourButton';
 
 
 const TourDetail = () => {
@@ -28,7 +32,6 @@ const TourDetail = () => {
     const { id } = useParams()
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {setIsReadMore(!isReadMore)};
-    const [tours,setTours]= useState([])
     const [reviews,setReviews]= useState([])
     const [reviewCount,setReviewCount]= useState(null)
     const [reviewNext,setReviewNext]= useState(null)
@@ -45,6 +48,7 @@ const TourDetail = () => {
 
     const [loadingContact,setLoadingSendContact] = useState(false)
     const axiosPrivateInstance = useAxiosPrivate()
+
     const onSubmit = (contact,handleSuccess)=>{
         setLoadingSendContact(true)
         axiosInstance.post('orders/',{contact:contact,tour:tour.id}).then(res=>{
@@ -119,13 +123,6 @@ const TourDetail = () => {
                     setRelatedTours(res.data.results)
                 }
             })
-            
-        })
-        axiosInstance.get('tours/').then(res=>{
-            setTours(res.data.results)
-        })
-        axiosInstance.get('tours/').then(res=>{
-            setTours(res.data.results)
         })
         axiosInstance.get(`reviews/?tour=${id}&page_size=5&page=1&ordering=-id`).then(res=>{
             setReviews(res.data.results)
@@ -138,16 +135,14 @@ const TourDetail = () => {
         <>
             {tour &&
             <div>
-                 <Meta title={tour.name} description={tour.about.slice(0,160)} thumbnail={tour.thumbnail}></Meta>
+                <Meta title={tour.name} description={tour.about.slice(0,160)} thumbnail={tour.thumbnail}></Meta>
                 <div className='container m-auto relative md:pt-12 pt-6'>
                     <div className="flex flex-col md:mb-8 mb-4 px-4 md:px-0">
                         <div className="flex justify-between items-center md:mb-4 mb-2">
                             <h2 className='text-gray-100 text-xl md:text-4xl'>
                                 {tour.name}
                             </h2>
-                            <button className='text-gray-300 hover:text-teal-300 duration-150'>
-                                <TbHeart size={24}></TbHeart> 
-                            </button>
+                            <FavouriteTourButton tourId={tour.id}/>
                         </div>
                         
                         <div className='flex items-center md:gap-8 gap-4 text-gray-400'>

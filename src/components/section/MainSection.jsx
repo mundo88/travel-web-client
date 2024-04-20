@@ -13,6 +13,7 @@ import { axiosInstance }  from "../../service/axiosInstance"
 import { Link } from 'react-router-dom';
 import ContactForm from '../form/ContactForm';
 import { Toaster } from 'react-hot-toast';
+import { TourCard } from '../TourCard';
 
 const MainSection = ({children}) => {
     return (
@@ -79,25 +80,7 @@ const MainSectionCity =({children,props})=>{
 }
 
 
-const TourCard = ({tour})=>{
-    return(
-        <Link to={"/tours/"+tour.id} className='flex items-end gap-4 w-full aspect-video overflow-hidden group'>
-            <div style={{writingMode:"vertical-rl"}} className='rotate-180 uppercase text-gray-500 text-lg md:md:text-3xl font-bold group-hover:text-white duration-300 truncate'>{tour.destination.name}</div>
-            <div className='w-full h-full relative'>
-                <div className='absolute bg-black/70 p-8 flex flex-col items-center justify-center inset-0 gap-4 opacity-0 group-hover:opacity-100 duration-300'>
-                    <div className="text-white text-xl font-semibold truncate max-w-full">
-                        {tour.name}
-                    </div>
-                    <div className='flex items-center justify-center gap-4'>
-                        <button className='w-fit text-md md:text-xl font-semibold md:px-8 px-3 md:py-3 py-2 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Detail</button>
-                        <button className='w-fit text-md md:text-xl font-semibold hover:bg-teal-400 md:py-3 md:px-8 px-3 py-2 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
-                    </div>
-                </div>
-                <img src={tour.thumbnail} alt="" className='w-full h-full object-cover'/>
-            </div>
-        </Link>
-    )
-}
+
 const MainSectionTour = ({children,props})=>{
     const [tours,setTours]= useState([])
     useEffect(() => {
@@ -426,6 +409,3 @@ MainSection.Season = MainSectionSeason
 MainSection.Contact = MainSectionContact
 
 export default MainSection;
-export {
-    TourCard
-}

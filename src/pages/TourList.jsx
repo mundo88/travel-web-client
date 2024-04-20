@@ -1,78 +1,14 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import {  TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch, TbStarFilled } from 'react-icons/tb';
+import {  TbChevronLeft, TbChevronRight, TbFilter, TbMenuOrder, TbSearch } from 'react-icons/tb';
 import { axiosInstance } from '../service/axiosInstance';
-import { Link, useSearchParams, } from 'react-router-dom';
+import {  useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import useRound from '../hooks/useRound';
 import { Navigation } from 'swiper/modules';
 import { VscEmptyWindow } from 'react-icons/vsc';
+import { TourCardFull } from '../components/TourCard';
 
 
-const TourCard = ({tour,galleryShow}) =>{
-    const round = useRound()
-    
-    return (
-        <div className='w-full flex flex-col' to={"/tours/"+tour.id}>
-            <div className="w-full h-auto aspect-square overflow-hidden relative group/tour">
-            {galleryShow?
-                <>
-                    <button className={`prev-${tour.id} absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next md:opacity-0 group-hover/tour:opacity-100 z-20`}>
-                        <TbChevronLeft size={24}></TbChevronLeft>
-                    </button>
-                    <button className={`next-${tour.id} absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 backdrop-blur-lg flex items-center justify-center hover:bg-white hover:text-black text-white active:scale-95 duration-300 next md:opacity-0 group-hover/tour:opacity-100 z-20`}>
-                        <TbChevronRight size={24}></TbChevronRight>
-                    </button>
-                    
-                    <Swiper 
-                        className='w-full h-full'
-                        modules={[Navigation]}
-                        navigation={{
-                            nextEl: ".next-"+tour.id,
-                            prevEl: '.prev-'+tour.id,
-                            disabledClass: "swiper-disabled"
-                        }}
-                    >
-                        <SwiperSlide className='group'>
-                            <Link>
-                                <img src={tour.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
-                            </Link>
-                        </SwiperSlide>
-                        {tour.attachments.map((attachment,key)=>(
-                            <SwiperSlide key={key} className='group'>
-                                <Link>
-                                    <img src={attachment.file} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
-                                </Link>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </>
-                :
-                <Link to={"/tours/"+tour.id}>
-                    <img src={tour.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
-                </Link>
-                }
-            </div>
-            <div className='mt-2 space-y-1'>
-                <div className='flex justify-between w-full items-start gap-4'>
-                    <Link to={"/tours/"+tour.id} className="text-gray-100 font-semibold line-clamp-2 hover:underline">
-                        {tour.name}
-                    </Link>
-                    <div className="text-gray-100  flex items-center gap-1">
-                        <TbStarFilled size={18}></TbStarFilled>
-                        {tour.aggregate_rating ? round(tour.aggregate_rating) : 5}
-                    </div>
-                </div>
-                <div className="text-gray-200">
-                    {tour.time}
-                </div>
-                <div className="text-gray-100 font-semibold">
-                    ${tour.price}
-                </div>
-            </div>
-        </div>
-    )
-}
 
 const TourList = () => {
     const [categories,setCategories] = useState(null)
@@ -81,7 +17,7 @@ const TourList = () => {
     const [searchDestination,setSearchDestination] = useState([])
     const [next,setNext] = useState(null)
     const [loading,setLoading] = useState(false)
-    const [params,setParams] = useSearchParams()
+    const [params] = useSearchParams()
 
     const tourApi = "tours/?page_size=15&ordering=-id&"
 
@@ -238,7 +174,7 @@ const TourList = () => {
                 {
                     tours.map((tour,key)=>(
                         <div key={key}>
-                            <TourCard tour={tour} galleryShow={galleryShow}/>
+                            <TourCardFull tour={tour} galleryShow={galleryShow}/>
                         </div>
                     ))
                 }

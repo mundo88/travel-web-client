@@ -4,7 +4,7 @@ import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChe
 import { FaShare } from "react-icons/fa";
 import { axiosInstance } from '../service/axiosInstance';
 import line from "../assets/images/SVG/line.svg"
-import { TourCard } from '../components/section/MainSection';
+import { TourCard } from '../components/TourCard';
 import { HashLink } from 'react-router-hash-link';
 import parse from 'html-react-parser';
 import TimeAgo from 'react-timeago'
