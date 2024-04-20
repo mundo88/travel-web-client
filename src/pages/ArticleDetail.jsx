@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { TbBrandFacebookFilled, TbBrandTiktokFilled, TbBrandTwitterFilled, TbChevronDown, TbDots, TbHeart, TbHeartFilled, TbLink, TbMailFilled, TbMessage, TbMessageCircle2Filled, TbMoodSmile, TbPhoto, TbShare, TbStarFilled, TbTimeline } from 'react-icons/tb';
 import { FaShare } from "react-icons/fa";
-import { axiosInstance, axiosPrivateInstance } from '../service/axiosInstance';
+import { axiosInstance } from '../service/axiosInstance';
 import line from "../assets/images/SVG/line.svg"
 import { TourCard } from '../components/section/MainSection';
 import { HashLink } from 'react-router-hash-link';
@@ -11,6 +11,8 @@ import TimeAgo from 'react-timeago'
 import useAuth from '../hooks/useAuth';
 import EmojiPicker from 'emoji-picker-react';
 import OutsideClickHandler from 'react-outside-click-handler';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import Meta from '../components/Meta';
 
 const ArticleCard = ({article}) => {
     return (
@@ -47,7 +49,7 @@ const ArticleDetail = () => {
     const [fullShare,setFullShare] = useState(false)
     const {currentUser} = useAuth()
     const [emojiOpen,setEmojiOpen] = useState(false)
-
+    const axiosPrivateInstance = useAxiosPrivate()
     const handleOpenEmoji = ()=>{
         setEmojiOpen(!emojiOpen)
     }
@@ -149,6 +151,7 @@ const ArticleDetail = () => {
                             </div>
                             {article &&
                                 <div>
+                                    <Meta title={article.title} description={article.description} thumbnail={article.thumbnail}></Meta>
                                     <div className="flex items-center gap-2 px-4 md:px-0">
                                         <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
                                             Du lịch
@@ -191,7 +194,7 @@ const ArticleDetail = () => {
                                                 {commentsCount} comments
                                             </div>
                                             <button className="py-2 px-2 flex items-center justify-center gap-4 text-grey-800 border border-gray-500 hover:border-teal-700 duration-150 active:scale-95">
-                                                <span>Gần đây nhất</span>
+                                                <span>Most recent</span>
                                                 <TbChevronDown></TbChevronDown>
                                             </button>
                                         </div>

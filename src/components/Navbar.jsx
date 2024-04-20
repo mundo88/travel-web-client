@@ -86,7 +86,7 @@ const Navbar = () => {
                                 }
                             </Dropdown.Button>
                             <Dropdown.Container postion='bottom-left' className='mt-2 max-w-xs w-56 p-2 bg-teal-800 '>
-                                <Dropdown.Item>
+                                {/* <Dropdown.Item>
                                     <Dropdown.ItemIcon>
                                         <TbSettingsFilled size={18} />
                                     </Dropdown.ItemIcon>
@@ -94,7 +94,7 @@ const Navbar = () => {
                                         Cài đặt
                                     </Dropdown.ItemText>
                                 </Dropdown.Item>
-                                <Dropdown.Separator/>
+                                <Dropdown.Separator/> */}
                                 {currentUser.id ?
                                     <Dropdown.Item onClick={onLogout}>
                                         <Dropdown.ItemIcon>

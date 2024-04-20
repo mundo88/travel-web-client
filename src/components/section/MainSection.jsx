@@ -89,7 +89,7 @@ const TourCard = ({tour})=>{
                         {tour.name}
                     </div>
                     <div className='flex items-center justify-center gap-4'>
-                        <button className='w-fit text-md md:text-xl font-semibold md:px-8 px-3 md:py-3 py-2 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Chi tiết</button>
+                        <button className='w-fit text-md md:text-xl font-semibold md:px-8 px-3 md:py-3 py-2 text-white hover:bg-black/60 border-2 border-teal-300 duration-300 text-center active:scale-95'>Detail</button>
                         <button className='w-fit text-md md:text-xl font-semibold hover:bg-teal-400 md:py-3 md:px-8 px-3 py-2 text-black bg-teal-300 duration-300 text-center active:scale-95 border-2 border-teal-400'>Book now</button>
                     </div>
                 </div>

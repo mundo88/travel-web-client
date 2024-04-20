@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { axiosInstance, axiosPrivateInstance } from '../service/axiosInstance';
+import { axiosInstance } from '../service/axiosInstance';
 import {  useLocation, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { TbCalendarEvent, TbChevronDown, TbEye, TbHeart, TbLoader2, TbMapPin, TbMessage, TbMoodSmile, TbPhotoSensor3, TbSend, TbShare, TbStarFilled, TbUserHeart, TbX } from 'react-icons/tb';
@@ -19,6 +19,8 @@ import TimeAgo from 'react-timeago'
 import StarRatings from 'react-star-ratings';
 import EmojiPicker from 'emoji-picker-react';
 import OutsideClickHandler from 'react-outside-click-handler';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import Meta from '../components/Meta';
 
 
 const TourDetail = () => {
@@ -42,7 +44,7 @@ const TourDetail = () => {
     const [emojiOpen,setEmojiOpen] = useState(false)
 
     const [loadingContact,setLoadingSendContact] = useState(false)
-    
+    const axiosPrivateInstance = useAxiosPrivate()
     const onSubmit = (contact,handleSuccess)=>{
         setLoadingSendContact(true)
         axiosInstance.post('orders/',{contact:contact,tour:tour.id}).then(res=>{
@@ -136,6 +138,7 @@ const TourDetail = () => {
         <>
             {tour &&
             <div>
+                 <Meta title={tour.name} description={tour.about} thumbnail={tour.thumbnail}></Meta>
                 <div className='container m-auto relative md:pt-12 pt-6'>
                     <div className="flex flex-col md:mb-8 mb-4 px-4 md:px-0">
                         <div className="flex justify-between items-center md:mb-4 mb-2">
@@ -179,7 +182,7 @@ const TourDetail = () => {
                                     {key ===3 &&
                                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-20">
                                             <button className='flex items-center gap-2 w-fit font-semibold border-none hover:bg-black/60 px-6 py-3  duration-300 text-center active:scale-95 border-2 text-white'>
-                                                <span className='md:block hidden'>Xem tất cả</span>
+                                                <span className='md:block hidden'>View all images</span>
                                                 <TbEye className='md:hidden block' size={24}></TbEye>
                                             </button>
                                         </div>
@@ -194,13 +197,13 @@ const TourDetail = () => {
                         <div className='flex flex-col w-full'>
                             <div className="flex items-center justify-between md:justify-start mt-6 md:mt-8">
                                 <button onClick={()=>{setTab('about')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='about'?'active':''}`}>
-                                    Mô tả
+                                    Describe
                                 </button>
                                 <button onClick={()=>{setTab('schedule')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='schedule'?'active':''}`}>
-                                    Lịch trình
+                                    Schedule
                                 </button>
                                 <button onClick={()=>{setTab('rules')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
-                                    Quy định
+                                    Regulations
                                 </button>
                             </div>
                             <div className='mt-8 text-gray-300 whitespace-pre-line'>
@@ -210,9 +213,9 @@ const TourDetail = () => {
                                         {tour.about.length > 550 && 
                                             <>
                                                 {isReadMore ? 
-                                                    <button className='inline-block ml-2 text-teal-300' onClick={toggleReadMore}>..Xem thêm</button> 
+                                                    <button className='inline-block ml-2 text-teal-300' onClick={toggleReadMore}>..Read more</button> 
                                                     :  
-                                                    <button className='text-teal-300 mt-1 block' onClick={toggleReadMore}>Thu gọn</button>
+                                                    <button className='text-teal-300 mt-1 block' onClick={toggleReadMore}>Collapse</button>
                                                 }
                                             </>
                                         }
@@ -226,7 +229,7 @@ const TourDetail = () => {
                                         <span>{r(tour.aggregate_rating)}</span>
                                     </div>
                                     <div className='mt-6'>
-                                        <p className='text-gray-300 mb-2'>Xếp hạng tổng thể</p>
+                                        <p className='text-gray-300 mb-2'>Overall rating</p>
                                         <div className="flex flex-col gap-2">
                                             {tour.review_percentage.map((percen,key)=>(
                                                 <div className="flex items-center gap-4" key={key}>
@@ -289,7 +292,7 @@ const TourDetail = () => {
                                             {reviewCount} reviews
                                         </div>
                                         <div className="py-2 px-2 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150">
-                                            <span>Gần đây nhất</span>
+                                            <span>Most recent</span>
                                             <TbChevronDown></TbChevronDown>
                                         </div>
                                     </div>
@@ -420,7 +423,7 @@ const TourDetail = () => {
                     </div>
                 </div>
                 <div className="container mx-auto md:mt-24 mt-12 px-4 md:px-0">
-                    <HeaderTitle title={"Có thể bạn sẽ thích"} desciption={"Take a look the best places"}></HeaderTitle>
+                    <HeaderTitle title={"Tour For You"} desciption={"Take a look the best places"}></HeaderTitle>
                     <div className='md:mb-24 mb-44 relative flex items-center flex-col justify-center'>
                         <div className='grid md:grid-cols-3 grid-cols-1 gap-12 mt-12'>
                             {relatedTours && relatedTours.slice(0,3).map((tour,key)=>(
@@ -430,7 +433,7 @@ const TourDetail = () => {
                             ))}
                         </div>
                         <Link to={"/tours"} className="hover:bg-black/60 active:scale-95 focus:border-teal-300 mt-12 w-fit py-2 px-6 flex items-center justify-center gap-4 text-gray-300 border border-gray-300 hover:border-teal-300 duration-150">
-                            Xem tất cả
+                            View all
                         </Link>
                     </div>
                 </div>

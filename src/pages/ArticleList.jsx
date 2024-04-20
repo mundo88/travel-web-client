@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../service/axiosInstance';
 import TimeAgo from 'react-timeago'
 import { Link } from 'react-router-dom';
-
+import Meta from '../components/Meta';
 const ArticleList = () => {
     const [featuredArticles,setFeaturedArticles] = useState([])
     const [articles,setArticles] = useState([])
@@ -25,6 +25,8 @@ const ArticleList = () => {
         })
     },[])
     return (
+        <>
+        <Meta title={"Articles"}></Meta>
         <div className='min-h-screen bg-grey-50'>
             <div className="container mx-auto md:py-16 py-6  border-b border-b-grey-300">
                 <h2 className='text-3xl font-bold mb-2 md:px-0 px-4'>
@@ -65,7 +67,7 @@ const ArticleList = () => {
                 {articles.length > 0 &&
                 <div className="grid md:grid-cols-4 gap-8">
                     {articles.map(article=>(
-                        <div className='flex flex-col group' key={article.id}>
+                        <Link className='flex flex-col group' to={"/articles/"+article.id} key={article.id}>
                             <div className="w-full h-auto aspect-square overflow-hidden">
                                 <img src={article.thumbnail} className='w-full h-full object-cover group-hover:scale-110 duration-300' alt="" />
                             </div>
@@ -74,7 +76,7 @@ const ArticleList = () => {
                                 <p className='font-semibold text-grey-800 line-clamp-2 group-hover:underline mt-1'>{article.title} {article.id}</p>
                                 <p className='line-clamp-2 text-sm mt-1 text-grey-600'>{article.description}</p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>}
 
@@ -89,6 +91,7 @@ const ArticleList = () => {
             </div>
             
         </div>
+        </>
     );
 }
 
