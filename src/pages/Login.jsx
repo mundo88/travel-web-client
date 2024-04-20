@@ -21,7 +21,7 @@ const Login = () => {
     } = useForm();
     const handleLogin = async (data)=>{
         setLoading(true)
-        axiosInstance.post('login',data).then(res=>{
+        axiosInstance.post('login',data)    .then(res=>{
             setAccessToken(res?.data?.access_token)
             setCSRFToken(res?.headers["x-csrftoken"])
             reset()

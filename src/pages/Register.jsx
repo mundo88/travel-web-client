@@ -24,7 +24,6 @@ const Register = () => {
     const handleRegister = (data)=>{
         
         axiosInstance.post('/register',data).then(res=>{
-            console.log(res.data)
             if (res.data.errors_code===400) {
                 setError("username",{
                     message:res.data.error_message

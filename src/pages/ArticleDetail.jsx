@@ -57,7 +57,6 @@ const ArticleDetail = () => {
     }
     const handleNextComment = ()=>{
         axiosInstance.get(commentNext).then(res=>{
-            console.log(res.data)
             const newComment = comments.concat(res.data.results.filter(x=> x != comments.some(y=>y.id==x.id)))
             setComments(newComment)
             setCommentNext(res.data.next)

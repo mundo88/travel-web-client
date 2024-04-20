@@ -11,7 +11,6 @@ const ArticleList = () => {
     const handleNextArticles = ()=>{
         axiosInstance.get(next).then(res=>{
             setArticles([...articles,...res.data.results])
-            console.log(res.data.results)
             setNext(res.data.next)
         })
     }
@@ -22,7 +21,6 @@ const ArticleList = () => {
         })
         axiosInstance.get('articles/?featured=false').then(res=>{
             setArticles(res.data.results)
-            console.log(res.data.next)
             setNext(res.data.next)
         })
     },[])
@@ -32,7 +30,7 @@ const ArticleList = () => {
                 <h2 className='text-3xl font-bold mb-2 md:px-0 px-4'>
                     Featured Article
                 </h2>
-                {featuredArticles.length &&
+                {featuredArticles.length > 0 &&
                 <div className='grid gap-x-12 gap-y-4 md:grid-cols-2'>
                     <Link to={"/articles/"+featuredArticles[0].id} className='w-full group pt-4'>
                         <div className="w-full h-auto aspect-video overflow-hidden">
@@ -64,7 +62,7 @@ const ArticleList = () => {
                 <h2 className='text-3xl font-bold mb-6'>
                     Lated Articles
                 </h2>
-                {articles.length &&
+                {articles.length > 0 &&
                 <div className="grid md:grid-cols-4 gap-8">
                     {articles.map(article=>(
                         <div className='flex flex-col group' key={article.id}>
