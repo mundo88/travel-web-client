@@ -8,7 +8,6 @@ const FavouriteTourButton = ({tourId,className,iconSize}) => {
     const [action,setAction] = useState(null)
 
     const [tourIdArr, setTourIdArr,removeTourId] = useLocalStorage('favourite_tour', [])
-    console.log(tourIdArr)
     const removeTourFavourites = ()=>{
         setTourIdArr(tourIdArr.filter(x=>x!=tourId))
         toast.custom((t) => <CustomToast t={t} msg={'Removed tour to favorites'}/>,{duration:3000})

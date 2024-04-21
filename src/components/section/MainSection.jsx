@@ -63,7 +63,7 @@ const MainSectionCity =({children,props})=>{
                             prevEl: ".prev-city",
                             disabledClass: "swiper-disabled"
                         }}>
-                    {destinations && destinations.map((destination,key)=>(
+                    {destinations && destinations.map((destination)=>(
                         <SwiperSlide className=' md:even:mt-16'>
                             <Link to={"/tours?destination="+destination.id} className='flex flex-col gap-6 w-full overflow-hidden group'>
                                 <div className='w-full h-auto aspect-square overflow-hidden shadow-md shadow-black'>

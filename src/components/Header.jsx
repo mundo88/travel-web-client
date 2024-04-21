@@ -51,8 +51,8 @@ const Header = () => {
                                         className='h-full w-full'
                                     >
                                         
-                                        {tours && tours.map((tour,key)=>(
-                                            <SwiperSlide>
+                                        {tours && tours.map((tour)=>(
+                                            <SwiperSlide key={tour.id}>
                                                 <div className='flex items-center justify-between gap-16 border-2 bg-black border-emerald-500 md:px-4 h-full w-full text-lg md:text-3xl px-3 py-2 font-normal'>
                                                     <span className="whitespace-nowrap">{tour.destination.name}</span>
                                                     <TbChevronDown size={36}></TbChevronDown>

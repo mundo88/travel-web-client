@@ -20,8 +20,8 @@ const GalleryImage = ({attachments}) => {
                     className='h-full'
                     effect = {'fade'}
                 >
-                    {attachments.map((attachment,key)=>(
-                        <SwiperSlide className='w-full h-full' key={key}>
+                    {attachments.map((attachment)=>(
+                        <SwiperSlide className='w-full h-full' key={attachment.id}>
                             <img alt='' className='h-full w-full object-cover' src={attachment.file} />
                         </SwiperSlide>
                     ))}
@@ -70,7 +70,6 @@ const GalleryImage = ({attachments}) => {
                         modules={[ Thumbs]}
                         className='w-full h-full'
                         spaceBetween={10}
-                        centerInsufficientSlide={true}
                         breakpoints={
                             {
                                 390: {
