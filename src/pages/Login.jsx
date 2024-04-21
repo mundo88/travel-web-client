@@ -25,7 +25,7 @@ const Login = () => {
             setAccessToken(res?.data?.access_token)
             setCSRFToken(res?.headers["x-csrftoken"])
             reset()
-            toast.custom((t) => <CustomToast t={t} msg={'Login successfully,redirect to home'}/>,{duration:5000})
+            toast.custom((t) => <CustomToast t={t} msg={'Login successfully'}/>,{duration:5000})
         }).catch(error=>{
             toast.custom((t) => <CustomToast t={t} msg={error.response.data.detail}/>,{duration:5000})
         })

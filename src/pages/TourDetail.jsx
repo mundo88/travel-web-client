@@ -295,7 +295,7 @@ const TourDetail = () => {
                                         {currentUser.id ?  
                                             <div className="flex items-center gap-4">
                                                 <div className='min-w-12 h-12 aspect-square overflow-hidden rounded-full border border-gray-300'>
-                                                    <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className='w-full h-full object-cover' alt="" />
+                                                    <img src={process.env.REACT_APP_API_ENDPOINT + currentUser.avatar} className='w-full h-full object-cover' alt="" />
                                                 </div>
                                                 <div className="relative w-full">
                                                     <input value={reviewContent} onChange={(e)=>{setReviewContent(e.target.value)}} type="text" className='peer w-full h-12 flex pl-12 pr-4 md:pr-44 border border-gray-300 focus:border-teal-300 duration-150 outline-none hover:border-teal-300 bg-transparent text-gray-300' placeholder={`Hey ${currentUser.username}, what are you thinking?`} />

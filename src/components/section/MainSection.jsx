@@ -284,7 +284,7 @@ const MainSectionArticle =()=>{
             <div className="grid md:grid-cols-2 gap-8 grid-cols-1 px-4">
                 {articles&& articles.slice(0,4).map((article,key)=>(
                     key % 2 ===0 ?
-                    <div className='flex md:flex-row flex-col'key={key}>
+                    <div className='flex md:flex-row flex-col' key={article.id}>
                         <div className='w-full h-auto md:h-[450px] md:max-h-[450px] aspect-square md:aspect-auto '>
                             <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                         </div>
@@ -302,7 +302,7 @@ const MainSectionArticle =()=>{
                         </div>
                     </div>:
                     <>
-                        <div className='flex md:flex-row flex-col' key={key}>
+                        <div className='flex md:flex-row flex-col' key={article.id}>
                             <div className='w-full h-auto md:h-[450px] md:max-h-[450px] aspect-square md:aspect-auto'>
                                 <img src={article.thumbnail} alt="" className='w-full h-full object-cover'/>
                             </div>

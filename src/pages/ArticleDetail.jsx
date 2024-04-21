@@ -201,7 +201,7 @@ const ArticleDetail = () => {
                                         <div className='my-10 w-full '>
                                             <div className="flex items-center gap-2 md:gap-4 w-full">
                                                 <div className="w-12 h-12 min-w-12 overflow-hidden aspect-square border border-grey-500 rounded-full">
-                                                    <img src={process.env.REACT_APP_SERVER_URL + currentUser.avatar} className=' w-full h-full object-cover' alt="" />
+                                                    <img src={process.env.REACT_APP_API_ENDPOINT + currentUser.avatar} className=' w-full h-full object-cover' alt="" />
                                                 </div>
                                                 <div className="w-full relative">
                                                     <input value={comment} onChange={(e)=>{setComment(e.target.value)}} type="text" className='peer w-full h-12 flex pr-20 pl-4 border border-grey-500 focus:border-grey-800 duration-150 outline-none hover:border-grey-800 bg-transparent text-grey-800' placeholder='Viết bình luận' />

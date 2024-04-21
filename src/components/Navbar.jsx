@@ -78,7 +78,7 @@ const Navbar = () => {
                             <Dropdown.Button>
                                 {currentUser.id ?
                                     <button className=' rounded-full flex items-center justify-center border-2 border-gray-300 min-h-8 min-w-8 w-8 h-8 overflow-hidden relative font-semibold hover:text-teal-300 duration-300'>
-                                        <img src={ process.env.REACT_APP_SERVER_URL + currentUser.avatar} alt={`${currentUser.username} avatar`} className='w-full h-full object-cover' />
+                                        <img src={ process.env.REACT_APP_API_ENDPOINT + currentUser.avatar} alt={`${currentUser.username} avatar`} className='w-full h-full object-cover' />
                                     </button>:
                                     <button className='flex items-center justify-center py-2 relative font-semibold hover:text-teal-300 duration-300'>
                                         <TbUser size={24}></TbUser>
@@ -125,7 +125,7 @@ const Navbar = () => {
                             <div className='flex justify-between items-center pb-4 border-b border-b-teal-900'>
                                 <div className="flex items-center">
                                     <div className="w-8 h-8 overflow-hidden rounded-full border border-teal-900">
-                                        <img src={ process.env.REACT_APP_SERVER_URL + currentUser.avatar} alt={`Ảnh đại diện ${currentUser.username} `} className='h-full w-full object-cover' />
+                                        <img src={ process.env.REACT_APP_API_ENDPOINT + currentUser.avatar} alt={`Ảnh đại diện ${currentUser.username} `} className='h-full w-full object-cover' />
                                     </div>
                                     <div className='text-gray-200 font-semibold ml-4 truncate max-w-44'>
                                         {currentUser.username}
