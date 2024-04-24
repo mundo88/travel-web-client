@@ -64,7 +64,7 @@ const MainSectionCity =({children,props})=>{
                             disabledClass: "swiper-disabled"
                         }}>
                     {destinations && destinations.map((destination)=>(
-                        <SwiperSlide className=' md:even:mt-16'>
+                        <SwiperSlide className=' md:even:mt-16' key={destination.id}>
                             <Link to={"/tours?destination="+destination.id} className='flex flex-col gap-6 w-full overflow-hidden group'>
                                 <div className='w-full h-auto aspect-square overflow-hidden shadow-md shadow-black'>
                                     <img src={destination.thumbnail} alt="" className='w-full h-full object-cover' />
@@ -383,6 +383,9 @@ const MainSectionContact = ({children})=>{
         setLoading(true)
         axiosInstance.post('contacts/',data).then(res=>{
             handleSuccess(`Hi ${res.data.username}, thank for contacting us.`)
+            setLoading(false)
+        }).catch(res=>{
+            console.log(res)
             setLoading(false)
         })
     }
