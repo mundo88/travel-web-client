@@ -153,15 +153,11 @@ const ArticleDetail = () => {
                                 <div>
                                     <Meta title={article.title} description={article.description.slice(0,160)} thumbnail={article.thumbnail}></Meta>
                                     <div className="flex items-center gap-2 px-4 md:px-0">
-                                        <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
-                                            Du lịch
-                                        </span>
-                                        <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
-                                            Tắm biển
-                                        </span>
-                                        <span className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
-                                            Phú Quốc
-                                        </span>
+                                        {article.tags.map(tag=>(
+                                            <span key={tag.id} className='px-2 py-0.5 flex items-center justify-center bg-teal-700 text-gray-200 hover:bg-teal-800'>
+                                                {tag.title}
+                                            </span>
+                                        ))}
                                     </div>
                                     <h1 className='text-gray-800 md:text-4xl text-2xl font-bold mt-2 md:mt-4 px-4 md:px-0'>{article.title}</h1>
                                     <div className="md:mt-6 mt-2 flex items-center gap-1 px-4 md:px-0">

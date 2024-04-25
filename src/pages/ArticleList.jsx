@@ -62,7 +62,7 @@ const ArticleList = () => {
             </div>
             <div className="container mx-auto py-16  px-4 md:px-0">
                 <h2 className='text-3xl font-bold mb-6'>
-                    Lated Articles
+                    Latest Articles
                 </h2>
                 {articles.length > 0 &&
                 <div className="grid md:grid-cols-4 gap-8">
