@@ -112,6 +112,7 @@ const TourDetail = () => {
         return params.toString()
     }
     useEffect(() => {
+        setTab("about")
         axiosInstance.get("tours/"+id+"/").then(res=>{
             setTour(res.data)
             axiosInstance.get("tours/?"+ setTagsSearchQuery(res.data.tags)).then(res=>{
@@ -217,10 +218,10 @@ const TourDetail = () => {
                                     </>
                                 }
                                 {tab==='schedule' && 
-                                    tour.schedule
+                                    parse(tour.schedule)
                                 }
                                 {tab==='regulations' && 
-                                    tour.rules
+                                    parse(tour.rules)
                                 }
                             </div>
                             <div className="mt-12 md:mt-24 flex items-start flex-col md:flex-row gap-6 md:gap-24">
