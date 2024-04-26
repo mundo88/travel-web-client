@@ -197,7 +197,7 @@ const TourDetail = () => {
                                 <button onClick={()=>{setTab('schedule')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='schedule'?'active':''}`}>
                                     Schedule
                                 </button>
-                                <button onClick={()=>{setTab('rules')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
+                                <button onClick={()=>{setTab('regulations')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
                                     Regulations
                                 </button>
                             </div>
@@ -215,6 +215,12 @@ const TourDetail = () => {
                                             </>
                                         }
                                     </>
+                                }
+                                {tab==='schedule' && 
+                                    tour.schedule
+                                }
+                                {tab==='regulations' && 
+                                    tour.rules
                                 }
                             </div>
                             <div className="mt-12 md:mt-24 flex items-start flex-col md:flex-row gap-6 md:gap-24">
