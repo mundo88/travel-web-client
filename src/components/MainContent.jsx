@@ -18,12 +18,12 @@ const MainContent = () => {
                         <img src={WordMapImage} alt="" className='object-contain h-full w-auto opacity-[.03]' />
                     </div>
                     <div className='container m-auto md:mt-16 -mt-8 relative'>
-                        <div id="featured">
+                        {/* <div id="featured">
                             <HeaderTitle postion={'left'} title={'Featured Packages'} desciption={'Take a look the best places'}/>
                             <div className='md:mt-16 mt-8' >
                                 <MainSection.Tour/>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='md:my-36 my-16' id="destination">
                             <HeaderTitle postion={'right'} title={'Choose your destination'} desciption={'Take a look the best places'}/>
                             <div className="relative">
