@@ -53,9 +53,9 @@ const Navbar = () => {
                             <NavHashLink smooth={true} to={"/#destination"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                                 <span>Destination</span>
                             </NavHashLink>
-                            <NavHashLink smooth={true} to={"/#featured"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
+                            {/* <NavHashLink smooth={true} to={"/#featured"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                                 <span>Featured</span>
-                            </NavHashLink>
+                            </NavHashLink> */}
                             <NavHashLink smooth={true} to={"/#explore"} className='flex items-center justify-center py-2 px-2 relative font-semibold hover:text-teal-300 duration-300'>
                                 <span>Explore</span>
                             </NavHashLink>
@@ -144,10 +144,10 @@ const Navbar = () => {
                             <TbMapPin size={20}></TbMapPin>
                             <span>Destination</span>
                         </Link>
-                        <Link to='/tours' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
+                        {/* <Link to='/tours' className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <MdOutlineFeaturedPlayList size={20}></MdOutlineFeaturedPlayList>
                             <span>Featured</span>
-                        </Link>
+                        </Link> */}
                         <Link to={'/tours'} className='text-gray-300 w-full p-2 hover:bg-teal-900 duration-150 flex items-center gap-2'>
                             <TbCompass size={20}></TbCompass>
                             <span>Explore</span>
