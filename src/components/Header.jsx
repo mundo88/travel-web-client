@@ -30,8 +30,9 @@ const Header = () => {
         <div className='min-h-screen bg-main mb-16 md:mb-0'>
             <div className='absolute inset-0'>
                 <div className='absolute inset-0'>
-                    <div className='container m-auto pt-28 md:pt-44 flex flex-col h-full'>
-                        <div className='text-white font-bold text-3xl md:text-8xl flex flex-col items-center'>
+                    <div className='container m-auto pt-28 md:pt-44 flex flex-col h-screen '>
+                        
+                        <div className='text-white font-bold text-3xl md:text-8xl flex flex-col items-center relative z-10 '>
                             <div className='relative'>
                                 <img src={ArrowHeader} className='absolute md:-right-24 top-4 -rotate-12 md:w-auto -right-10 w-12 h-auto' alt="" />
                                 Your next <span className='text-teal-300'>travel </span>
@@ -63,7 +64,7 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='overflow-hidden h-full md:mt-12 mt-8 relative flex items-center justify-center group'>
+                        <div className='absolute inset-0 overflow-hidden h-full flex items-center justify-center group'>
                             <Swiper 
                                 className='h-full w-full'
                                 modules={[Controller,EffectFade,Autoplay,Navigation]}
@@ -84,13 +85,11 @@ const Header = () => {
                                 {tours && tours.map((tour,key)=>(
                                     <SwiperSlide key={key}>
                                         <div className='h-full relative'>
-                                   
-                                            <div className='absolute inset-0 bg-gradient-to-t w-full h-full from-[#051214] via-[#051214]/40 to-transparent z-20 flex items-end justify-center'>
-                                            
+                                            <div className='absolute inset-0 w-full h-full bg-black/30 bg-gradient-to-t from-[#051214] via-[#051214]/40 to-transparent z-20 flex items-end justify-center'>
                                             </div>
                                             <img className='h-full w-full object-cover' alt='' src={tour.thumbnail}/>
                                             <div className=" absolute inset-0">
-                                                <div className=' md:opacity-0 md:group-hover:opacity-100 duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
+                                                <div className=' duration-300 transition-opacity absolute bottom-0 left-0 right-0 rounded-lg py-4 px-4 backdrop-blur-xl flex justify-between items-center gap-4 z-40'>
                                                     <div className='flex items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                         <TbMapPin size={'36'}></TbMapPin> 
                                                         <div className='flex flex-col'>
@@ -102,7 +101,7 @@ const Header = () => {
                                                     <div className='md:flex hidden items-center gap-4 p-2 text-white hover:bg-white/15 duration-300 w-full'>
                                                         <TbSend size={'36'}></TbSend> 
                                                         <div className='flex flex-col'>
-                                                            <span className='text-sm'>Type</span>
+                                                            <span className='text-sm'>Transport</span>
                                                             <span className='text-lg truncate'>{tour.transport}</span>
                                                         </div>
                                                     </div>
