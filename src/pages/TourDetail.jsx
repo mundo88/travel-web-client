@@ -196,7 +196,7 @@ const TourDetail = () => {
                                     Describe
                                 </button>
                                 <button onClick={()=>{setTab('schedule')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='schedule'?'active':''}`}>
-                                    Schedule
+                                    Hightlight
                                 </button>
                                 <button onClick={()=>{setTab('regulations')}} className={`py-3 md:px-8 w-full md:w-fit border-b-2 [&.active]:border-b-teal-500 [&.active]:text-gray-200 text-gray-400 border-b-transparent md:text-lg font-medium duration-150 ${tab==='rules'?'active':''}`}>
                                     Regulations
